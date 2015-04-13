@@ -89,6 +89,47 @@ SpyWidget::SpyWidget(Spy* spy)
     // }
 //}
 
+//! \brief Connections with signal of the spied object
+//!
+// std::list<boost::signals2::connection> m_connections;
+
+
+
+
+
+// void operator<<(boost::signals2::connection co)
+// {
+//     m_connections.push_back(co);
+// }
+
+
+
+
+/* ============================================================================
+ *
+ * */
+void SpyWidget::onSpiedObjChange()
+{
+    // Check the spied object
+    boost::shared_ptr<core::Object> obj = m_spy->spiedObj();
+    if( !obj )
+    {
+        return;
+    }
+
+    m_header.onSpiedObjChange();
+
+    // Connect signals
+
+    //*this << 
+    obj->objSignals()->nameModified.connect( boost::bind(&SpyWidgetHeader::onObjNameModification, &m_header) );
+
+
+
+
+}
+
+
 /* ============================================================================
  *
  * */

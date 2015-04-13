@@ -36,6 +36,9 @@ public slots:
     //! Update property values
     void updateProperties();
 
+
+    void onObjNameModification();
+
 protected:
 
     //! Label for name 

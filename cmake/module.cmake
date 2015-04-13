@@ -13,15 +13,15 @@ SET(PROJECT_HEADER_FILES
 
 
     proteo/gui/Gui.hpp
+    proteo/gui/Scheduler.hpp
     
     proteo/gui/Spy.hpp
-
     proteo/gui/spy/DoubleLabel.hpp
     proteo/gui/spy/SpyWidget.hpp
-    proteo/gui/spy/SpyWidgetHeader.hpp
+    proteo/gui/spy/SpyWidgetHeader.hpp    
     
-    proteo/gui/Scheduler.hpp
-
+    proteo/gui/Shell.hpp
+    proteo/gui/shell/ShellWidget.hpp
 
     proteo/model/SensorDistance.hpp
     
@@ -31,18 +31,22 @@ SET(PROJECT_HEADER_FILES
 SET(PROJECT_SOURCE_FILES
     proteo/core/Object.cpp
 
+    proteo/gui/Scheduler.cpp
+
     proteo/gui/Spy.cpp
     proteo/gui/spy/SpyWidget.cpp
     proteo/gui/spy/SpyWidgetHeader.cpp
 
-    proteo/gui/Scheduler.cpp
+    proteo/gui/Shell.cpp
+    proteo/gui/shell/ShellWidget.cpp
+
 
     proteo/model/SensorDistance.cpp
     
-    proteo/wrapper_py/wrapper_gui.cpp
-    proteo/wrapper_py/wrapper_core.cpp
-    proteo/wrapper_py/wrapper_model.cpp
-    proteo/wrapper_py/wrapper_module.cpp
+    wrapper/py/wrapper_gui.cpp
+    wrapper/py/wrapper_core.cpp
+    wrapper/py/wrapper_model.cpp
+    wrapper/py/wrapper_module.cpp
     )
 
 # Define the wrapper library that wraps our library

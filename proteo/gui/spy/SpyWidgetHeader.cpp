@@ -144,3 +144,19 @@ void SpyWidgetHeader::updateLabelName(const std::string& name, quint32 color)
         "color: #FFFFFF; font: 34px Roboto; padding: 10px;"
         );
 }
+
+
+void SpyWidgetHeader::onObjNameModification()
+{
+    if(m_spy->spiedObj())
+    {
+        updateLabelName(m_spy->spiedObj()->objName(), m_spy->spiedObj()->objRole());
+    }
+    else
+    {
+        
+        updateLabelName("No object spied", 0x424242);
+    }
+
+}
+

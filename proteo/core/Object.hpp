@@ -28,16 +28,24 @@ namespace proteo { namespace core {
 //!
 typedef std::array<char, 8> TagArray;
 
-
-
-struct Signals
+//! \class ObjSignals
+//! \brief Define object common signals
+//!
+//! \author [XR]MakingBot ( http://makingbot.fr )
+//!
+struct ObjSignals
 {
 
+    //! \brief Emitted when the object name is modified
+    //!
+    boost::signals2::signal<void ()> nameModified;
 
+    //! \brief Emitted when a property value has been modified
+    //! It takes a uint8 value which is the property id.
+    //!
+    boost::signals2::signal<void (uint8_t)> propertyModified;
 
-    boost::signals2::signal<void (uint8_t)> sigProp;
 };
-
 
 //! \class Object
 //! \brief Main object interface
@@ -69,23 +77,11 @@ public:
 
     //! \brief Object name getter
     //!
-    const std::string& objName() const;
+    const std::string objName() const;
 
     //! \brief Object name setter
     //!
-    void setObjName(const std::string& name);
-
-
-
-
-    // boost::signals2::connection doOnClick(const SignalPropertyValueChangedSlotType& slot)
-    // {
-    //     return m_oPropertyValueChanged.connect(slot);
-    // }
-
-
-
-
+    void setObjName(const std::string name);
 
     // ========================================================================
     // => Object connections
@@ -105,14 +101,9 @@ public:
     //! \brief Hook on the disconnection process
     //!
     virtual bool disconnectionHook(boost::shared_ptr<Object> obj, bool initiative);
-    
-
 
     // ========================================================================
     // => Object properties
-
-
-
 
     //! \brief Property value getter
     //!
@@ -134,18 +125,19 @@ public:
     //!
     virtual const std::vector<Property>& properties() const = 0;
 
-
-
-
-
     // ========================================================================
-    // => Object signals
+    // => Object connections
 
-    //! \brief Signal emitted when a property has been modified
+    //! \brief Object connections getter
     //!
-    //     typedef  SignalPropertyValueChanged;
-    //     typedef SignalPropertyValueChanged::slot_type SignalPropertyValueChangedSlotType;
-    // SignalPropertyValueChanged m_oPropertyValueChanged;
+    inline boost::shared_ptr<ObjSignals> objSignals();
+
+    //! \brief Object connections getter
+    //!
+    inline const std::list<boost::shared_ptr<Object> >& objConnections();
+
+
+
 
 protected:
 
@@ -169,6 +161,10 @@ protected:
     //! If the object has no parent, its id chain is m_oName.
     //!
     std::string m_oIdChain;
+
+    //! \brief Mutex for every dynamic identification element
+    //!
+    // std::mutex m_mutex_identification;
 
     // ========================================================================
     // => Block status management
@@ -202,40 +198,39 @@ protected:
     // ========================================================================
     // => Object connections
 
+    //! \brief Object signals
+    //!
+    boost::shared_ptr<ObjSignals> m_oSignals;
+
     //! \brief Object connections
     //!
     std::list<boost::shared_ptr<Object> > m_oConnections;
 
-private:
 
-    Signals* _sgi; // Cause compilation error if not used with pointer
 
 
 };
 
 
 
-
-
-
-
+/* ============================================================================
+ *
+ * */
+inline boost::shared_ptr<ObjSignals> Object::objSignals()
+{
+   return m_oSignals;
+}
 
 /* ============================================================================
  *
  * */
-// inline Variant Object::property(uint8_t id)
-// {
-//     return Variant();
-// }
+inline const std::list<boost::shared_ptr<Object> >& Object::objConnections()
+{
+   return m_oConnections;
+}
 
-/* ============================================================================
- *
- * */
-// inline void Object::setProperty(uint8_t id, const Variant& value)
-// {
-//     PROTEO_UNUSED(id);
-//     PROTEO_UNUSED(value);
-// }
+
+
 
 } // core
 } // proteo

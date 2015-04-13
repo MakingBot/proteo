@@ -1,19 +1,29 @@
 #ifndef SPY_HPP
 #define SPY_HPP
-
-
+//!
+//! \file Spy.hpp
+//!
+// Copyright 2015 MakingBot
+// This file is part of proteo.
+//
+// proteo is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// proteo is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <proteo/core/Object.hpp>
 
-
-
-
-
-
 namespace proteo { namespace gui {
-   
+
 class SpyWidget;
- 
 
 //! \class Spy
 //!
@@ -52,48 +62,35 @@ public:
     //!
     virtual const core::TagArray& objTag() const;
 
-
     //! \brief FROM Object
     //!
     bool connectionHook(boost::shared_ptr<Object> obj, bool initiative);
 
-
+    //! \brief FROM Object
+    //!
     virtual const std::vector<core::Property>& properties() const;
-   
-
 
     // ========================================================================
     // => Spy
 
-
-
+    //! \brief Spied object pointer getter
+    //!
     boost::shared_ptr<Object> spiedObj();
-
-
-
-
-
-
 
 protected:
 
-    std::string m_name;
-
+    //! \brief Spied object pointer
+    //!
     boost::shared_ptr<Object> m_spied;
 
+    //! \brief The widget
+    //!
     boost::shared_ptr<SpyWidget> m_widget;
- 
 
 };
 
-// ostream& operator<<(ostream&, Spy);
 
 
-
-
-
-
-
-}
-}
+} // gui
+} // proteo
 #endif // SPY_HPP

@@ -48,7 +48,8 @@ public slots:
     
     //!
     //! When the spied change
-    //void onSpiedBlockChange();
+    
+    void onSpiedObjChange();
 
 protected:
     
