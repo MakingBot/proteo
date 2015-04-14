@@ -19,6 +19,7 @@ SET(PROJECT_HEADER_FILES
     proteo/gui/spy/DoubleLabel.hpp
     proteo/gui/spy/SpyWidget.hpp
     proteo/gui/spy/SpyWidgetHeader.hpp    
+    proteo/gui/spy/SpyWidgetBody.hpp    
     
     proteo/gui/Shell.hpp
     proteo/gui/shell/ShellWidget.hpp
@@ -35,7 +36,8 @@ SET(PROJECT_SOURCE_FILES
 
     proteo/gui/Spy.cpp
     proteo/gui/spy/SpyWidget.cpp
-    proteo/gui/spy/SpyWidgetHeader.cpp
+    proteo/gui/spy/SpyWidgetHeader.cpp    
+    proteo/gui/spy/SpyWidgetBody.cpp
 
     proteo/gui/Shell.cpp
     proteo/gui/shell/ShellWidget.cpp

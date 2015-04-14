@@ -83,6 +83,38 @@ public:
     //!
     void setObjName(const std::string name);
 
+    //! \brief
+    //!
+    uint32_t objIdNumber() const;
+
+    //! \brief
+    //!
+    std::string objIdChain() const;
+
+    // ========================================================================
+    // => Block status management
+
+
+
+    // ========================================================================
+    // => Object parent link
+
+    //! \brief
+    //!
+    boost::shared_ptr<Object> objParent();
+
+    //! \brief
+    //!
+    void setObjParent(boost::shared_ptr<Object> p);
+
+    //! \brief
+    //!
+    uint32_t nbObjChilds() const;
+
+    //! \brief
+    //!
+    void append(boost::shared_ptr<Object> chd);
+
     // ========================================================================
     // => Object connections
 
@@ -131,6 +163,10 @@ public:
     //! \brief Object connections getter
     //!
     inline boost::shared_ptr<ObjSignals> objSignals();
+
+    //! \brief return the number of connected object
+    //!
+    uint32_t nbObjConnections() const;
 
     //! \brief Object connections getter
     //!
@@ -191,7 +227,7 @@ protected:
     // ========================================================================
     // => Object properties
 
-    //! \brief Activation
+    //! \brief Activation bit set, one bit for property and 256 properties max
     //!
     std::bitset<256> m_oActiveProperties;
 
@@ -206,11 +242,7 @@ protected:
     //!
     std::list<boost::shared_ptr<Object> > m_oConnections;
 
-
-
-
 };
-
 
 
 /* ============================================================================

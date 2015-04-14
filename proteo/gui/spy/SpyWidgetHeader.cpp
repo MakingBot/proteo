@@ -1,5 +1,5 @@
 //!
-//! \file SpyWidgetHeader.hpp
+//! \file SpyWidgetHeader.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -32,10 +32,10 @@ using namespace proteo::gui;
  * */
 SpyWidgetHeader::SpyWidgetHeader(Spy* spy)
     : QWidget()
-    , m_labelTag     ( "type" )
+    , m_labelTag     ( "tag" )
     , m_labelRole    ( "role" )
-    , m_labelParent  ( "father" )
-    , m_labelChildNb ( "sons" )
+    , m_labelParent  ( "parent" )
+    , m_labelChildNb ( "childs" )
     , m_labelConnNb  ( "connections" )
     , m_spy          ( spy )
 {
@@ -99,25 +99,30 @@ void SpyWidgetHeader::updateProperties()
 {
     if(m_spy->spiedObj())
     {
+        // Name
         updateLabelName(m_spy->spiedObj()->objName(), m_spy->spiedObj()->objRole());
 
+        // Object tag
+        std::string tag_str(std::begin( m_spy->spiedObj()->objTag() ), std::end( m_spy->spiedObj()->objTag() ));
+        m_labelTag.setValue( QString(tag_str.c_str()) );
 
+        // objRole()
+        // m_labelRole   .setValue("");
 
+        // Childs and connections number
+        m_labelChildNb.setValue(QString::number(m_spy->spiedObj()->nbObjChilds     ()));
+        m_labelConnNb .setValue(QString::number(m_spy->spiedObj()->nbObjConnections()));
 
-        // m_labelTag.setValue(be(QString::number(block->blockVersion()));
-        // m_labelRole.setValue(BotBlock::BlockRoleToString(block->blockRole()));
-        // _labelSonsNub.setValue(QString::number(block->blockNbSons() ));
-        // _labelConnNub.setValue(QString::number(block->blockNbConnections()));
-        
-        // QWeakPointer<BotBlock> father = block->blockFather();
-        // if(father)
-        // {
-        //     _labelFather.setValue(father.toStrongRef()->blockName());  
-        // }
-        // else
-        // {
-        //     _labelFather .setValue("X");
-        // }
+        // Parent
+        boost::shared_ptr<core::Object> parent = m_spy->spiedObj()->objParent();
+        if(parent)
+        {
+            m_labelParent.setValue( QString(parent->objName().c_str()) );
+        }
+        else
+        {
+            m_labelParent .setValue("X");
+        }
     }
     else
     {
@@ -145,7 +150,9 @@ void SpyWidgetHeader::updateLabelName(const std::string& name, quint32 color)
         );
 }
 
-
+/* ============================================================================
+ *
+ * */
 void SpyWidgetHeader::onObjNameModification()
 {
     if(m_spy->spiedObj())
@@ -159,4 +166,3 @@ void SpyWidgetHeader::onObjNameModification()
     }
 
 }
-

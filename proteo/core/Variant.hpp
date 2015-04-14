@@ -46,20 +46,32 @@ class Variant
 
 public:
 
-    Variant();
+    //! \brief Default constructor 
+    //!
+    inline Variant();
 
     template<typename T> Variant(T* p);
 
+    //! \brief Constructor uint32
+    //!
+    inline Variant(uint32_t u);
 
-    Variant(uint32_t u);
 
     Variant(const std::string& s);
 
+
+    //! \brief Converter to uint32
+    //!
+    inline uint32_t toUint32() const;
+
 protected:
 
-
+    //! \brief Data meta type
+    //!
     MetaType m_mtype;
 
+    //! \brief Data encapsulation
+    //!
     BasicType m_bdata;
 
 };
@@ -77,6 +89,9 @@ inline Variant::Variant(T* p)
    m_bdata.p = static_cast<void*>(p);
 }
 
+/* ============================================================================
+ *
+ * */
 inline Variant::Variant(uint32_t u)
 {
     m_mtype = Tuint;
@@ -89,6 +104,19 @@ inline Variant::Variant(const std::string& s)
     m_mtype = Tstring;
     m_bdata.p = static_cast<void*>( new std::string(s) );
 }
+
+
+
+
+/* ============================================================================
+ *
+ * */
+inline uint32_t Variant::toUint32() const
+{
+    return m_bdata.u32;
+}
+
+
 
 
 }

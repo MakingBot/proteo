@@ -58,9 +58,49 @@ void Object::setObjName(const std::string name)
 /* ============================================================================
  *
  * */
-bool Object::initiativeConnect(boost::shared_ptr<Object> obj)
+uint32_t Object::objIdNumber() const
 {
-    connect(obj,true);
+    return m_oIdNumber;
+}
+
+/* ============================================================================
+ *
+ * */
+std::string Object::objIdChain() const
+{
+    return m_oIdChain;
+}
+
+/* ============================================================================
+ *
+ * */
+boost::shared_ptr<Object> Object::objParent()
+{
+    return m_oParent;
+}
+
+/* ============================================================================
+ *
+ * */
+void Object::setObjParent(boost::shared_ptr<Object> p)
+{
+    m_oParent = p;
+}
+
+/* ============================================================================
+ *
+ * */
+uint32_t Object::nbObjChilds() const
+{
+    return m_oChilds.size();
+}
+
+/* ============================================================================
+ *
+ * */
+void Object::append(boost::shared_ptr<Object> chd)
+{
+    m_oChilds[chd->objName()] = chd;
 }
 
 /* ============================================================================
@@ -69,18 +109,41 @@ bool Object::initiativeConnect(boost::shared_ptr<Object> obj)
 bool Object::connect(boost::shared_ptr<Object> obj, bool initiative)
 {
 
+    // // Check that the connection does not already exist
+    // if( std::find(m_oConnections.begin(), m_oConnections.end(), obj) != m_oConnections.end() )
+    // {
+    //     // Connection refused
+    //     // Log error "object already connected"
+    //     return false;
+    // }
 
+    // // Call the connection process of the other object
+    // if( initiative )
+    // {
+    //     if( ! obj->connect(shared_from_this(), false) )
+    //     {
+    //         return false;
+    //     }
+    // }
 
-
-
-    if( std::find(m_oConnections.begin(), m_oConnections.end(), obj) != m_oConnections.end() )
+    // Call connection hook
+    if( ! connectionHook(obj, initiative) )
     {
-        // Connection refused
-        // Log error "object already connected"
-        return false;
+
     }
 
-    connectionHook(obj, initiative);
+    // Save connection pointer
+    m_oConnections.push_back(obj);
+
+    return true;
+}
+
+/* ============================================================================
+ *
+ * */
+bool Object::initiativeConnect(boost::shared_ptr<Object> obj)
+{
+    connect(obj,true);
 }
 
 /* ============================================================================
@@ -112,7 +175,8 @@ Variant Object::propertyValue(uint8_t id)
  * */
 void Object::setPropertyValue(uint8_t id, const Variant& v)
 {
-
+    PROTEO_UNUSED(v);
+    PROTEO_UNUSED(id);
 }
 
 /* ============================================================================
@@ -120,7 +184,7 @@ void Object::setPropertyValue(uint8_t id, const Variant& v)
  * */
 bool Object::isPropertyActive(uint8_t id)
 {
-
+    return (bool)m_oActiveProperties[id];
 }
 
 /* ============================================================================
@@ -128,6 +192,13 @@ bool Object::isPropertyActive(uint8_t id)
  * */
 bool Object::setPropertyActivity(uint8_t id, bool b)
 {
-
+    m_oActiveProperties[id] = (int)b;
 }
 
+/* ============================================================================
+ *
+ * */
+uint32_t Object::nbObjConnections() const
+{
+    return m_oConnections.size();
+}

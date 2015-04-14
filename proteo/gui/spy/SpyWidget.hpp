@@ -20,8 +20,7 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-
-// #include <SpyWidgetBody.hpp>
+#include "SpyWidgetBody.hpp"
 #include "SpyWidgetHeader.hpp"
 // #include <SpyWidgetFooter.hpp>
 
