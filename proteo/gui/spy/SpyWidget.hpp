@@ -45,21 +45,22 @@ public:
 
 public slots:
     
+    //! \brief When the spied change
     //!
-    //! When the spied change
-    
     void onSpiedObjChange();
 
 protected:
     
-    //! Parent block
+    //! \brief Spy object 
+    //!
     Spy* m_spy;
 
-    //! Information header
+    //! \brief Information header
+    //!
     SpyWidgetHeader m_header;
 
-    // //! Information body
-    // SpyWidgetBody     _body;
+    //! Information body
+    SpyWidgetBody   m_body;
 
     // //! Information footer
     // SpyWidgetFooter _footer;

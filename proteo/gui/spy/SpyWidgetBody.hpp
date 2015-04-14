@@ -46,12 +46,16 @@ public:
 
     
 public slots:
+    
+    //! \brief When the spied change
+    //!
+    void onSpiedObjChange();
 
-    // //! When the spied change
-    // void onSpiedBlockChange();
+    //! \brief Update property structure
+    //!
+    void updateStructure();
 
-    // //! Update property structure
-    // void updateStructure();
+
 
     // //! Update property values
     // void updateValues();
@@ -81,6 +85,8 @@ public slots:
 
 protected:
 
+    //! \brief Spy object
+    //!
     Spy* m_spy;
 
     // //! Map that contains widget of each property

@@ -22,13 +22,17 @@
 #include <QWidget>
 #include <QTextEdit>
 #include <QLineEdit>
+#include <QSettings>
 #include <QScrollArea>
 #include <QListWidget>
 #include <QStringListModel>
 
 namespace proteo { namespace gui {
 
-
+//! \class Widget for the shell object
+//!
+//! \author [XR]MakingBot ( http://makingbot.fr )
+//!
 class ShellWidget : public QWidget
 {
     Q_OBJECT
@@ -44,13 +48,26 @@ signals:
 
 public slots:
 
+    //! \brief 
+    //!
     void onNewCmd();
 
+    //! \brief 
+    //!
     void onItemClick(QListWidgetItem * item);
-
 
 protected:
 
+    //! \brief Settings manager 
+    //!
+    QSettings m_settings;
+
+    //! \brief Historic cmd list
+    //!
+    QStringList m_histo;
+
+    //! \brief Text area where result are displayed
+    //!
     QTextEdit m_resultArea;
 
     //! \brief Line in which user can enter python commands
@@ -59,18 +76,17 @@ protected:
 
     //! \brief
     //!
-    QStringList m_histo;
-
-    
     QScrollArea m_histoArea;
 
+    //! \brief
+    //!
     QListWidget m_histoView;
 
-
+    //! \brief
+    //!
     QStringListModel m_histoModel;
 
 };
-
 
 } // gui
 } // proteo

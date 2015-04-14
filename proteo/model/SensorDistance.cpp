@@ -32,7 +32,9 @@ const uint8_t SensorDistance::IdPropertyDistance = 0;
  * */
 SensorDistance::SensorDistance(std::string name)
     : core::Object(name)
-{ }
+{
+    setPropertyActivity(IdPropertyDistance, true);
+}
 
 /* ============================================================================
  *

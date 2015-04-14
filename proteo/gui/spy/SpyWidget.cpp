@@ -35,16 +35,17 @@ using namespace proteo::gui;
  *
  * */
 SpyWidget::SpyWidget(Spy* spy)
-    : QWidget(0)
-    , m_spy  (spy)
-    , m_header        (spy)
-    // , _body             (parent_block)
+    : QWidget   (0)
+    , m_spy     (spy)
+    , m_header  (spy)
+    , m_body    (spy)
     // , _footer           (parent_block)
 {
     // Basic verification
     if(!m_spy)
     {
-        throw std::runtime_error("Spy widget has been created without a parent spy block");
+        // throw proteo exception
+        // throw std::runtime_error("Spy widget has been created without a parent spy block");
     }
 
     // Window configuration
@@ -56,7 +57,7 @@ SpyWidget::SpyWidget(Spy* spy)
     lay->setContentsMargins(0,0,0,0);
     
     lay->addWidget(&m_header, 0, 0, Qt::AlignTop);
-    // ((QGridLayout*)layout())->addWidget(&_body  , 1, 0);
+    lay->addWidget(&m_body  , 1, 0);
     // ((QGridLayout*)layout())->addWidget(&_footer, 2, 0, Qt::AlignBottom);
     
     // // Connect update signals
@@ -117,7 +118,9 @@ void SpyWidget::onSpiedObjChange()
         return;
     }
 
+    // First element update
     m_header.onSpiedObjChange();
+    m_body  .onSpiedObjChange();
 
     // Connect signals
 

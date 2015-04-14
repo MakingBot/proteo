@@ -19,28 +19,21 @@
 #include "SpyWidgetBody.hpp"
 #include <proteo/gui/Spy.hpp>
 
-
-
 #include <QEvent>
 #include <QPainter>
 #include <QFormLayout>
 #include <QGridLayout>
 #include <QMapIterator>
-#include <QVectorIterator>
 #include <QStyleOption>
+#include <QVectorIterator>
 
 #include <QLabel>
 #include <QSpinBox>
 #include <QLineEdit>
 #include <QComboBox>
 #include <QDoubleSpinBox>
-// #include <ViewerRealList.hpp>
-// #include <ViewerQVectornD.hpp>
-// #include <ViewerQMatrix4x4.hpp>
 
-// #include <ViewerInteger.hpp>
-
-
+using namespace proteo::core;
 using namespace proteo::gui;
 
 /* ============================================================================
@@ -59,20 +52,70 @@ SpyWidgetBody::SpyWidgetBody(Spy* spy)
  * */
 void SpyWidgetBody::paintEvent(QPaintEvent *event)
 {
-    // Q_UNUSED(event);
-    // QStyleOption opt;
-    // opt.init(this);
-    // QPainter p(this);
-    // style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+    Q_UNUSED(event);
+    QStyleOption opt;
+    opt.init(this);
+    QPainter p(this);
+    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }
-
-
 
 /* ============================================================================
  *
  * */
-// void SpyWidgetBody::destroyStructure()
-// {
+void SpyWidgetBody::onSpiedObjChange()
+{
+    updateStructure();
+}
+
+/* ============================================================================
+ *
+ * */
+void SpyWidgetBody::updateStructure()
+{
+    // Clean structure
+    destroyStructure();
+
+    // Get properties
+    const std::vector<Property>& properties = m_spy->spiedObj()->properties();
+
+    // Go through properties
+    for( uint8_t pid=0 ; pid<properties.size() ; pid++ )
+    {
+        // Check if the property is active
+        if( ! m_spy->spiedObj()->isPropertyActive(pid) )
+        {
+            continue;
+        }
+
+        // Get the property
+        const Property property = properties[pid];
+        switch( property.mtype() )
+        {
+
+            case Tuint:
+            {
+                
+                break;
+            }
+            
+    // Tint,
+
+    // Tbool,
+    // Tenum,
+
+    // Tstring,
+
+    // Treserved
+
+        }
+    }
+}
+
+/* ============================================================================
+ *
+ * */
+void SpyWidgetBody::destroyStructure()
+{
 //     // Go through widgets
 //     QMapIterator<quint8, QWidget*> widget(_widgetMap);
 //     while (widget.hasNext())
@@ -90,4 +133,4 @@ void SpyWidgetBody::paintEvent(QPaintEvent *event)
 //         widget.value()->deleteLater();
 //     }
 //     _widgetMap.clear();
-// }
+}
