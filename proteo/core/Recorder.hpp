@@ -21,6 +21,13 @@
 
 namespace proteo { namespace core {
 
+//! \class RecEnd
+//! \brief End the current record stream
+//!
+//! \author [XR]MakingBot ( http://makingbot.fr )
+//!
+class RecEnd { public: RecEnd() {} };
+
 //! \class Recorder
 //! \brief Simple thread safe logger
 //!
@@ -30,6 +37,12 @@ class Recorder : public core::Object
 {
 
 public:
+
+    enum RecLevel
+    {
+        LvlInfo;
+        LvlWarning;
+    };
 
     //! \brief Default constructor
     //!
@@ -68,7 +81,6 @@ public:
     // ========================================================================
     // => Recorder
 
-
     //! \brief Use std out getter
     //!
     bool useStdOut();
@@ -85,16 +97,21 @@ public:
     //!
     void useLogFile(bool b);
 
-
-    void rec(const std::string& message);
-
+    //! \brief
     //!
+    inline Recorder& rec(boost::shared_ptr<Object> obj, RecLevel lvl);
+
+    //! \brief Rec function for wrappers
     //!
     boost::shared_ptr<Recorder> extern_rec(const std::string message);
 
+    inline Recorder& operator<<(std::string s);
+    inline Recorder& operator<<(RecEnd&     r);
 
+    //! \brief End of record
+    //!
+    static RecEnd EndR() { return RecEnd(); }
 
-    Recorder& operator<<(std::string) {   return *this; }
 
 
 protected:
@@ -103,8 +120,17 @@ protected:
     //!
     bool m_useSynth;
 
-    // mutex
-    // std::string buffer  stringstream // buffer
+    //! \brief Text buffer used to store
+    //!
+    std::stringstream m_buffer;
+
+//
+
+
+
+
+    // mutex buffer
+    // mutex outcom
 
 
 
@@ -115,8 +141,6 @@ protected:
 
     // Create a global accessor to cout
     // core::SharedCout
-    // mutex
-
 
 
 
@@ -124,12 +148,15 @@ protected:
     //!
     bool m_useLogFile;
 
-
     // file stream buffer   ofstream
-    // mutex
 
 
 
+
+
+    //! \brief Record a log message for internal purpose
+    //!
+    inline void rec(const std::string& message);
 
 
     //! \brief Update use synthesis
@@ -140,7 +167,40 @@ protected:
 };
 
 
+/* ============================================================================
+ *
+ * */
+inline Recorder& operator<<(std::string s)
+{
+    m_buffer << s;
+    return *this;
+}
 
+/* ============================================================================
+ *
+ * */
+inline Recorder& operator<<(RecEnd& r)
+{
+    this->rec(m_buffer.str());
+    m_buffer.clear();
+    return *this;
+}
+
+/* ============================================================================
+ *
+ * */
+inline void Recorder::rec(const std::string& message)
+{
+    if(m_useStdOut)
+    {
+
+    }
+
+    if(m_useLogFile)
+    {
+
+    }
+}
 
 /* ============================================================================
  *
@@ -150,9 +210,6 @@ inline void Recorder::updateSynth()
     m_useSynth = (m_useStdOut || m_useLogFile);
 }
 
-
-
 } // core
 } // proteo
 #endif // RECORDER_HPP
-
