@@ -24,6 +24,55 @@ using namespace proteo::core;
 /* ============================================================================
  *
  * */
+Recorder::Recorder(std::string name)
+    : core::Object(name)
+{ }
+
+/* ============================================================================
+ *
+ * */
+const ObjRole Recorder::ORole = Rtool;
+
+/* ============================================================================
+ *
+ * */
+const TagArray Recorder::OTag = { 'R', 'E', 'C', 'O' };
+
+/* ============================================================================
+ *
+ * */
+const std::vector<Property> Recorder::Properties = {
+    // Property(IdPropertyDistance, "distance", Tuint)
+};
+
+/* ============================================================================
+ *
+ * */
+boost::shared_ptr<Recorder> Recorder::extern_rec(const std::string message)
+{
+    this->rec(message);
+    return std::dynamic_pointer_cast<Recorder>(Object::shared_from_this());
+}
+
+/* ============================================================================
+ *
+ * */
+ObjRole Recorder::objRole() const
+{
+    return ORole;
+}
+
+/* ============================================================================
+ *
+ * */
+const TagArray& Recorder::objTag() const
+{
+    return OTag;
+}
+
+/* ============================================================================
+ *
+ * */
 bool Recorder::useStdOut()
 {
     return m_useStdOut;
