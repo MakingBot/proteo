@@ -33,6 +33,8 @@
 #include <QComboBox>
 #include <QDoubleSpinBox>
 
+#include "ViewerInteger.hpp"
+
 using namespace proteo::core;
 using namespace proteo::gui;
 
@@ -57,6 +59,15 @@ void SpyWidgetBody::paintEvent(QPaintEvent *event)
     opt.init(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+}
+
+/* ============================================================================
+ *
+ * */
+void SpyWidgetBody::onPropertyModified(uint8_t id)
+{
+    ViewerProperty* v = qobject_cast<ViewerProperty*>(m_widgets[id]);
+    v->setValueFromVariant( m_spy->spiedObj()->propertyValue(id) );
 }
 
 /* ============================================================================
@@ -88,13 +99,19 @@ void SpyWidgetBody::updateStructure()
         }
 
         // Get the property
+        QWidget* new_widget = 0;
         const Property property = properties[pid];
         switch( property.mtype() )
         {
 
             case Tuint:
             {
-                
+                ViewerInteger* widget = new ViewerInteger(pid, property.readOnly(), 1, 0, 0xFFFFFF);
+                QObject::connect(widget , &ViewerProperty::newValueRequestedFor  ,
+                                 this   , &SpyWidgetBody ::onNewValueRequestedFor);
+          
+                new_widget = qobject_cast<QWidget*>(widget);     
+
                 break;
             }
             
@@ -108,7 +125,27 @@ void SpyWidgetBody::updateStructure()
     // Treserved
 
         }
+
+        // Check that the widget is not empty
+        if( ! new_widget )
+        {
+            continue;
+        }
+
+        // Store and place the widget
+        m_widgets[pid] = new_widget;
+        QString title  = QString("[") + QString::number(pid) + QString("] ");
+        title         += QString(property.name().c_str());
+        ((QFormLayout*)layout())->addRow( title, new_widget );
     }
+}
+
+/* ============================================================================
+ *
+ * */
+void SpyWidgetBody::onNewValueRequestedFor(quint8 id, proteo::core::Variant v)
+{
+    m_spy->spiedObj()->setPropertyValue(id, v);
 }
 
 /* ============================================================================

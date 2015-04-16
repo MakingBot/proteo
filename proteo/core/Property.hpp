@@ -49,7 +49,10 @@ public:
 
     //! \brief Meta type getter
     //!
-    MetaType mtype() const;
+    inline MetaType mtype() const;
+
+
+    inline bool readOnly() const;
 
     //! \brief Copy assignement
     //!
@@ -75,6 +78,10 @@ protected:
     //! It gives useful information to create the user interface
     //!
     MetaType m_type;
+
+    //! \brief True if the property is can only be read
+    //!
+    bool m_readOnly;
 
 };
 
@@ -115,6 +122,15 @@ inline MetaType Property::mtype() const
 {
     return m_type;
 }
+
+/* ============================================================================
+ *
+ * */
+bool Property::readOnly() const
+{
+    return m_readOnly;
+}
+
 
 } // core
 } // proteo

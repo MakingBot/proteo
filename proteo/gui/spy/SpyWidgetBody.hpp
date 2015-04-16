@@ -18,14 +18,16 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <QMap>
 #include <QWidget>
+#include <proteo/core/Variant.hpp>
 
 namespace proteo { namespace gui {
 
 class Spy;
 
-//!
-//! Widget that display personal block properties 
+//! \class SpyWidgetBody
+//! \brief Widget that display object properties 
 //!
 //! \author [XR]MakingBot ( http://makingbot.fr )
 //!
@@ -43,8 +45,10 @@ public:
     //!
     void paintEvent(QPaintEvent *event);
 
+    //! \brief 
+    //!
+    void onPropertyModified(uint8_t id);
 
-    
 public slots:
     
     //! \brief When the spied change
@@ -55,32 +59,9 @@ public slots:
     //!
     void updateStructure();
 
-
-
-    // //! Update property values
-    // void updateValues();
-    
-    // //! For line edit property widget
-    // void onLineTextEdited(const QString& text);
-
-    // //! For combobox that manage boolean switch
-    // void onComboBoxBool( const QString & text );
-
-    // //! For combobox that manage enum
-    // void onComboBoxEnum( const QString & text );
-
-    // //! For real list modification
-    // void onListModified(QList<qreal>& list);
-
-    // void onVector3DEdit(const QVector3D&);
-    // void onVector4DEdit(const QVector4D&);
-
-
-    // void onDoubleSpinBoxChange(double);
-
-
-    // //! Signal to the spy, which property has to be updated
-    // void onNewValueRequestFor(quint8 propid);
+    //! \brief Change the value of the property
+    //!
+    void onNewValueRequestedFor(quint8 id, proteo::core::Variant variant);
 
 
 protected:
@@ -89,16 +70,15 @@ protected:
     //!
     Spy* m_spy;
 
-    // //! Map that contains widget of each property
-    // QMap<quint8, QWidget*> _widgetMap;
+    //! \brief Map that contains widget of each property
+    //!
+    QMap<quint8, QWidget*> m_widgets;
 
-    //! Delete all current widgets
+    //! \brief Delete all current widgets
+    //!
     void destroyStructure();
 
-
-
 };
-
 
 } // gui
 } // proteo

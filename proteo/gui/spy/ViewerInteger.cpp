@@ -1,5 +1,5 @@
 //!
-//! \file ViewerNumber.cpp
+//! \file ViewerInteger.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -17,16 +17,17 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <ViewerNumber.hpp>
+#include "ViewerInteger.hpp"
 #include <QHBoxLayout>
 
 using namespace proteo::core;
+using namespace proteo::gui;
 
 /* ============================================================================
  *
  * */
-ViewerNumber::ViewerNumber(quint8 propid, bool readonly, int step, int min, int max)
-    : ViewerIProperty(propid, readonly)
+ViewerInteger::ViewerInteger(quint8 propid, bool readonly, int step, int min, int max)
+    : ViewerProperty(propid, readonly)
 {
     // Create the layout
     QHBoxLayout* lay = new QHBoxLayout(this);
@@ -38,31 +39,42 @@ ViewerNumber::ViewerNumber(quint8 propid, bool readonly, int step, int min, int 
     if(!readonly)
     {
         lay->addWidget( &m_setButton );
-        connect(&m_setButton, SIGNAL(click()), this, SLOT(apply()));
+        connect(&m_setButton, SIGNAL(clicked()), this, SLOT(apply()));
     }
 
     // Box property
     m_box.setSingleStep( step );
     m_box.setRange( min , max );
+    m_box.setAlignment( Qt::AlignCenter );
+
 }
 
 /* ============================================================================
  *
  * */
-void ViewerNumber::apply()
+void ViewerInteger::setValueFromVariant(const proteo::core::Variant& variant)
+{
+    setInterger(variant.toUint32());
+}
+
+/* ============================================================================
+ *
+ * */
+void ViewerInteger::apply()
 {
     if(m_setButton.hasChanged())
     {
-        emit newValueRequestedFor(_propid, );
+        emit newValueRequestedFor(m_property, proteo::core::Variant(m_box.value()));
+        m_setButton.update();
     }
 }
 
 /* ============================================================================
  *
  * */
-void ViewerNumber::onValueChange(int value)
+void ViewerInteger::onValueChange(int value)
 {
-    Q_UNSED(value);
+    Q_UNUSED(value);
     m_setButton.change();
 }
 

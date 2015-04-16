@@ -133,4 +133,6 @@ uint32_t SensorDistance::distance()
 void SensorDistance::setDistance(uint32_t distance)
 {
     m_distance = distance;
+
+    objSignals()->propertyModified(IdPropertyDistance);
 }

@@ -37,7 +37,8 @@ public:
     SetButton(QWidget* parent=0)
         : QPushButton(parent), m_changed(false)
     {
-        this->setText("-");
+        this->setText("OK");
+        this->setMaximumWidth(92);
     }
 
     //! \brief To check to state of the button
@@ -64,13 +65,13 @@ public:
     {
         if( m_changed )
         {
-            setText("-");
+            setText("OK");
             m_changed = false;
         }
     }
 
 protected:
-
+    
     //! \brief True when the data has changed
     //!
     bool m_changed;

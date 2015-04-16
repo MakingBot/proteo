@@ -22,6 +22,8 @@
 #include <QWidget>
 #include <proteo/core/Variant.hpp>
 
+namespace proteo { namespace gui {
+
 //! \class ViewerProperty
 //! \brief Global interface for interactive property viewers
 //!
@@ -38,6 +40,10 @@ public:
     ViewerProperty(quint8 id, bool readonly)
         : QWidget(0), m_property(id), m_readOnly(readonly)
     { }
+
+    //!
+    //!
+    virtual void setValueFromVariant(const proteo::core::Variant& variant) = 0;
 
 signals:
 
@@ -58,4 +64,6 @@ protected:
 };
 
 
+} // gui
+} // proteo
 #endif // VIEWERPROPERTY_HPP

@@ -27,7 +27,15 @@ void export_model()
 
     
     bp::class_<pm::SensorDistance, bp::bases<pc::Object> >("SensorDistance", bp::init<std::string>())
+
+        .def("connect", &pc::Object::initiativeConnect)
+        
+        .add_property("distance", &pm::SensorDistance::distance, &pm::SensorDistance::setDistance);
+
         ;
 
 
 }
+
+
+

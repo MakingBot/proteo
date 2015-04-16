@@ -1,7 +1,7 @@
-#ifndef VIEWERNUMBER_HPP
-#define VIEWERNUMBER_HPP
+#ifndef VIEWERINTEGER_HPP
+#define VIEWERINTEGER_HPP
 //!
-//! \file ViewerNumber.hpp
+//! \file ViewerInteger.hpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -23,12 +23,14 @@
 #include "SetButton.hpp"
 #include "ViewerProperty.hpp"
 
-//! \class ViewerNumber
+namespace proteo { namespace gui {
+
+//! \class ViewerInteger
 //! \brief To display and modify integers
 //!
 //! \author [XR]MakingBot ( http://makingbot.fr )
 //!
-class ViewerNumber : public ViewerProperty
+class ViewerInteger : public ViewerProperty
 {
     Q_OBJECT
 
@@ -36,7 +38,11 @@ public:
 
     //! \brief Default constructor
     //!
-    ViewerNumber(quint8 propid, bool readonly, int step = 1, int min = -0xFFFFFF, int max = 0xFFFFFF);
+    ViewerInteger(quint8 propid, bool readonly, int step = 1, int min = -0xFFFFFF, int max = 0xFFFFFF);
+
+    //!
+    //!
+    virtual void setValueFromVariant(const proteo::core::Variant& variant);
 
     //!
     //! Integer getter
@@ -77,4 +83,6 @@ protected:
 
 };
 
-#endif // VIEWERNUMBER_HPP
+} // gui
+} // proteo
+#endif // VIEWERINTEGER_HPP

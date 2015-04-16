@@ -125,7 +125,9 @@ void SpyWidget::onSpiedObjChange()
     // Connect signals
 
     //*this << 
-    obj->objSignals()->nameModified.connect( boost::bind(&SpyWidgetHeader::onObjNameModification, &m_header) );
+    obj->objSignals()->nameModified    .connect( boost::bind(&SpyWidgetHeader::onObjNameModification, &m_header) );
+
+    obj->objSignals()->propertyModified.connect( boost::bind(&SpyWidgetBody  ::onPropertyModified   , &m_body  , _1) );
 
 
 

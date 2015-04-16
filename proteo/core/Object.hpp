@@ -52,7 +52,7 @@ struct ObjSignals
 //!
 //! \author [XR]MakingBot ( http://makingbot.fr )
 //!
-class Object : public boost::enable_shared_from_this<Object>
+class Object: public boost::enable_shared_from_this<Object>
 {
 
 public:
