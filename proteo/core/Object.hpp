@@ -24,29 +24,6 @@
 
 namespace proteo { namespace core {
 
-//! \typedef Tag array type
-//!
-typedef std::array<char, 8> TagArray;
-
-//! \class ObjSignals
-//! \brief Define object common signals
-//!
-//! \author [XR]MakingBot ( http://makingbot.fr )
-//!
-struct ObjSignals
-{
-
-    //! \brief Emitted when the object name is modified
-    //!
-    boost::signals2::signal<void ()> nameModified;
-
-    //! \brief Emitted when a property value has been modified
-    //! It takes a uint8 value which is the property id.
-    //!
-    boost::signals2::signal<void (uint8_t)> propertyModified;
-
-};
-
 //! \class Object
 //! \brief Main object interface
 //!
@@ -56,6 +33,27 @@ class Object: public boost::enable_shared_from_this<Object>
 {
 
 public:
+
+    //! \typedef Tag array type
+    //!
+    typedef std::array<char, 4> TagArray;
+
+    //! \class ObjSignals
+    //! \brief Define object common signals
+    //!
+    struct ObjSignals
+    {
+
+        //! \brief Emitted when the object name is modified
+        //!
+        boost::signals2::signal<void ()> nameModified;
+
+        //! \brief Emitted when a property value has been modified
+        //! It takes a uint8 value which is the property id.
+        //!
+        boost::signals2::signal<void (uint8_t)> propertyModified;
+
+    };
 
     //! \brief Default constructor
     //!
@@ -244,11 +242,10 @@ protected:
 
 };
 
-
 /* ============================================================================
  *
  * */
-inline boost::shared_ptr<ObjSignals> Object::objSignals()
+inline boost::shared_ptr<Object::ObjSignals> Object::objSignals()
 {
    return m_oSignals;
 }
@@ -260,9 +257,6 @@ inline const std::list<boost::shared_ptr<Object> >& Object::objConnections()
 {
    return m_oConnections;
 }
-
-
-
 
 } // core
 } // proteo

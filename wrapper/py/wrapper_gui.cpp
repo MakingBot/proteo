@@ -39,8 +39,6 @@ void export_gui()
 
     // === Export
 
-  
-
     //
     // Scheduler
     //
@@ -48,14 +46,10 @@ void export_gui()
         .def("start", &pg::Scheduler::start)
         ;
 
-
     bp::class_<pg::Spy, bp::bases<pc::Object> >("Spy", bp::init<std::string>())
         ;
 
     bp::class_<pg::Shell, bp::bases<pc::Object> >("Shell", bp::init<std::string>())
         ;
         
-
 }
-
-

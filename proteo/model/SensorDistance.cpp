@@ -44,7 +44,7 @@ const ObjRole SensorDistance::ORole = Rgui;
 /* ============================================================================
  *
  * */
-const TagArray SensorDistance::OTag = { 'S', 'E', 'N', 'S', 'D', 'I', 'S', 'T' };
+const Object::TagArray SensorDistance::OTag = { 'D', 'I', 'S', 'T' };
 
 /* ============================================================================
  *
@@ -64,7 +64,7 @@ ObjRole SensorDistance::objRole() const
 /* ============================================================================
  *
  * */
-const TagArray& SensorDistance::objTag() const
+const Object::TagArray& SensorDistance::objTag() const
 {
     return OTag;
 }

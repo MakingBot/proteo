@@ -46,7 +46,7 @@ const ObjRole Spy::ORole = Rgui;
 /* ============================================================================
  *
  * */
-const TagArray Spy::OTag = { '_', '_', 'S', 'P', 'Y', '_', '_', '_' };
+const Object::TagArray Spy::OTag = { '_', 'S', 'P', 'Y' };
 
 /* ============================================================================
  *
@@ -66,7 +66,7 @@ ObjRole Spy::objRole() const
 /* ============================================================================
  *
  * */
-const TagArray& Spy::objTag() const
+const Object::TagArray& Spy::objTag() const
 {
     return OTag;
 }

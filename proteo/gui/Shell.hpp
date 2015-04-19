@@ -36,6 +36,8 @@ public:
     //!
     Shell(std::string name);
 
+    Shell(const proteo::gui::Shell&);
+
     // ========================================================================
     // => Constantes
 
@@ -45,7 +47,7 @@ public:
 
     //! \brief Tag
     //!
-    static const core::TagArray OTag;
+    static const core::Object::TagArray OTag;
 
     //! \brief Property vector
     //!
@@ -60,7 +62,7 @@ public:
 
     //! \brief FROM Object
     //!
-    virtual const core::TagArray& objTag() const;
+    virtual const core::Object::TagArray& objTag() const;
 
     //! \brief FROM Object
     //!

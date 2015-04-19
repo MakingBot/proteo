@@ -1,5 +1,5 @@
 //!
-//! \file wrapper_core.cpp
+//! \file wrapper_brain.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -18,41 +18,41 @@
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <boost/python.hpp>
-#include <proteo/core/Object.hpp>
-#include <proteo/core/Container.hpp>
+#include <proteo/brain/Behaviour.hpp>
 
 using namespace std;
-using namespace proteo::core;
 using namespace boost::python;
+using namespace proteo::core;
+using namespace proteo::brain;
 
 /* ============================================================================
  *
  * */
-void export_core()
+void export_brain()
 {
-    // Map the core namespace to a sub-module
-    // Make "from proteo.core import ..." work
-    object core_module(handle<>(borrowed(PyImport_AddModule("proteo.core"))));
-    // Make "from proteo import core" work
-    scope().attr("core") = core_module;
+    // Map the brain namespace to a sub-module
+    // Make "from proteo.brain import ..." work
+    object brain_module(handle<>(borrowed(PyImport_AddModule("proteo.brain"))));
+    // Make "from proteo import brain" work
+    scope().attr("brain") = brain_module;
     // Set the current scope to the new sub-module
-    scope core_scope = core_module;
+    scope brain_scope = brain_module;
 
     //
-    // Object
+    // Behaviour
     //
-    class_<Object, boost::noncopyable>("Object", no_init)
+    class_<Behaviour, bases<Object> >("Behaviour", init<std::string>())
 
-        .def("append" , &Object::append)
-        .def("connect", &Object::initiativeConnect)
 
-        .add_property("objName", &Object::objName, &Object::setObjName);
+        .def("start", &Behaviour::start)
+        .def("stop" , &Behaviour::stop)
+
+        .def("createEvent" , &Behaviour::createCyclicEvent)
+        //.def("createEvent" , &Behaviour::createEvent)
+        .def("attachEvent" , &Behaviour::attachEvent)
+
+ 
 
         ;
 
-    //
-    // Container
-    //
-    class_<Container, bases<Object> >("Container", init<string>())
-        ;
 }

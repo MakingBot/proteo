@@ -35,6 +35,12 @@ Shell::Shell(std::string name)
 }
 
 
+Shell::Shell(const proteo::gui::Shell& copy)
+    : Object("name")
+{
+
+}
+
 /* ============================================================================
  *
  * */
@@ -43,7 +49,7 @@ const ObjRole Shell::ORole = Rgui;
 /* ============================================================================
  *
  * */
-const TagArray Shell::OTag = { '_', 'S', 'H', 'E', 'L', 'L', '_', '_' };
+const Object::TagArray Shell::OTag = { 'S', 'H', 'L', 'L' };
 
 /* ============================================================================
  *
@@ -63,7 +69,7 @@ ObjRole Shell::objRole() const
 /* ============================================================================
  *
  * */
-const TagArray& Shell::objTag() const
+const Object::TagArray& Shell::objTag() const
 {
     return OTag;
 }

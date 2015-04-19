@@ -1,7 +1,7 @@
-#ifndef VIEWERREAL_HPP
-#define VIEWERREAL_HPP
+#ifndef VIEWERSTRING_HPP
+#define VIEWERSTRING_HPP
 //!
-//! \file ViewerReal.hpp
+//! \file ViewerString.hpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -19,18 +19,18 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <QDoubleSpinBox>
+#include <QLineEdit>
 #include "SetButton.hpp"
 #include "ViewerProperty.hpp"
 
 namespace proteo { namespace gui {
 
-//! \class ViewerReal
+//! \class ViewerString
 //! \brief To display and modify real
 //!
 //! \author [XR]MakingBot ( http://makingbot.fr )
 //!
-class ViewerReal : public ViewerProperty
+class ViewerString : public ViewerProperty
 {
     Q_OBJECT
 
@@ -38,7 +38,7 @@ public:
 
     //! \brief Default constructor
     //!
-    ViewerReal(quint8 propid, bool readonly, int step = 1, int min = -0xFFFFFF, int max = 0xFFFFFF);
+    ViewerString(quint8 propid, bool readonly);
 
     //! \brief 
     //!
@@ -48,14 +48,14 @@ public:
     //!
     double getReal()
     {
-        return m_box.value();
+        return m_box.text();
     }
 
     //! \brief Integer setter
     //!
     void setReal(double real)
     {
-        m_box.setValue(real);
+        m_box.setText(real);
         m_setButton.update();
     }
 
@@ -73,7 +73,7 @@ protected:
 
     //! \brief Box to display the value
     //!
-    QDoubleSpinBox m_box;
+    QLineEdit m_box;
 
     //! \brief Button to set the value
     //!
@@ -83,6 +83,4 @@ protected:
 
 } // gui
 } // proteo
-#endif // VIEWERREAL_HPP
-
-
+#endif // VIEWERSTRING_HPP

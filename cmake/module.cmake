@@ -6,11 +6,13 @@ SET(MODULE_NAME "proteo")
 
 # Headers
 SET(PROJECT_HEADER_FILES
+
     proteo/core/Type.hpp
     proteo/core/Object.hpp
     proteo/core/Variant.hpp
     proteo/core/Property.hpp
-
+    proteo/core/Container.hpp
+    proteo/core/SharedCout.hpp
 
     proteo/gui/Gui.hpp
     proteo/gui/Scheduler.hpp
@@ -25,19 +27,23 @@ SET(PROJECT_HEADER_FILES
     proteo/gui/spy/ViewerProperty.hpp    
     proteo/gui/spy/ViewerInteger.hpp    
 
-
     proteo/gui/Shell.hpp
     proteo/gui/shell/ShellWidget.hpp
 
     proteo/model/SensorDistance.hpp
     
+    proteo/brain/Brain.hpp
+    proteo/brain/Behaviour.hpp
+
     )
 
 # Sources
 SET(PROJECT_SOURCE_FILES
-    proteo/core/Object.cpp
 
+    proteo/core/Object.cpp
     proteo/gui/Scheduler.cpp
+    proteo/core/Container.cpp
+    proteo/core/SharedCout.cpp
 
     proteo/gui/Spy.cpp
     proteo/gui/spy/SpyWidget.cpp
@@ -49,13 +55,17 @@ SET(PROJECT_SOURCE_FILES
     proteo/gui/Shell.cpp
     proteo/gui/shell/ShellWidget.cpp
 
-
     proteo/model/SensorDistance.cpp
-    
+
+    proteo/brain/Brain.cpp
+    proteo/brain/Behaviour.cpp
+
     wrapper/py/wrapper_gui.cpp
     wrapper/py/wrapper_core.cpp
+    wrapper/py/wrapper_brain.cpp
     wrapper/py/wrapper_model.cpp
     wrapper/py/wrapper_module.cpp
+
     )
 
 # Define the wrapper library that wraps our library

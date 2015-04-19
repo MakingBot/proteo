@@ -5,10 +5,12 @@
 
 #include <map>
 #include <mutex>
+#include <atomic>
 #include <thread>
 #include <bitset>
 #include <vector>
 #include <string>
+#include <memory>
 #include <iostream>
 #include <algorithm>
 

@@ -19,6 +19,8 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
+#include "Object.hpp"
+
 namespace proteo { namespace core {
 
 class Container : public Object
@@ -39,7 +41,7 @@ public:
 
     //! \brief Tag
     //!
-    static const core::TagArray OTag;
+    static const core::Object::TagArray OTag;
 
     //! \brief Property vector
     //!
@@ -54,7 +56,7 @@ public:
 
     //! \brief FROM Object
     //!
-    virtual const core::TagArray& objTag() const;
+    virtual const core::Object::TagArray& objTag() const;
 
     //! \brief FROM Object
     //!

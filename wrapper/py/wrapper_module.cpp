@@ -16,7 +16,9 @@ void export_model();
 //!
 void export_gui();
 
-
+//! \brief Export brain module
+//!
+void export_brain();
 
 /* ============================================================================
  *
@@ -33,6 +35,7 @@ BOOST_PYTHON_MODULE(proteo)
     export_core();
     export_model();
     export_gui();
-
+    export_brain();
+    
 }
 

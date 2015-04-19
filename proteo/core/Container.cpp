@@ -36,7 +36,7 @@ const ObjRole Container::ORole = Rtool;
 /* ============================================================================
  *
  * */
-const TagArray Container::OTag = { 'C', 'N', 'T', 'R' };
+const Object::TagArray Container::OTag = { 'C', 'N', 'T', 'R' };
 
 /* ============================================================================
  *
@@ -54,7 +54,7 @@ ObjRole Container::objRole() const
 /* ============================================================================
  *
  * */
-const TagArray& Container::objTag() const
+const Object::TagArray& Container::objTag() const
 {
     return OTag;
 }

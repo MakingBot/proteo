@@ -1,28 +1,47 @@
 #!/usr/bin/python
 
-from proteo.gui import *
+import time 
+
+from proteo.core  import *
+from proteo.gui   import *
 from proteo.model import *
+from proteo.brain import *
 
 
 
-gui = Scheduler()
+# gui = Scheduler()
 
-shell = Shell("pyshell")
-
-
-sp = Spy("agent007");
+# #shell = Shell("pyshell")
 
 
-
-sensor = SensorDistance("sensor");
-sensor.distance = 5;
-
-sp.connect(sensor);
+# sp = Spy("agent007");
 
 
-test=5;
+
+# # sensor = SensorDistance("sensor");
+# # sensor.distance = 5;
+
+# # sp.connect(sensor);
 
 
-gui.start()
+# # test=5;
 
 
+# gui.start()
+
+def action():
+    print("cooooollllll!!")
+
+
+bh = Behaviour("test")
+
+
+bh.start()
+
+
+bh.attachEvent("truc", action)
+
+
+
+time.sleep(0.001)
+bh.stop()
