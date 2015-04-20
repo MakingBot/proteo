@@ -1,3 +1,4 @@
+
 #ifndef BHCPROPERTYEVENT_HPP
 #define BHCPROPERTYEVENT_HPP
 //!
@@ -24,14 +25,55 @@
 
 namespace proteo { namespace brain {
 
-
+//! \class BhPropertyEvent
+//! \brief Provide to users a way to create a behaviour that trigger only on property change.
+//!
+//! \author [XR]MakingBot ( http://makingbot.fr )
+//!
 class BhPropertyEvent : public BhEvent
 {
 
 public:
 
+    inline BhPropertyEvent(std::shared_ptr<core::Object> obj, const std::string property_id, boost::python::object condition);
+
+
+    
+
+protected:
+
+    std::shared_ptr<core::Object> m_obj;
+
+    const uint8_t m_id;
+
+    boost::python::object m_condition;
+
+    void onPropertyModified(uint8_t id);
+
 };
 
+/* ============================================================================
+ *
+ * */
+inline BhPropertyEvent::BhPropertyEvent(std::shared_ptr<core::Object> obj, uint8_t property_id, boost::python::object condition)
+{
+
+    // obj->objSignals()->propertyModified.connect( bind( onPropertyModified ) ));
+
+}
+
+/* ============================================================================
+ *
+ * */
+void onPropertyModified(uint8_t id)
+{
+    // Check if the good property has been modified
+    if(id != m_id)
+    {
+        return;
+    }
+
+}
 
 } // brain
 } // proteo
