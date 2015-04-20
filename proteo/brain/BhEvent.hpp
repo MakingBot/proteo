@@ -19,54 +19,61 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-
 #include <boost/python.hpp>
 
 namespace proteo { namespace brain {
 
-
-
-
+//! \class BhEvent
+//! \brief Behaviour event interface
+//!
+//! \author [XR]MakingBot ( http://makingbot.fr )
+//!
 class BhEvent
 {
 
 public:
 
+    //! \brief Default constructor
+    //!
     inline BhEvent();
 
-
+    //! \brief Action getter
+    //!
     inline const boost::python::object& action();
 
+    //! \brief Action setter
+    //!
     inline void setAction(boost::python::object& action);
-
 
 protected:
 
-
+    //! \brief Event action
+    //!
     boost::python::object m_action;
-
 
 };
 
-
+/* ============================================================================
+ *
+ * */
 inline BhEvent::BhEvent()
-{
+{ }
 
-}
-
-
-
+/* ============================================================================
+ *
+ * */
 inline const boost::python::object& BhEvent::action()
 {
     return m_action;
 }
 
-
+/* ============================================================================
+ *
+ * */
 inline void BhEvent::setAction(boost::python::object& action)
 {
     m_action = action;
 }
-
 
 } // brain
 } // proteo
