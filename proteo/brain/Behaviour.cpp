@@ -74,7 +74,34 @@ const std::vector<Property>& Behaviour::properties() const
     return Properties;
 }
 
+/* ============================================================================
+ *
+ * */
+bool Behaviour::isRunning()
+{
+    return m_thread->run;
+}
 
+/* ============================================================================
+ *
+ * */
+void Behaviour::setRun(bool run)
+{
+    if( run )
+    {
+        if( !isRunning() )
+        {
+            start();
+        }
+    }
+    else
+    {
+        if( isRunning() )
+        {
+            stop();
+        }
+    }
+}
 
 /* ============================================================================
  *
@@ -125,24 +152,25 @@ void Behaviour::createConditionedEvent(const std::string name, const boost::pyth
  * */
 void Behaviour::createPropertyEvent(const std::string name, std::shared_ptr<core::Object> obj, const std::string property_id, boost::python::object condition)
 {
-
+    //BhPropertyEvent event(obj, property_id, condition);
 }
-
-
-
-
-
-
 
 /* ============================================================================
  *
  * */
 void Behaviour::attachEvent(const std::string name, const boost::python::object& action)
 {
-    if( hasattr(action, "__call__") )
+    if( ! hasattr(action, "__call__") )
     {
-        boost::python::call<void>(action.ptr());    
+        return;
     }
+
+    if( m_conditionedEvents.find(name) != m_conditionedEvents.end() )
+    {
+        m_conditionedEvents[name].setAction(action);
+    }
+
+    // boost::python::call<void>(action.ptr());
 }
 
 /* ============================================================================
@@ -151,30 +179,42 @@ void Behaviour::attachEvent(const std::string name, const boost::python::object&
 void Behaviour::execute()
 {
     // Initialize thread
-    m_thread->loopTime = high_resolution_clock::now();
+    uint32_t rt_shift = 0;
+    std::chrono::milliseconds time_elapsed = 0;
+    m_thread->nextTimePoint = high_resolution_clock::now() + m_thread->loopStep;
 
     // Main loop
     while(m_thread->run)
     {
-        // Get current time
-        std::chrono::high_resolution_clock::time_point ms_time = high_resolution_clock::now();
-
-        //
-        // auto elapsed = duration_cast<std::chrono::milliseconds>(ms_time - m_thread->loopTime);
+        // Compute elapsed time
+        time_elapsed = m_thread->loopStep + (rt_shift*m_thread->loopStep)
 
 
-        // cout << "coucou : " << elapsed.count() << endl;
+        // Actions
 
 
-        //std::cout << typeid(elapsed).name() << std::endl;  
 
 
-        // Save time
-        m_thread->loopTime = ms_time;
+        // Conditioned events
+        for (std::map<std::string, BhConditionedEvent>::iterator it=m_conditionedEvents.begin() ; it!=m_conditionedEvents.end() ; ++it)
+        {
+            const BhConditionedEvent& event = it->second;
+            event.check()
+        }
+
+
+
+
+        // Check real time shift
+        rt_shift = 0;
+        while( high_resolution_clock::now() >= m_thread->nextTimePoint )
+        {
+            rt_shift++;
+            m_thread->nextTimePoint += step;
+        }
+
+        // Sleep until the next loop
+        std::this_thread::sleep_until(m_thread->nextTimePoint);
     }
-
-
-
-
 }
 
