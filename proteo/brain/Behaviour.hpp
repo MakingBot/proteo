@@ -31,14 +31,25 @@
 namespace proteo { namespace brain {
 
 //! \class Behaviour
-//! \brief 
+//! \brief Provide to users a way to create behaviour.
+//!
+//! \author [XR]MakingBot ( http://makingbot.fr )
 //!
 class Behaviour : public core::Object
 {
 
 public:
 
+    //! \brief Distance property id
+    //!
+    // static const uint8_t 
+    // IdPropertyRun;
+    // IdPropertyFreq
+    // IdPropertyRtShift
 
+    //! \struct ThreadControl
+    //! \brief Thread control variables
+    //!
     struct ThreadControl
     {
         ThreadControl()
@@ -51,15 +62,29 @@ public:
         //!
         std::thread thread;
 
-        //!
+        //! \brief The thread must run until run is true
         //!
         std::atomic_bool run;
 
-
+        //! \brief Requested frequency
+        //!
         std::atomic_uint baseFreq;
 
+        //! \brief Number of milliseconds between 2 loop
+        //!
+        std::chrono::milliseconds loopStep;
 
-        std::chrono::high_resolution_clock::time_point loopTime;
+/*
+definir une frequence minimum
+
+step = 1000/frequency
+
+each loop must last 'step' ms 
+*/
+
+        //! \brief Time point the thread have to wait before starting the new loop
+        //!
+        std::chrono::high_resolution_clock::time_point nextTimePoint;
 
     };
 
@@ -101,6 +126,14 @@ public:
     // ========================================================================
     // => Behaviour
 
+    //! \brief Run getter
+    //!
+    bool isRunning();
+
+    //! \brief Run setter
+    //!
+    void setRun(bool run);
+
     //! \brief Start behaviour thread
     //!
     void start();
@@ -109,42 +142,31 @@ public:
     //!
     void stop();
 
-
+    //! \brief Create an event called 'name' that is triggered at the provided 'frequency'
+    //!
     void createCyclicEvent(const std::string name, uint8_t frequency);
 
-
+    //! \brief Create an event called 'name' that is triggered when 'condition' is true
+    //! The condition is checked at the base frequency
+    //!
     void createConditionedEvent(const std::string name, const boost::python::object& condition);
 
-
+    //! \brief Create an event called 'name' that is triggered when 'condition' is true
+    //! The condition is checked only when the property is modified
+    //!
     void createPropertyEvent(const std::string name, std::shared_ptr<core::Object> obj, const std::string property_id, boost::python::object condition);
-
-
 
     //! \brief Create an event called 'name' that is triggered at the provided 'frequency'
     //!
     inline void createEvent(const std::string name, uint8_t frequency);
 
-    //! \brief Create an event called 'name' that is triggered when 'condition' is true
-    //!
-    // void createEvent(const std::string name, boost::python::object condition);
-
-    // void createEvent(const std::string name, shared_ptr<core::Object> obj, const std::string property_id, pyobj condition);
-
-    // void createEvent(const std::string name, shared_ptr<core::Object> obj, const std::string property_name, pyobj condition);
-
-
-
-
-
     //! \brief Attach an action to the event 'name'
     //!
     void attachEvent(const std::string name, const boost::python::object& action);
 
-
-
 protected:
 
-    //! \brief
+    //! \brief Thread management
     //!
     std::shared_ptr<ThreadControl> m_thread;
 
@@ -152,6 +174,8 @@ protected:
     //std::map<std::string, BhCyclicEvent> m_cyclicEvents;
 
 
+    //! \brief Map of the conditioned events
+    //!
     std::map<std::string, BhConditionedEvent> m_conditionedEvents;
 
 
@@ -166,9 +190,7 @@ protected:
     //!
     void execute();
 
-
 };
-
 
 /* ============================================================================
  *
