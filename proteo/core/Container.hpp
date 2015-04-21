@@ -62,6 +62,9 @@ public:
     //!
     virtual const std::vector<core::Property>& properties() const;
 
+
+
+
 };
 
 } // core

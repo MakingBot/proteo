@@ -59,6 +59,9 @@ public:
     //!
     Object(std::string name);
 
+
+
+
     // ========================================================================
     // => Object const identification
 
@@ -97,7 +100,11 @@ public:
     // ========================================================================
     // => Object parent link
 
-    //! \brief
+    //! \brief To check if the object has a parent
+    //!
+    bool hasObjParent();
+
+    //! \brief Object parent getter
     //!
     boost::shared_ptr<Object> objParent();
 
@@ -109,9 +116,13 @@ public:
     //!
     uint32_t nbObjChilds() const;
 
-    //! \brief
+    //! \brief Append a child to this object as container
     //!
     void append(boost::shared_ptr<Object> chd);
+
+    //! \brief Cool append overload
+    //!
+    boost::shared_ptr<Object> operator+=(boost::shared_ptr<Object> chd);
 
     // ========================================================================
     // => Object connections
@@ -241,6 +252,8 @@ protected:
     std::list<boost::shared_ptr<Object> > m_oConnections;
 
 };
+
+
 
 /* ============================================================================
  *

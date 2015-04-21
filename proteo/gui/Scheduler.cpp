@@ -17,6 +17,8 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <QPainter>
+
 #include <proteo/gui/Scheduler.hpp>
 
 using namespace proteo::gui;

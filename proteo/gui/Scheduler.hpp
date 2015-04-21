@@ -21,7 +21,6 @@
 
 #include <proteo/core/Type.hpp>
 
-#include <QPainter>
 #include <QProxyStyle>
 #include <QApplication>
 #include <QStyleOption>

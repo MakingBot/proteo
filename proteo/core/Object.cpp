@@ -74,6 +74,18 @@ std::string Object::objIdChain() const
 /* ============================================================================
  *
  * */
+bool Object::hasObjParent()
+{
+    if(m_oParent)
+    {
+        return true;
+    }
+    return false;
+}
+
+/* ============================================================================
+ *
+ * */
 boost::shared_ptr<Object> Object::objParent()
 {
     return m_oParent;
@@ -100,7 +112,20 @@ uint32_t Object::nbObjChilds() const
  * */
 void Object::append(boost::shared_ptr<Object> chd)
 {
+    // Store the childs
     m_oChilds[chd->objName()] = chd;
+
+    // Set the parent of the child
+    chd->setObjParent( shared_from_this() );
+}
+
+/* ============================================================================
+ *
+ * */
+boost::shared_ptr<Object> Object::operator+=(boost::shared_ptr<Object> chd)
+{
+    this->append(chd);
+    return shared_from_this();
 }
 
 /* ============================================================================

@@ -21,7 +21,6 @@
 #include <proteo/core/Object.hpp>
 #include <proteo/core/Container.hpp>
 
-using namespace std;
 using namespace proteo::core;
 using namespace boost::python;
 
@@ -30,29 +29,59 @@ using namespace boost::python;
  * */
 void export_core()
 {
-    // Map the core namespace to a sub-module
-    // Make "from proteo.core import ..." work
-    object core_module(handle<>(borrowed(PyImport_AddModule("proteo.core"))));
-    // Make "from proteo import core" work
-    scope().attr("core") = core_module;
-    // Set the current scope to the new sub-module
-    scope core_scope = core_module;
+
 
     //
     // Object
     //
-    class_<Object, boost::noncopyable>("Object", no_init)
+    class_<Object, boost::shared_ptr<Object>, boost::noncopyable>
+    (
+        "Object"
+    ,   "Main proteo interface"
+    ,   no_init
+    )
 
+
+
+
+        .add_property("objName", &Object::objName, &Object::setObjName)
+
+
+        // ========================================================================
+        // => Object parent link
+
+        .def("hasObjParent", &Object::hasObjParent)
+        .add_property("objParent", &Object::objParent, &Object::setObjParent)
+        .def("nbObjChilds", &Object::nbObjChilds)
         .def("append" , &Object::append)
+        .def(self += other<boost::shared_ptr<Object> >())
+
+        // ========================================================================
+        // => Object connections
+
         .def("connect", &Object::initiativeConnect)
 
-        .add_property("objName", &Object::objName, &Object::setObjName);
+
 
         ;
 
     //
     // Container
     //
-    class_<Container, bases<Object> >("Container", init<string>())
+    class_<Container, boost::shared_ptr<Container>, bases<Object>, boost::noncopyable>(
+        "Container", init<std::string>())
+
         ;
+
+
 }
+
+
+/* ============================================================================
+ *
+ * */
+BOOST_PYTHON_MODULE(core)
+{
+    export_core();
+}
+

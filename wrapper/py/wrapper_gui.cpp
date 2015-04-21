@@ -29,15 +29,9 @@ void export_gui()
     namespace pc = proteo::core;
     namespace pg = proteo::gui;
 
-    // Map the gui namespace to a sub-module
-    // Make "from proteo.gui import ..." work
-    bp::object gui_module(bp::handle<>(bp::borrowed(PyImport_AddModule("proteo.gui"))));
-    // Make "from proteo import gui" work
-    bp::scope().attr("gui") = gui_module;
-    // Set the current scope to the new sub-module
-    bp::scope gui_scope = gui_module;
 
-    // === Export
+
+
 
     //
     // Scheduler
@@ -53,3 +47,13 @@ void export_gui()
         ;
         
 }
+
+/* ============================================================================
+ *
+ * */
+BOOST_PYTHON_MODULE(gui)
+{
+    export_gui();
+}
+
+

@@ -30,13 +30,7 @@ using namespace proteo::brain;
  * */
 void export_brain()
 {
-    // Map the brain namespace to a sub-module
-    // Make "from proteo.brain import ..." work
-    object brain_module(handle<>(borrowed(PyImport_AddModule("proteo.brain"))));
-    // Make "from proteo import brain" work
-    scope().attr("brain") = brain_module;
-    // Set the current scope to the new sub-module
-    scope brain_scope = brain_module;
+
 
     //
     // Behaviour

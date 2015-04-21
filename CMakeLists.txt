@@ -18,5 +18,10 @@ SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 SET(CMAKE_AUTOMOC ON)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
 
-INCLUDE(cmake/module.cmake)
+# Append directory
+INCLUDE_DIRECTORIES(.)
+
+
+INCLUDE(wrapper/py/module_core.cmake)
+INCLUDE(wrapper/py/module_gui.cmake)
 
