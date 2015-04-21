@@ -27,16 +27,34 @@ using namespace proteo::brain;
 /* ============================================================================
  *
  * */
+static const uint8_t Behaviour::IdPropertyRun               = 0;
+
+/* ============================================================================
+ *
+ * */
+static const uint8_t Behaviour::IdPropertyFreq              = 1;
+
+/* ============================================================================
+ *
+ * */
+static const uint8_t Behaviour::IdPropertyRtShift           = 2;
+
+/* ============================================================================
+ *
+ * */
 Behaviour::Behaviour(std::string name)
     : core::Object(name)
     , m_thread(new ThreadControl)
 {
+    setPropertyActivity(IdPropertyRun       , true);
+    setPropertyActivity(IdPropertyFreq      , true);
+    setPropertyActivity(IdPropertyRtShift   , true);
 }
 
 /* ============================================================================
  *
  * */
-const ObjRole Behaviour::ORole = Rgui;
+const ObjRole Behaviour::ORole = Rbehaviour;
 
 /* ============================================================================
  *
@@ -47,7 +65,9 @@ const Object::TagArray Behaviour::OTag = { 'B', 'E', 'H', 'V' };
  *
  * */
 const std::vector<Property> Behaviour::Properties = {
-    // Property(IdPropertyDistance, "distance", Tuint)
+    Property(IdPropertyRun      , "run"         , Tbool) ,
+    Property(IdPropertyFreq     , "freq"        , Tuint) ,
+    Property(IdPropertyRtShift  , "rtShift"     , Tuint, false)
 };
 
 /* ============================================================================
@@ -64,6 +84,66 @@ ObjRole Behaviour::objRole() const
 const Object::TagArray& Behaviour::objTag() const
 {
     return OTag;
+}
+
+/* ============================================================================
+ *
+ * */
+Variant Behaviour::propertyValue(uint8_t id)
+{
+    switch(id)
+    {
+        case IdPropertyRun:
+        {
+            return Variant(isRunning());
+            break;
+        }
+
+        case IdPropertyFreq:
+        {
+            return Variant(freq());
+            break;
+        }
+
+        case IdPropertyRtShift:
+        {
+            return Variant(rtShift());
+            break;
+        }
+
+        default:
+        {
+            return Object::propertyValue(id);
+            break;
+        }
+    }
+}
+
+/* ============================================================================
+ *
+ * */
+void Behaviour::setPropertyValue(uint8_t id, const Variant& v)
+{
+    switch(id)
+    {
+        case IdPropertyRun:
+        {
+            setRun(v.toBool());
+            break;
+        }
+
+        case IdPropertyFreq:
+        {
+            setFreq(v.toUint32());
+            break;
+        }
+
+        default:
+        {
+            Object::setPropertyValue(id, v);
+            break;
+        }
+    }
 }
 
 /* ============================================================================
@@ -101,6 +181,31 @@ void Behaviour::setRun(bool run)
             stop();
         }
     }
+}
+
+/* ============================================================================
+ *
+ * */
+uint32_t Behaviour::freq()
+{
+    return m_thread->baseFreq;
+}
+
+/* ============================================================================
+ *
+ * */
+void Behaviour::setFreq(uint32_t freq)
+{
+    m_thread->baseFreq = freq;
+    loopStep = 1000 / m_thread->baseFreq;
+}
+
+/* ============================================================================
+ *
+ * */
+uint32_t Behaviour::rtShift()
+{
+    return m_thread->rtShift;
 }
 
 /* ============================================================================
