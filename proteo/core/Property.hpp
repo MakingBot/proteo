@@ -33,7 +33,7 @@ public:
 
     //! \brief Default constructor
     //!
-    Property(uint8_t id, const char* name, MetaType type);
+    Property(uint8_t id, const char* name, MetaType type, bool readOnly=false);
 
     //! \brief Copy constructor
     //!
@@ -88,15 +88,15 @@ protected:
 /* ============================================================================
  *
  * */
-inline Property::Property(uint8_t id, const char* name, MetaType type)
-    : m_id(id), m_name(name), m_type(type)
+inline Property::Property(uint8_t id, const char* name, MetaType type, bool readOnly)
+    : m_id(id), m_name(name), m_type(type), m_readOnly(readOnly)
 { }
 
 /* ============================================================================
  *
  * */
 inline Property::Property(const Property& p)
-    : m_id(p.id()), m_name(p.name()), m_type(p.mtype())
+    : m_id(p.id()), m_name(p.name()), m_type(p.mtype()), m_readOnly(p.readOnly())
 { }
 
 /* ============================================================================

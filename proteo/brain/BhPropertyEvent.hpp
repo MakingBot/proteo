@@ -35,27 +35,27 @@ class BhPropertyEvent : public BhEvent
 
 public:
 
-    inline BhPropertyEvent(std::shared_ptr<core::Object> obj, const std::string property_id, boost::python::object condition);
+    inline BhPropertyEvent(std::shared_ptr<core::Object> obj, const std::string property_name, boost::python::object condition);
 
 
     
 
 protected:
 
-    std::shared_ptr<core::Object> m_obj;
+    // std::shared_ptr<core::Object> m_obj;
 
-    const uint8_t m_id;
+    // const uint8_t m_id;
 
-    boost::python::object m_condition;
+    // boost::python::object m_condition;
 
-    void onPropertyModified(uint8_t id);
+//    void onPropertyModified(uint8_t id);
 
 };
 
 /* ============================================================================
  *
  * */
-inline BhPropertyEvent::BhPropertyEvent(std::shared_ptr<core::Object> obj, uint8_t property_id, boost::python::object condition)
+inline BhPropertyEvent::BhPropertyEvent(std::shared_ptr<core::Object> obj, const std::string property_name, boost::python::object condition)
 {
 
     // obj->objSignals()->propertyModified.connect( bind( onPropertyModified ) ));
@@ -65,15 +65,15 @@ inline BhPropertyEvent::BhPropertyEvent(std::shared_ptr<core::Object> obj, uint8
 /* ============================================================================
  *
  * */
-void onPropertyModified(uint8_t id)
-{
+// void BhPropertyEvent::onPropertyModified(uint8_t id)
+// {
     // Check if the good property has been modified
-    if(id != m_id)
-    {
-        return;
-    }
+    // if(id != m_id)
+    // {
+    //     return;
+    //}
 
-}
+//}
 
 } // brain
 } // proteo

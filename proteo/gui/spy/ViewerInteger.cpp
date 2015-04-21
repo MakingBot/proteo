@@ -64,7 +64,7 @@ void ViewerInteger::apply()
 {
     if(m_setButton.hasChanged())
     {
-        emit newValueRequestedFor(m_property, proteo::core::Variant(m_box.value()));
+        emit newValueRequestedFor(m_property, proteo::core::Variant((uint32_t)m_box.value()));
         m_setButton.update();
     }
 }

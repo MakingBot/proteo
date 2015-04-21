@@ -27,17 +27,17 @@ using namespace proteo::brain;
 /* ============================================================================
  *
  * */
-static const uint8_t Behaviour::IdPropertyRun               = 0;
+const uint8_t Behaviour::IdPropertyRun               = 0;
 
 /* ============================================================================
  *
  * */
-static const uint8_t Behaviour::IdPropertyFreq              = 1;
+const uint8_t Behaviour::IdPropertyFreq              = 1;
 
 /* ============================================================================
  *
  * */
-static const uint8_t Behaviour::IdPropertyRtShift           = 2;
+const uint8_t Behaviour::IdPropertyRtShift           = 2;
 
 /* ============================================================================
  *
@@ -67,7 +67,7 @@ const Object::TagArray Behaviour::OTag = { 'B', 'E', 'H', 'V' };
 const std::vector<Property> Behaviour::Properties = {
     Property(IdPropertyRun      , "run"         , Tbool) ,
     Property(IdPropertyFreq     , "freq"        , Tuint) ,
-    Property(IdPropertyRtShift  , "rtShift"     , Tuint, false)
+    Property(IdPropertyRtShift  , "rtShift"     , Tuint, true)
 };
 
 /* ============================================================================
@@ -196,8 +196,8 @@ uint32_t Behaviour::freq()
  * */
 void Behaviour::setFreq(uint32_t freq)
 {
-    m_thread->baseFreq = freq;
-    loopStep = 1000 / m_thread->baseFreq;
+    //m_thread->baseFreq = freq;
+    //loopStep = 1000 / m_thread->baseFreq;
 }
 
 /* ============================================================================
@@ -249,7 +249,7 @@ void Behaviour::createCyclicEvent(const std::string name, uint8_t frequency)
  * */
 void Behaviour::createConditionedEvent(const std::string name, const boost::python::object& condition)
 {
-    m_conditionedEvents.insert( std::pair<std::string, BhConditionedEvent>(name,BhConditionedEvent(condition)) );
+//    m_conditionedEvents.insert( std::pair<std::string, BhConditionedEvent>(name,BhConditionedEvent(condition)) );
 }
 
 /* ============================================================================
@@ -265,15 +265,15 @@ void Behaviour::createPropertyEvent(const std::string name, std::shared_ptr<core
  * */
 void Behaviour::attachEvent(const std::string name, const boost::python::object& action)
 {
-    if( ! hasattr(action, "__call__") )
-    {
-        return;
-    }
+    // if( ! hasattr(action, "__call__") )
+    // {
+    //     return;
+    // }
 
-    if( m_conditionedEvents.find(name) != m_conditionedEvents.end() )
-    {
-        m_conditionedEvents[name].setAction(action);
-    }
+    // if( m_conditionedEvents.find(name) != m_conditionedEvents.end() )
+    // {
+    //     m_conditionedEvents[name].setAction(action);
+    // }
 
     // boost::python::call<void>(action.ptr());
 }
@@ -283,6 +283,7 @@ void Behaviour::attachEvent(const std::string name, const boost::python::object&
  * */
 void Behaviour::execute()
 {
+    /*
     // Initialize thread
     uint32_t rt_shift = 0;
     std::chrono::milliseconds time_elapsed = 0;
@@ -321,5 +322,6 @@ void Behaviour::execute()
         // Sleep until the next loop
         std::this_thread::sleep_until(m_thread->nextTimePoint);
     }
+    */
 }
 

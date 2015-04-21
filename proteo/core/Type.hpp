@@ -45,7 +45,8 @@ enum ObjRole
     Rgui        = 0x4CAF50,
     Rmodel      = 0x2196F3,
     Rtool ,
-    Rinterface  = 0xF44336
+    Rinterface  = 0xF44336,
+    Rbehaviour 
 };
 
 
