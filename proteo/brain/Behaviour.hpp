@@ -40,13 +40,6 @@ class Behaviour : public core::Object
 
 public:
 
-    //! \brief Distance property id
-    //!
-    // static const uint8_t 
-    // IdPropertyRun;
-    // IdPropertyFreq
-    // IdPropertyRtShift
-
     //! \struct ThreadControl
     //! \brief Thread control variables
     //!
@@ -74,11 +67,12 @@ public:
         //!
         std::chrono::milliseconds loopStep;
 
+        //! \brief Number of missed step loop
+        //!
+        std::atomic_uint rtShift;
 /*
 definir une frequence minimum
-
 step = 1000/frequency
-
 each loop must last 'step' ms 
 */
 
@@ -88,6 +82,18 @@ each loop must last 'step' ms
 
     };
 
+
+    //! \brief Run property id
+    //!
+    static const uint8_t IdPropertyRun;
+
+    //! \brief Freq property id
+    //!
+    static const uint8_t IdPropertyFreq;
+
+    //! \brief Freq property id
+    //!
+    static const uint8_t IdPropertyRtShift;
 
     //! \brief Default constructor
     //!
@@ -121,6 +127,14 @@ each loop must last 'step' ms
 
     //! \brief FROM Object
     //!
+    virtual core::Variant propertyValue(uint8_t id);
+
+    //! \brief FROM Object
+    //!
+    virtual void setPropertyValue(uint8_t id, const core::Variant& v);
+
+    //! \brief FROM Object
+    //!
     virtual const std::vector<core::Property>& properties() const;
 
     // ========================================================================
@@ -133,6 +147,18 @@ each loop must last 'step' ms
     //! \brief Run setter
     //!
     void setRun(bool run);
+
+    //! \brief Frequence getter
+    //!
+    uint32_t freq();
+
+    //! \brief Frequence setter
+    //!
+    void setFreq(uint32_t freq);
+
+    //! \brief Rt Shift counter getter
+    //!
+    uint32_t rtShift();
 
     //! \brief Start behaviour thread
     //!
@@ -203,3 +229,4 @@ inline void Behaviour::createEvent(const std::string name, uint8_t frequency)
 } // brain
 } // proteo
 #endif // BEHAVIOUR_HPP
+
