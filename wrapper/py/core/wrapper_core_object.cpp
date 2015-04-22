@@ -43,13 +43,24 @@ void export_core_object()
     .def("hasObjParent", &Object::hasObjParent)
     .add_property("objParent", &Object::objParent, &Object::setObjParent)
     .def("nbObjChilds", &Object::nbObjChilds)
+    
     .def("append" , &Object::append)
     .def(self += other<boost::shared_ptr<Object> >())
+
+    .def("remove" , &Object::remove)
+    .def(self -= other<boost::shared_ptr<Object> >())
+
+    .def("rootParent" , &Object::rootParent)
 
     // ========================================================================
     // => Object connections
 
     .def("connect", &Object::initiativeConnect)
+    .def(self *= other<boost::shared_ptr<Object> >())
+
+    .def("disconnect", &Object::initiativeDisconnect)
+    .def(self /= other<boost::shared_ptr<Object> >())
 
     ;
 }
+
