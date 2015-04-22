@@ -30,14 +30,17 @@ class UtestCore(unittest.TestCase):
 
 		parent += child2
 		self.assertEqual( parent.nbObjChilds(), 2 )
+		self.assertEqual( child2.objParent.objName, 'parent' )
 
-	#     parent.remove()
-	#     parent += child
-	#     parent -= child
-#.Create
+		parent.remove(child)
+		if child.hasObjParent():
+			self.fail("Child should have no parent anymore")
 
-#.Create
-	# def test_object_childNumbers(self):
+		parent -= child2
+		if child.hasObjParent():
+			self.fail("Child2 should have no parent anymore")
+
+
 
 	# def test_object_connection(self):
 

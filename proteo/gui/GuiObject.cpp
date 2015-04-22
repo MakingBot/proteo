@@ -17,16 +17,22 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
+#include "GuiObject.hpp"
 
+using namespace proteo::gui;
 
 /* ============================================================================
  *
  * */
 GuiObject::GuiObject(std::string name)
-    : core::Object(name)
-{
+    : core::Object(name), m_visible(false)
+{ }
 
-}
+/* ============================================================================
+ *
+ * */
+//const ObjRole GuiObject::ORole = Rgui;
+
 
 /* ============================================================================
  *
@@ -39,7 +45,30 @@ bool GuiObject::isVisible()
 /* ============================================================================
  *
  * */
-GuiObject::setVisible(bool v)
+void GuiObject::setVisible(bool v)
 {
     m_visible = v;
+    
+    if(!m_widget)
+    {
+        return;
+    }
+
+    if(m_visible)
+    {
+       // m_widget->show();
+    }
+    else
+    {
+        m_widget->hide();
+    }
 }
+
+/* ============================================================================
+ *
+ * */
+// QSharedPointer<QWidget> GuiObject::uiWidget()
+// {
+//     return m_widget;
+// }
+

@@ -21,7 +21,6 @@ FIND_PACKAGE(Qt5Widgets REQUIRED)
 # Append directory
 INCLUDE_DIRECTORIES(.)
 
-
-INCLUDE(wrapper/py/module_core.cmake)
-INCLUDE(wrapper/py/module_gui.cmake)
+INCLUDE(wrapper/py/core/module.cmake)
+INCLUDE(wrapper/py/gui/module.cmake)
 

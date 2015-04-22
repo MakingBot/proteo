@@ -18,7 +18,7 @@
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <proteo/gui/Composer.hpp>
-// #include <proteo/gui/Composer/ComposerWidget.hpp>
+#include <proteo/gui/composer/ComposerWidget.hpp>
 
 using namespace proteo;
 using namespace proteo::gui;
@@ -28,12 +28,11 @@ using namespace proteo::core;
  *
  * */
 Composer::Composer(std::string name)
-    : Object(name)
-    //, m_widget(new ComposerWidget())
+    : GuiObject(name), m_composer(new ComposerWidget())
 {
-    //m_widget->show();
+    m_widget = qSharedPointerObjectCast<QWidget>( m_composer );
+   // m_composer->show();
 }
-
 
 /* ============================================================================
  *

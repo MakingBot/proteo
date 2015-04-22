@@ -19,7 +19,7 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <proteo/core/Object.hpp>
+#include "GuiObject.hpp"
 
 namespace proteo { namespace gui {
 
@@ -27,7 +27,7 @@ class ComposerWidget;
 
 //! \class
 //!
-class Composer : public core::Object
+class Composer : public GuiObject
 {
 
 public:
@@ -67,16 +67,14 @@ public:
     //!
     virtual const std::vector<core::Property>& properties() const;
 
-
 protected:
-
-    //! \brief The widget
-    //!
-    // boost::shared_ptr<ComposerWidget> m_widget;
 
     //! \brief Container that is composed
     //!
     boost::shared_ptr<core::Object> m_container;
+
+
+    QSharedPointer<ComposerWidget> m_composer;
 
 };
 

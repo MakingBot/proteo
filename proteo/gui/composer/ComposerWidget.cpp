@@ -1,5 +1,5 @@
 //!
-//! \file wrapper_core.cpp
+//! \file ComposerWidget.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -17,18 +17,17 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
+#include "ComposerWidget.hpp"
 
-using namespace boost::python;
-
-void export_core_object();
-void export_core_container();
+using namespace proteo::gui;
 
 /* ============================================================================
  *
  * */
-BOOST_PYTHON_MODULE(core)
+ComposerWidget::ComposerWidget()
+    : QWidget()
 {
-    export_core_object();
-    export_core_container();
+
 }
+
+

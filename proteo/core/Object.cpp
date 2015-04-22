@@ -145,7 +145,7 @@ void Object::remove(boost::shared_ptr<Object> chd)
     it = m_oChilds.find(chd->objName());
     if( it != m_oChilds.end() )
     {
-        chd.resetObjParent();
+        chd->resetObjParent();
         m_oChilds.erase(it);
     }
 }
@@ -228,7 +228,7 @@ boost::shared_ptr<Object> Object::operator*=(boost::shared_ptr<Object> obj)
 /* ============================================================================
  *
  * */
-bool Object::disconnect(boost::shared_ptr<Object> obj, bool initiative = true)
+bool Object::disconnect(boost::shared_ptr<Object> obj, bool initiative)
 {
     std::list<boost::shared_ptr<Object> >::iterator it;
     it = std::find(m_oConnections.begin(), m_oConnections.end(), obj);

@@ -19,7 +19,7 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <proteo/core/Type.hpp>
+#include <proteo/core/Object.hpp>
 
 #include <QProxyStyle>
 #include <QApplication>
@@ -31,14 +31,48 @@ namespace proteo { namespace gui {
 //! \class Scheduler
 //! \brief Graphic scheduler
 //!
-class Scheduler
+class Scheduler : public core::Object
 {
 
 public:
 
     //! \brief Constructor
     //!
-    Scheduler();
+    Scheduler(std::string name);
+
+
+    // ========================================================================
+    // => Constantes
+
+    //! \brief Role
+    //!
+    static const core::ObjRole ORole;
+
+    //! \brief Tag
+    //!
+    static const core::Object::TagArray OTag;
+
+    //! \brief Property vector
+    //!
+    static const std::vector<core::Property> Properties;
+
+    // ========================================================================
+    // => Object redefinition
+
+    //! \brief FROM Object
+    //!
+    virtual core::ObjRole objRole() const;
+
+    //! \brief FROM Object
+    //!
+    virtual const core::Object::TagArray& objTag() const;
+
+    //! \brief FROM Object
+    //!
+    virtual const std::vector<core::Property>& properties() const;
+
+
+
 
     //! \brief Start graphic event loop
     //!

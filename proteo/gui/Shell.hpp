@@ -36,8 +36,7 @@ public:
     //!
     Shell(std::string name);
 
-    Shell(const proteo::gui::Shell&);
-
+ 
     // ========================================================================
     // => Constantes
 

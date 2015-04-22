@@ -1,4 +1,3 @@
-
 # Module name
 SET(MODULE_NAME "core")
 
@@ -21,9 +20,10 @@ SET(PROJECT_SOURCE_FILES
     proteo/core/Container.cpp
     proteo/core/SharedCout.cpp
 
+    wrapper/py/core/wrapper_core.cpp
 
-    wrapper/py/wrapper_core.cpp
-
+    wrapper/py/core/wrapper_core_object.cpp
+    wrapper/py/core/wrapper_core_container.cpp
     )
 
 # Define the wrapper library that wraps our library
@@ -31,9 +31,6 @@ ADD_LIBRARY( ${MODULE_NAME} SHARED
     ${PROJECT_SOURCE_FILES} 
     ${PROJECT_HEADER_FILES} )
 TARGET_LINK_LIBRARIES( ${MODULE_NAME} ${Boost_LIBRARIES} ${PythonLibs_LIBRARIES} )
-
-# Link Qt
-# QT5_USE_MODULES( ${MODULE_NAME} Gui Core Widgets )
 
 # Do not prepend wrapper library name with lib
 SET_TARGET_PROPERTIES( ${MODULE_NAME} PROPERTIES PREFIX "" OUTPUT_NAME ${MODULE_NAME} )

@@ -35,11 +35,6 @@ Shell::Shell(std::string name)
 }
 
 
-Shell::Shell(const proteo::gui::Shell& copy)
-    : Object("name")
-{
-
-}
 
 /* ============================================================================
  *

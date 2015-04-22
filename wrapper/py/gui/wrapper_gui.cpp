@@ -1,5 +1,5 @@
 //!
-//! \file wrapper_core.cpp
+//! \file wrapper_gui.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -21,14 +21,21 @@
 
 using namespace boost::python;
 
-void export_core_object();
-void export_core_container();
+void export_gui_guiobject();
+void export_gui_scheduler();
+void export_gui_spy();
+void export_gui_shell();
+void export_gui_composer();
 
 /* ============================================================================
  *
  * */
-BOOST_PYTHON_MODULE(core)
+BOOST_PYTHON_MODULE(gui)
 {
-    export_core_object();
-    export_core_container();
+    export_gui_guiobject();
+    export_gui_scheduler();
+    
+    export_gui_spy();
+    export_gui_shell();
+    export_gui_composer();
 }

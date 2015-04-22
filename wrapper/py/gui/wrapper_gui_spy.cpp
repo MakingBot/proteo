@@ -1,5 +1,5 @@
 //!
-//! \file wrapper_gui.hpp
+//! \file wrapper_gui_spy.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -18,42 +18,22 @@
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <boost/python.hpp>
-#include <proteo/gui/Gui.hpp>
+#include <proteo/gui/Spy.hpp>
+
+using namespace boost::python;
+using namespace proteo::core;
+using namespace proteo::gui;
 
 /* ============================================================================
  *
  * */
-void export_gui()
+void export_gui_spy()
 {
-    namespace bp = boost::python;
-    namespace pc = proteo::core;
-    namespace pg = proteo::gui;
-
-
-
-
-
-    //
-    // Scheduler
-    //
-    bp::class_<pg::Scheduler>("Scheduler")
-        .def("start", &pg::Scheduler::start)
-        ;
-
-    bp::class_<pg::Spy, bp::bases<pc::Object> >("Spy", bp::init<std::string>())
-        ;
-
-    bp::class_<pg::Shell, bp::bases<pc::Object> >("Shell", bp::init<std::string>())
-        ;
-        
+    class_<Spy, boost::shared_ptr<Spy>, bases<Object>, boost::noncopyable>
+    (
+        "Spy"
+    ,   init<std::string>()
+    )
+    ;
 }
-
-/* ============================================================================
- *
- * */
-BOOST_PYTHON_MODULE(gui)
-{
-    export_gui();
-}
-
 

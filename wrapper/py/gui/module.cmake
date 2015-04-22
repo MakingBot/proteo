@@ -1,14 +1,11 @@
-
 # Module name
 SET(MODULE_NAME "gui")
 
 # Headers
 SET(PROJECT_HEADER_FILES
 
+    proteo/gui/GuiObject.hpp
 
-
-    proteo/gui/Gui.hpp
-    
     proteo/gui/Scheduler.hpp
     
     proteo/gui/Spy.hpp
@@ -25,11 +22,15 @@ SET(PROJECT_HEADER_FILES
     proteo/gui/shell/ShellWidget.hpp
 
 
+    proteo/gui/Composer.hpp
+    proteo/gui/composer/ComposerWidget.hpp
 
     )
 
 # Sources
 SET(PROJECT_SOURCE_FILES
+
+    proteo/gui/GuiObject.cpp
 
     proteo/gui/Scheduler.cpp
 
@@ -44,7 +45,15 @@ SET(PROJECT_SOURCE_FILES
     proteo/gui/shell/ShellWidget.cpp
 
 
-    wrapper/py/wrapper_gui.cpp
+    proteo/gui/Composer.cpp
+    proteo/gui/composer/ComposerWidget.cpp
+
+
+    wrapper/py/gui/wrapper_gui.cpp
+    wrapper/py/gui/wrapper_gui_spy.cpp
+    wrapper/py/gui/wrapper_gui_shell.cpp
+    wrapper/py/gui/wrapper_gui_composer.cpp
+
 
     )
 

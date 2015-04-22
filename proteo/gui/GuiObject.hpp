@@ -19,16 +19,34 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <QWidget>
+#include <QSharedPointer>
 #include <proteo/core/Object.hpp>
 
 namespace proteo { namespace gui {
 
+//! \class GuiObject
+//! \brief Gui model
+//!
+//! \author [XR]MakingBot ( http://makingbot.fr )
+//!
 class GuiObject : public core::Object
 {
+
+public:
 
     //! \brief Default constructor
     //!
     GuiObject(std::string name);
+
+    // ========================================================================
+    // => Constantes
+
+    //! \brief Role
+    //!
+    // static const core::ObjRole ORole;
+
+
 
     //! \brief Visible getter
     //!
@@ -36,11 +54,11 @@ class GuiObject : public core::Object
 
     //! \brief Visible setter
     //!
-    setVisible(bool v);
+    void setVisible(bool v);
 
     //! \brief 
     //!
-    virtual QSharedPointer<QWidget> uiWidget() = 0;
+    // QSharedPointer<QWidget> uiWidget();
 
 protected:
 

@@ -1,5 +1,5 @@
 //!
-//! \file wrapper_gui_composer.cpp
+//! \file wrapper_gui_shell.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -18,61 +18,20 @@
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <boost/python.hpp>
-#include <proteo/gui/Composer.hpp>
-
-#include <proteo/gui/GuiObject.hpp>
-
-
-#include <proteo/gui/Scheduler.hpp>
+#include <proteo/gui/Shell.hpp>
 
 using namespace boost::python;
 using namespace proteo::core;
 using namespace proteo::gui;
 
-
-
 /* ============================================================================
  *
  * */
-void export_gui_scheduler()
+void export_gui_shell()
 {
-    class_<Scheduler, boost::shared_ptr<Scheduler>, bases<Object>, boost::noncopyable>
+    class_<Shell, boost::shared_ptr<Shell>, bases<Object>, boost::noncopyable>
     (
-        "Scheduler"
-    ,   init<std::string>()
-    )
-    .def("start", &Scheduler::start)
-
-    ;
-}
-
-
-
-/* ============================================================================
- *
- * */
-void export_gui_guiobject()
-{
-    class_<GuiObject, boost::shared_ptr<GuiObject>, bases<Object>, boost::noncopyable>
-    (
-        "GuiObject"
-    ,   no_init
-    )
-
-    .add_property("visible", &GuiObject::isVisible, &GuiObject::setVisible)
-
-    ;
-}
-
-
-/* ============================================================================
- *
- * */
-void export_gui_composer()
-{
-    class_<Composer, boost::shared_ptr<Composer>, bases<GuiObject>, boost::noncopyable>
-    (
-        "Composer"
+        "Shell"
     ,   init<std::string>()
     )
     ;

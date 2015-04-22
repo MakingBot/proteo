@@ -18,10 +18,10 @@
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QPainter>
-
 #include <proteo/gui/Scheduler.hpp>
 
 using namespace proteo::gui;
+using namespace proteo::core;
 
 /* ============================================================================
  *
@@ -43,7 +43,8 @@ class Style_tweaks : public QProxyStyle
 /* ============================================================================
  *
  * */
-Scheduler::Scheduler()
+Scheduler::Scheduler(std::string name)
+    : core::Object(name)
 {
     // Create the QApplication
     int argc = 1;
@@ -60,6 +61,55 @@ Scheduler::Scheduler()
     QApplication::setOrganizationName("MakingBot");
     QApplication::setOrganizationDomain("makingbot.com");
 }
+
+
+
+
+
+/* ============================================================================
+ *
+ * */
+const ObjRole Scheduler::ORole = Rgui;
+
+/* ============================================================================
+ *
+ * */
+const Object::TagArray Scheduler::OTag = { 'S', 'H', 'L', 'L' };
+
+/* ============================================================================
+ *
+ * */
+const std::vector<Property> Scheduler::Properties = {
+   // Property()
+};
+
+/* ============================================================================
+ *
+ * */
+ObjRole Scheduler::objRole() const
+{
+    return ORole;
+}
+
+/* ============================================================================
+ *
+ * */
+const Object::TagArray& Scheduler::objTag() const
+{
+    return OTag;
+}
+
+/* ============================================================================
+ *
+ * */
+const std::vector<Property>& Scheduler::properties() const
+{
+    return Properties;
+}
+
+
+
+
 
 /* ============================================================================
  *
