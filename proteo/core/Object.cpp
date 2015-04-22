@@ -102,6 +102,14 @@ void Object::setObjParent(boost::shared_ptr<Object> p)
 /* ============================================================================
  *
  * */
+void Object::resetObjParent()
+{
+    m_oParent.reset();
+}
+
+/* ============================================================================
+ *
+ * */
 uint32_t Object::nbObjChilds() const
 {
     return m_oChilds.size();
@@ -131,9 +139,46 @@ boost::shared_ptr<Object> Object::operator+=(boost::shared_ptr<Object> chd)
 /* ============================================================================
  *
  * */
+void Object::remove(boost::shared_ptr<Object> chd)
+{
+    std::map<std::string, boost::shared_ptr<Object> >::iterator it;
+    it = m_oChilds.find(chd->objName());
+    if( it != m_oChilds.end() )
+    {
+        chd.resetObjParent();
+        m_oChilds.erase(it);
+    }
+}
+
+/* ============================================================================
+ *
+ * */
+boost::shared_ptr<Object> Object::operator-=(boost::shared_ptr<Object> chd)
+{
+    this->remove(chd);
+    return shared_from_this();
+}
+
+/* ============================================================================
+ *
+ * */
+boost::shared_ptr<Object> Object::rootParent()
+{
+    if(hasObjParent())
+    {
+        return m_oParent->rootParent();
+    }
+    else
+    {
+        return shared_from_this();
+    }
+}
+
+/* ============================================================================
+ *
+ * */
 bool Object::connect(boost::shared_ptr<Object> obj, bool initiative)
 {
-
     // // Check that the connection does not already exist
     // if( std::find(m_oConnections.begin(), m_oConnections.end(), obj) != m_oConnections.end() )
     // {
@@ -151,7 +196,7 @@ bool Object::connect(boost::shared_ptr<Object> obj, bool initiative)
     //     }
     // }
 
-    // Call connection hook
+    // Call hook
     if( ! connectionHook(obj, initiative) )
     {
 
@@ -168,7 +213,58 @@ bool Object::connect(boost::shared_ptr<Object> obj, bool initiative)
  * */
 bool Object::initiativeConnect(boost::shared_ptr<Object> obj)
 {
-    connect(obj,true);
+    connect(obj, true);
+}
+
+/* ============================================================================
+ *
+ * */
+boost::shared_ptr<Object> Object::operator*=(boost::shared_ptr<Object> obj)
+{
+    initiativeConnect(obj);
+    return shared_from_this();
+}
+
+/* ============================================================================
+ *
+ * */
+bool Object::disconnect(boost::shared_ptr<Object> obj, bool initiative = true)
+{
+    std::list<boost::shared_ptr<Object> >::iterator it;
+    it = std::find(m_oConnections.begin(), m_oConnections.end(), obj);
+
+    // Check if the connection exists
+    if(it != m_oConnections.end())
+    {
+        return false;
+    }
+
+    // Call hook
+    if( ! disconnectionHook(obj, initiative) )
+    {
+
+    }
+
+    // Disconnect
+    m_oConnections.erase(it);
+    return true;
+}
+
+/* ============================================================================
+ *
+ * */
+bool Object::initiativeDisconnect(boost::shared_ptr<Object> obj)
+{
+    disconnect(obj, true);
+}
+
+/* ============================================================================
+ *
+ * */
+boost::shared_ptr<Object> Object::operator/=(boost::shared_ptr<Object> obj)
+{
+    initiativeDisconnect(obj);
+    return shared_from_this();
 }
 
 /* ============================================================================
@@ -185,6 +281,14 @@ bool Object::connectionHook(boost::shared_ptr<Object> obj, bool initiative)
 bool Object::disconnectionHook(boost::shared_ptr<Object> obj, bool initiative)
 {
     return true;
+}
+
+/* ============================================================================
+ *
+ * */
+uint32_t Object::nbObjConnections() const
+{
+    return m_oConnections.size();
 }
 
 /* ============================================================================
@@ -220,10 +324,3 @@ bool Object::setPropertyActivity(uint8_t id, bool b)
     m_oActiveProperties[id] = (int)b;
 }
 
-/* ============================================================================
- *
- * */
-uint32_t Object::nbObjConnections() const
-{
-    return m_oConnections.size();
-}
