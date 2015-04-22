@@ -59,9 +59,6 @@ public:
     //!
     Object(std::string name);
 
-
-
-
     // ========================================================================
     // => Object const identification
 
@@ -108,11 +105,15 @@ public:
     //!
     boost::shared_ptr<Object> objParent();
 
-    //! \brief
+    //! \brief Set the object parent to 'p'
     //!
     void setObjParent(boost::shared_ptr<Object> p);
 
-    //! \brief
+    //! \brief Break the link between the object and its parent
+    //!
+    void resetObjParent();
+
+    //! \brief Get the number of childs
     //!
     uint32_t nbObjChilds() const;
 
@@ -124,8 +125,24 @@ public:
     //!
     boost::shared_ptr<Object> operator+=(boost::shared_ptr<Object> chd);
 
+    //! \brief Remove a child
+    //!
+    void remove(boost::shared_ptr<Object> chd);
+
+    //! \brief Cool remove overload
+    //!
+    boost::shared_ptr<Object> operator-=(boost::shared_ptr<Object> chd);
+
+    //! \brief Objects are organised as tree, this function return the root
+    //!
+    boost::shared_ptr<Object> rootParent();
+
     // ========================================================================
     // => Object connections
+
+    //! \brief Object connections getter
+    //!
+    inline boost::shared_ptr<ObjSignals> objSignals();
 
     //! \brief Main function to connect 2 objects
     //!
@@ -135,6 +152,22 @@ public:
     //!
     bool initiativeConnect(boost::shared_ptr<Object> obj);
 
+    //! \brief Cool connect overload
+    //!
+    boost::shared_ptr<Object> operator*=(boost::shared_ptr<Object> obj);
+
+    //! \brief Main function to disconnect 2 objects
+    //!
+    bool disconnect(boost::shared_ptr<Object> obj, bool initiative = true);
+
+    //! \brief Interface for disconnect function in which initiative is always true
+    //!
+    bool initiativeDisconnect(boost::shared_ptr<Object> obj);
+
+    //! \brief Cool disconnect overload
+    //!
+    boost::shared_ptr<Object> operator/=(boost::shared_ptr<Object> obj);
+
     //! \brief Hook on the connection process
     //!
     virtual bool connectionHook(boost::shared_ptr<Object> obj, bool initiative);
@@ -142,6 +175,14 @@ public:
     //! \brief Hook on the disconnection process
     //!
     virtual bool disconnectionHook(boost::shared_ptr<Object> obj, bool initiative);
+
+    //! \brief return the number of connected object
+    //!
+    uint32_t nbObjConnections() const;
+
+    //! \brief Object connections getter
+    //!
+    inline const std::list<boost::shared_ptr<Object> >& objConnections();
 
     // ========================================================================
     // => Object properties
@@ -165,21 +206,6 @@ public:
     //! \brief
     //!
     virtual const std::vector<Property>& properties() const = 0;
-
-    // ========================================================================
-    // => Object connections
-
-    //! \brief Object connections getter
-    //!
-    inline boost::shared_ptr<ObjSignals> objSignals();
-
-    //! \brief return the number of connected object
-    //!
-    uint32_t nbObjConnections() const;
-
-    //! \brief Object connections getter
-    //!
-    inline const std::list<boost::shared_ptr<Object> >& objConnections();
 
 
 
@@ -253,8 +279,6 @@ protected:
 
 };
 
-
-
 /* ============================================================================
  *
  * */
@@ -274,3 +298,4 @@ inline const std::list<boost::shared_ptr<Object> >& Object::objConnections()
 } // core
 } // proteo
 #endif // OBJECT_HPP
+
