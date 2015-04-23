@@ -20,50 +20,9 @@
 #include <boost/python.hpp>
 #include <proteo/gui/Composer.hpp>
 
-#include <proteo/gui/GuiObject.hpp>
-
-
-#include <proteo/gui/Scheduler.hpp>
-
 using namespace boost::python;
 using namespace proteo::core;
 using namespace proteo::gui;
-
-
-
-/* ============================================================================
- *
- * */
-void export_gui_scheduler()
-{
-    class_<Scheduler, boost::shared_ptr<Scheduler>, bases<Object>, boost::noncopyable>
-    (
-        "Scheduler"
-    ,   init<std::string>()
-    )
-    .def("start", &Scheduler::start)
-
-    ;
-}
-
-
-
-/* ============================================================================
- *
- * */
-void export_gui_guiobject()
-{
-    class_<GuiObject, boost::shared_ptr<GuiObject>, bases<Object>, boost::noncopyable>
-    (
-        "GuiObject"
-    ,   no_init
-    )
-
-    .add_property("visible", &GuiObject::isVisible, &GuiObject::setVisible)
-
-    ;
-}
-
 
 /* ============================================================================
  *
@@ -77,4 +36,3 @@ void export_gui_composer()
     )
     ;
 }
-
