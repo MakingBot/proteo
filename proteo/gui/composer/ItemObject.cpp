@@ -1,5 +1,5 @@
 //!
-//! \file ItemCrossPoint.cpp
+//! \file ItemObject.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -17,28 +17,9 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "ItemCrossPoint.hpp"
-
-#include <QWidget>
-#include <QPainter>
-#include <QStyleOptionGraphicsItem>
+#include "ItemObject.hpp"
 
 using namespace proteo;
 using namespace proteo::gui;
 
-/* ============================================================================
- *
- * */
-QRectF ItemCrossPoint::boundingRect() const
-{
-
-}
-
-/* ============================================================================
- *
- * */
-void ItemCrossPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    
-}
 

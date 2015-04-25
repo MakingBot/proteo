@@ -22,9 +22,11 @@ SET(PROJECT_SOURCE_FILES
     proteo/core/SharedCout.cpp
 
     wrapper/py/core/wrapper_core.cpp
-
     wrapper/py/core/wrapper_core_object.cpp
+    wrapper/py/core/wrapper_core_objsize.cpp
+    wrapper/py/core/wrapper_core_objposition.cpp
     wrapper/py/core/wrapper_core_container.cpp
+
     )
 
 # Define the wrapper library that wraps our library

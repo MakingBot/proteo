@@ -1,5 +1,5 @@
 //!
-//! \file ItemCrossPoint.cpp
+//! \file wrapper_core_objsize.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -17,28 +17,26 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "ItemCrossPoint.hpp"
+#include <boost/python.hpp>
+#include <proteo/core/Object.hpp>
 
-#include <QWidget>
-#include <QPainter>
-#include <QStyleOptionGraphicsItem>
-
-using namespace proteo;
-using namespace proteo::gui;
+using namespace proteo::core;
+using namespace boost::python;
 
 /* ============================================================================
  *
  * */
-QRectF ItemCrossPoint::boundingRect() const
+void export_core_objsize()
 {
-
+    class_<ObjSize>
+    (
+        "ObjSize"
+    ,   "Size of the object in the architectural grid"
+    ,   init<uint32_t, uint32_t>()
+    )
+    .add_property("width" , &ObjSize::width , &ObjSize::setWidth )
+    .add_property("height", &ObjSize::height, &ObjSize::setHeight)
+    ;
 }
 
-/* ============================================================================
- *
- * */
-void ItemCrossPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    
-}
 

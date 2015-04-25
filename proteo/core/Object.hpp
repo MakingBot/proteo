@@ -24,6 +24,60 @@
 
 namespace proteo { namespace core {
 
+//! \class ObjPosition
+//! \brief Define the size of the object in an architectural grid
+//!
+class ObjSize
+{
+
+public:
+
+    //! \brief Default constructor
+    //!
+    ObjSize(uint32_t w = 0, uint32_t h = 0);
+    uint32_t width();
+    void setWidth(uint32_t w);
+    uint32_t height();
+    void setHeight(uint32_t h);
+
+protected:
+
+    //! \brief Object width
+    //!
+    uint32_t m_width;
+
+    //! \brief Object height
+    //!
+    uint32_t m_height;
+};
+
+//! \class ObjPosition
+//! \brief Define the position of the object in an architectural grid
+//!
+class ObjPosition
+{
+
+public:
+
+    //! \brief Default constructor
+    //!
+    ObjPosition(uint32_t x = 0, uint32_t y = 0);
+    uint32_t x();
+    void setX(uint32_t x);
+    uint32_t y();
+    void setY(uint32_t y);
+
+protected:
+
+    //! \brief Object x
+    //!
+    uint32_t m_x;
+
+    //! \brief Object y
+    //!
+    uint32_t m_y;
+};
+
 //! \class Object
 //! \brief Main object interface
 //!
@@ -38,12 +92,11 @@ public:
     //!
     typedef std::array<char, 4> TagArray;
 
-    //! \class ObjSignals
+    //! \struct ObjSignals
     //! \brief Define object common signals
     //!
     struct ObjSignals
     {
-
         //! \brief Emitted when the object name is modified
         //!
         boost::signals2::signal<void ()> nameModified;
@@ -52,15 +105,18 @@ public:
         //! It takes a uint8 value which is the property id.
         //!
         boost::signals2::signal<void (uint8_t)> propertyModified;
-
     };
 
+    //! \struct ObjMutex
+    //! \brief Define mutex used by proteo Objects
+    //!
     struct ObjMutex
     {
+        //! \brief Mutex 
+        //!
         std::mutex id;
     };
 
-    
     //! \brief Default constructor
     //!
     Object(std::string name);
@@ -94,6 +150,25 @@ public:
     //! \brief
     //!
     std::string objIdChain() const;
+
+    // ========================================================================
+    // => Block architectural properties
+
+    //! \brief Size getter
+    //!
+    ObjSize objSize() const;
+    
+    //! \brief Size setter
+    //!
+    void setObjSize(const ObjSize size);
+
+    //! \brief Position getter
+    //!
+    ObjPosition objPosition() const;
+
+    //! \brief Position setter
+    //!
+    void setObjPosition(const ObjPosition pos);
 
     // ========================================================================
     // => Block status management
@@ -145,6 +220,10 @@ public:
 
     // ========================================================================
     // => Object connections
+
+    //! \brief Object mutex getter
+    //!
+    inline boost::shared_ptr<ObjMutex> objMutex();
 
     //! \brief Object connections getter
     //!
@@ -213,12 +292,7 @@ public:
     //!
     virtual const std::vector<Property>& properties() const = 0;
 
-
-
-
 protected:
-
-    
 
     // ========================================================================
     // => Object dynamic identification
@@ -241,11 +315,16 @@ protected:
     //!
     std::string m_oIdChain;
 
+    // ========================================================================
+    // => Block architectural properties
 
-
-
-    boost::shared_ptr<ObjMutex> m_oMutex;
-
+    //! \brief
+    //!
+    ObjSize m_oSize;
+    
+    //! \brief
+    //!
+    ObjPosition m_oPosition;
 
     // ========================================================================
     // => Block status management
@@ -279,6 +358,10 @@ protected:
     // ========================================================================
     // => Object connections
 
+    //! \brief Object mutex
+    //!
+    boost::shared_ptr<ObjMutex> m_oMutex;
+
     //! \brief Object signals
     //!
     boost::shared_ptr<ObjSignals> m_oSignals;
@@ -286,8 +369,16 @@ protected:
     //! \brief Object connections
     //!
     std::list<boost::shared_ptr<Object> > m_oConnections;
-
 };
+
+
+/* ============================================================================
+ *
+ * */
+inline boost::shared_ptr<Object::ObjMutex> Object::objMutex()
+{
+    return m_oMutex;
+}
 
 /* ============================================================================
  *

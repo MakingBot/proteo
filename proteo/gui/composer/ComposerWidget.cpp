@@ -42,8 +42,11 @@ ComposerWidget::ComposerWidget()
     m_splitter.insertWidget(1, &m_view  );
     m_splitter.insertWidget(2, &m_editor);
 
-    // Attahc the scene
+    // Attach the scene
     m_view.setScene(m_scene.data());
+
+    // Set a minimum height
+    setMinimumHeight(600);
 }
 
 

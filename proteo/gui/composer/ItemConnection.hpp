@@ -27,7 +27,6 @@ namespace proteo { namespace gui {
 
 class ItemConnection : public QGraphicsItem
 {
-    Q_OBJECT
 
 public:
 
