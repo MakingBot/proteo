@@ -24,6 +24,14 @@ using namespace boost::python;
 void export_core_object();
 void export_core_container();
 
+
+
+std::string proteo_core_objects()
+{
+    return std::string("Container-Rtool");
+}
+
+
 /* ============================================================================
  *
  * */
@@ -31,4 +39,8 @@ BOOST_PYTHON_MODULE(core)
 {
     export_core_object();
     export_core_container();
+
+
+
+    def("proteo_core_objects", proteo_core_objects);
 }

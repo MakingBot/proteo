@@ -12,11 +12,11 @@ sched = Scheduler()
 
 comp = Composer("composer")
 
-spy1 = Spy("agent");
-#spy1.show()
-spy1 *= comp
+archi = Container("main")
 
-#comp.visible = True;
+
+comp *= archi
+
 comp.show()
 
 sched.start()

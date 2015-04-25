@@ -23,4 +23,5 @@ INCLUDE_DIRECTORIES(.)
 
 INCLUDE(wrapper/py/core/module.cmake)
 INCLUDE(wrapper/py/gui/module.cmake)
+INCLUDE(wrapper/py/model/module.cmake)
 

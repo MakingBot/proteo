@@ -23,50 +23,52 @@
 #include <QString>
 #include <QStringList>
 
+#include <iostream>
+#include <boost/python.hpp>
+using namespace boost::python;
+
 namespace proteo { namespace gui {
 
-
-
+//! \class ScriptScope
+//! \brief 
+//!
+//! \author [XR]MakingBot ( http://makingbot.fr )
+//!
 class ScriptScope
 {
 
-
 public:
 
-    ScriptScope(const QString& base = "")
-    {
-        m_scopeChain = base.split('.');
-    }
+    //! \brief Default constructor
+    //!
+    inline ScriptScope(const QString& base = "");
 
-    ScriptScope join(ScriptScope& scope, QString sub_scope)
-    {
-       // return ScriptScope();
-    }
+    //! \brief Scope name list to path chain 'path/to/scope'
+    //!
+    QString toPathChain() const;
 
-    QString toPathChain() const
-    {
-        QString path_chain;
-        foreach(const QString& scope, m_scopeChain)
-        {
-            path_chain += scope;
-            path_chain += QDir::separator();    
-        }
-        return path_chain;
-    }
+    //! \brief Scope name list to dot chain 'path.to.scope'
+    //!
+    QString toDotChain() const;
 
 protected:
 
-
-    //! 
+    //! \brief List of scope namespace
     //!
     QStringList m_scopeChain;
 
 };
 
-
+/* ============================================================================
+ *
+ * */
+inline ScriptScope::ScriptScope(const QString& base)
+{
+    m_scopeChain = base.split('.');
+}
 
 //! \class ScriptModule
-//! \brief Menu of the composer widget
+//! \brief 
 //!
 //! \author [XR]MakingBot ( http://makingbot.fr )
 //!
@@ -77,31 +79,39 @@ public:
 
     //! \brief Default constructor
     //!
-    ScriptModule(const QString& name, const ScriptScope& scope)
-        : m_imported(false), m_name(name), m_scope(scope)
-    {
+    inline ScriptModule(const QString& name, const ScriptScope& scope);
 
-    }
+    //! \brief Import flag getter
+    //!
+    inline bool isImported();
+    
+    //! \brief Import flag setter
+    //!
+    inline void setImported(bool imp);
 
+    //! \brief Name getter
+    //!
+    inline const QString& name();
 
-    bool isImported()
-    {
-        return m_imported;
-    }
+    //! \brief Name setter
+    //!
+    inline void setName(const QString& n);
 
-    const QString& name()
-    {
-        return m_name;
-    }
+    //! \brief Scope getter
+    //!
+    inline ScriptScope& scope();
 
-    ScriptScope& scope()
-    {
-        return m_scope;
-    }
+    //! \brief Scope setter
+    //!
+    inline void setScope(const ScriptScope& s);
+
+    //! \brief Scope name list to dot chain 'path.to.scope'
+    //!
+    QString toDotChain() const;
 
 protected:
 
-    //! 
+    //! \brief True if the module has been imported
     //!
     bool m_imported;
 
@@ -115,6 +125,70 @@ protected:
 
 };
 
+inline ScriptModule::ScriptModule(const QString& name, const ScriptScope& scope)
+    : m_imported(false)
+    , m_name(name)
+    , m_scope(scope)
+{ }
+
+/* ============================================================================
+ *
+ * */
+inline bool ScriptModule::isImported()
+{
+    return m_imported;
+}
+
+/* ============================================================================
+ *
+ * */
+inline void ScriptModule::setImported(bool imp)
+{
+    m_imported = imp;
+    if(m_imported)
+    {
+        object result = import(toDotChain().toStdString().c_str());
+
+        QString import_cmd = QString("from ") + toDotChain() + QString(" import *");
+        exec(import_cmd.toStdString().c_str());
+
+    }
+}
+
+/* ============================================================================
+ *
+ * */
+inline const QString& ScriptModule::name()
+{
+    return m_name;
+}
+
+/* ============================================================================
+ *
+ * */
+inline void ScriptModule::setName(const QString& n)
+{
+    m_name = n;
+}
+
+/* ============================================================================
+ *
+ * */
+inline ScriptScope& ScriptModule::scope()
+{
+    return m_scope;
+}
+
+/* ============================================================================
+ *
+ * */
+inline void ScriptModule::setScope(const ScriptScope& s)
+{
+    m_scope = s;
+}
+
 } // gui
 } // proteo
 #endif // SCRIPTMODULE_HPP
+
+

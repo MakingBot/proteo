@@ -1,5 +1,5 @@
 //!
-//! \file ScriptModule.cpp
+//! \file ItemCrossPoint.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -17,46 +17,21 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "ScriptModule.hpp"
-
-using namespace proteo;
-using namespace proteo::gui;
 
 
 /* ============================================================================
  *
  * */
-QString ScriptScope::toPathChain() const
+QRectF ItemCrossPoint::boundingRect() const
 {
-    QString path_chain;
-    foreach(const QString& scope, m_scopeChain)
-    {
-        path_chain += scope;
-        path_chain += QDir::separator();    
-    }
-    path_chain.remove( path_chain.size()-1 , 1 );
-    return path_chain;
+
 }
 
 /* ============================================================================
  *
  * */
-QString ScriptScope::toDotChain() const
+void ItemCrossPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QString path_chain;
-    foreach(const QString& scope, m_scopeChain)
-    {
-        path_chain += scope;
-        path_chain += '.';    
-    }
-    path_chain.remove( path_chain.size()-1 , 1 );
-    return path_chain;
+    
 }
 
-/* ============================================================================
- *
- * */
-QString ScriptModule::toDotChain() const
-{
-    return m_scope.toDotChain() + '.' + m_name;
-}

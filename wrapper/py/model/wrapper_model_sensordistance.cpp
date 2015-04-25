@@ -1,7 +1,5 @@
-#ifndef COMPOSERVIEW_HPP
-#define COMPOSERVIEW_HPP
 //!
-//! \file ComposerView.hpp
+//! \file wrapper_model_sensordistance.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -19,30 +17,28 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <QWidget>
-#include <QGraphicsView>
-#include "ComposerScene.hpp"
-    
-namespace proteo { namespace gui {
+#include <boost/python.hpp>
+#include <proteo/model/SensorDistance.hpp>
 
-//! \class ComposerView
-//! \brief Menu of the composer widget
-//!
-//! \author [XR]MakingBot ( http://makingbot.fr )
-//!
-class ComposerView : public QGraphicsView
+using namespace boost::python;
+using namespace proteo::core;
+using namespace proteo::model;
+
+/* ============================================================================
+ *
+ * */
+void export_model_sensordistance()
 {
-    Q_OBJECT
 
-public:
+   
+    class_<SensorDistance, bases<Object> >("SensorDistance", init<std::string>())
 
-    ComposerView();
+    
+    .add_property("distance", &SensorDistance::distance, &SensorDistance::setDistance);
 
-protected:
+    ;
 
 
-};
+}
 
-} // gui
-} // proteo
-#endif // COMPOSERVIEW_HPP
+

@@ -31,6 +31,7 @@ using namespace proteo::gui;
  *
  * */
 ComposerParameter::ComposerParameter()
+    : QObject()
 {
 
     refreshModuleList();
@@ -87,7 +88,7 @@ void ComposerParameter::extractModules(const ScriptScope& scope)
         {
 
             m_modules << ScriptModule(name, scope);
-            std::cout << "--" << name.toStdString() << " -- " << m_modules.size() << std::endl;
+        
         }
 
         
@@ -96,5 +97,11 @@ void ComposerParameter::extractModules(const ScriptScope& scope)
 }
 
 
-
+/* ============================================================================
+ *
+ * */
+void ComposerParameter::signalParamModification()
+{
+    emit moduleListModified();
+}
 

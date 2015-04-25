@@ -22,21 +22,16 @@
 using namespace proteo;
 using namespace proteo::gui;
 
-#include <stdlib.h>
-
-#include <iostream>
-
 /* ============================================================================
  *
  * */
 ComposerView::ComposerView()
     : QGraphicsView()
 {
-
-    char* pPath = getenv("PYTHONPATH");
-    std::cout << pPath << std::endl;
-
+    // Widget properties
+    this->setMinimumWidth(600);
 
 }
+
 
 

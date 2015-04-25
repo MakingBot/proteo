@@ -50,11 +50,7 @@ enum ObjRole
 };
 
 
-
-// ObjRole ObjRoleStringToEnum(std::string role)
-// {
-
-// }
+ObjRole ObjRoleStringToEnum(std::string role);
 
 
 

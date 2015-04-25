@@ -29,12 +29,12 @@ using namespace proteo::gui;
  *
  * */
 ComposerWidget::ComposerWidget()
-    : QWidget(), m_splitter(Qt::Horizontal)
+    : QWidget()
     , m_parameter(new ComposerParameter())
+    , m_scene(new ComposerScene())
+    , m_splitter(Qt::Horizontal)
     , m_menu(m_parameter)
 {
-
-
     // Create the layout
     QGridLayout* lay = new QGridLayout(this);
     lay->addWidget(&m_splitter, 0, 0);
@@ -42,9 +42,8 @@ ComposerWidget::ComposerWidget()
     m_splitter.insertWidget(1, &m_view  );
     m_splitter.insertWidget(2, &m_editor);
 
-
-
-
+    // Attahc the scene
+    m_view.setScene(m_scene.data());
 }
 
 

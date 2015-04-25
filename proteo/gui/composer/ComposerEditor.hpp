@@ -20,6 +20,7 @@
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QWidget>
+#include <QTextEdit>
 
 namespace proteo { namespace gui {
 
@@ -38,7 +39,9 @@ public:
 
 protected:
 
-
+    //! \brief Editor
+    //!
+    QTextEdit m_editor;
 
 };
 

@@ -51,13 +51,17 @@ public slots:
 
 protected:
 
-    //! \brief
-    //!
-    QSplitter m_splitter;
-
     //! \brief Parameter used for the composer
     //!
     QSharedPointer<ComposerParameter> m_parameter;
+
+    //! \brief 
+    //!
+    QSharedPointer<ComposerScene> m_scene;
+
+    //! \brief
+    //!
+    QSplitter m_splitter;
 
     //! \brief Object menu
     //!
@@ -70,6 +74,7 @@ protected:
     //! \brief Script editor
     //!
     ComposerEditor m_editor;
+
 
 
 

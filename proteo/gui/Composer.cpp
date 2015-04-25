@@ -70,6 +70,22 @@ const Object::TagArray& Composer::objTag() const
     return OTag;
 }
 
+/* ============================================================================
+ *
+ * */
+bool Composer::connectionHook(boost::shared_ptr<Object> obj, bool initiative)
+{
+    m_container = obj;
+    return true;
+}
+
+/* ============================================================================
+ *
+ * */
+bool Composer::disconnectionHook(boost::shared_ptr<Object> obj, bool initiative)
+{
+    return true;
+}
 
 /* ============================================================================
  *

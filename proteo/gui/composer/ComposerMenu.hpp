@@ -54,9 +54,10 @@ protected:
     QSharedPointer<ComposerParameter> m_parameter;
 
 
-    ComposerMenuObjects m_tabObjects;
 
     ComposerMenuModules m_tabModules;
+
+    ComposerMenuObjects m_tabObjects;
 
 };
 

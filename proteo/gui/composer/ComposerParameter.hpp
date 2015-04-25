@@ -24,8 +24,6 @@
 #include <QStringList>
 #include "ScriptModule.hpp"
 
-
-
 namespace proteo { namespace gui {
 
 //! \class ComposerParameter
@@ -33,8 +31,9 @@ namespace proteo { namespace gui {
 //!
 //! \author [XR]MakingBot ( http://makingbot.fr )
 //!
-class ComposerParameter
+class ComposerParameter : public QObject
 {
+    Q_OBJECT
 
 public:
 
@@ -58,6 +57,17 @@ public:
     {
         return m_modules;
     }
+
+
+    //! \brief
+    //!
+    void signalParamModification();
+
+signals:
+
+    //! \brief Emitted when the module list is modified
+    //!
+    void moduleListModified();
 
 protected:
 

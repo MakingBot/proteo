@@ -31,25 +31,21 @@ using namespace proteo::gui;
  *
  * */
 ComposerMenu::ComposerMenu(QSharedPointer<ComposerParameter> parameter)
-    : QWidget(), m_parameter(parameter)
-    , m_tabObjects(m_parameter)
+    : QWidget()
+    , m_parameter(parameter)
     , m_tabModules(m_parameter)
+    , m_tabObjects(m_parameter)
 {
+    // Widget properties
+    this->setMinimumWidth(300);
 
-
-
+    // Create tabs
     m_tabContainer.addTab(&m_tabModules, "Modules");
     m_tabContainer.addTab(&m_tabObjects, "Objects");
-
-
 
     // Create the layout
     QGridLayout* lay = new QGridLayout(this);
     lay->addWidget(&m_tabContainer, 0, 0);
-
-
-
-
 }
 
 

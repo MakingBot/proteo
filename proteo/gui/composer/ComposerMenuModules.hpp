@@ -20,32 +20,10 @@
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QWidget>
-#include <QCheckBox>
+#include "ModuleCheckBox.hpp"
 #include "ComposerParameter.hpp"
 
 namespace proteo { namespace gui {
-
-
-
-
-class ModuleCheckBox : public QCheckBox
-{
-
-public:
-
-    ModuleCheckBox(const QString & text = "", int ind = 0)
-        : QCheckBox(text), index(ind)
-    {
-
-    }
-
-
-    int index;
-
-};
-
-
-
 
 
 //! \class ComposerMenuModules
@@ -62,6 +40,10 @@ public:
     ComposerMenuModules(QSharedPointer<ComposerParameter> parameter);
 
 
+    //! \brief Build a checkbox for each module
+    //!
+    void refreshModuleList();
+
 
 public slots:
 
@@ -74,10 +56,9 @@ protected:
     //!
     QSharedPointer<ComposerParameter> m_parameter;
 
-
+    //! \brief CheckBoxs widget list
+    //!
     QList<QSharedPointer<ModuleCheckBox> > m_checkBoxs;
-
-
 
 };
 

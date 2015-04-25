@@ -1,7 +1,7 @@
-#ifndef COMPOSERMENUOBJECTS_HPP
-#define COMPOSERMENUOBJECTS_HPP
+#ifndef COMPOSERSCENE_HPP
+#define COMPOSERSCENE_HPP
 //!
-//! \file ComposerMenuObjects.hpp
+//! \file ComposerScene.hpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -20,62 +20,43 @@
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QWidget>
-#include <QCheckBox>
-#include "ComposerMenuItem.hpp"
-#include "ComposerParameter.hpp"
-
+#include <QGraphicsScene>
+    
 namespace proteo { namespace gui {
 
-
-
-//! \class ComposerMenuObjects
+//! \class ComposerScene
 //! \brief Menu of the composer widget
 //!
 //! \author [XR]MakingBot ( http://makingbot.fr )
 //!
-class ComposerMenuObjects : public QWidget
+class ComposerScene : public QGraphicsScene
 {
     Q_OBJECT
 
 public:
 
-    ComposerMenuObjects(QSharedPointer<ComposerParameter> parameter);
-
-
-
-    //! \brief Refresh
+    //! \brief Default constructor
     //!
-    void refreshUi();
-
-public slots:
-
-
-    void onStateChange(int state);
-
-    //! \brief 
-    //!
-    void onModuleListModified();
+    ComposerScene();
 
 protected:
 
-    //! \brief Parameters
-    //!
-    QSharedPointer<ComposerParameter> m_parameter;
 
-    //! \brief Menu items
-    //!
-    QList<QSharedPointer<ComposerMenuItem> > m_items;
 
-    //! \brief Destroy module items
-    //!
-    void destroyUi();
-
-    //!
-    //!
-    void extractObjectFromModule(ScriptModule& module);
 
 };
 
+
+/* ============================================================================
+ *
+ * */
+inline ComposerScene::ComposerScene()
+    : QGraphicsScene()
+{
+
+}
+
+
 } // gui
 } // proteo
-#endif // COMPOSERMENUOBJECTS_HPP
+#endif // COMPOSERSCENE_HPP

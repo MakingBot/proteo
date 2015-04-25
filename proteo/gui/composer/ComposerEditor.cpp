@@ -19,6 +19,8 @@
 
 #include "ComposerEditor.hpp"
 
+#include <QGridLayout>
+
 using namespace proteo;
 using namespace proteo::gui;
 
@@ -27,6 +29,16 @@ using namespace proteo::gui;
  * */
 ComposerEditor::ComposerEditor()
     : QWidget()
-{ }
+{
+    // Widget properties
+    this->setMinimumWidth(400);
+
+
+    QGridLayout* lay = new QGridLayout(this);
+
+    lay->addWidget(&m_editor, 0, 0);
+
+    
+}
 
 

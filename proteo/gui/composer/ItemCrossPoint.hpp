@@ -1,7 +1,7 @@
-#ifndef COMPOSERVIEW_HPP
-#define COMPOSERVIEW_HPP
+#ifndef ITEMCROSSPOINT_HPP
+#define ITEMCROSSPOINT_HPP
 //!
-//! \file ComposerView.hpp
+//! \file ItemCrossPoint.hpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -19,30 +19,42 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <QWidget>
-#include <QGraphicsView>
-#include "ComposerScene.hpp"
-    
+#include <QGraphicsItem>
+
 namespace proteo { namespace gui {
 
-//! \class ComposerView
-//! \brief Menu of the composer widget
-//!
-//! \author [XR]MakingBot ( http://makingbot.fr )
-//!
-class ComposerView : public QGraphicsView
+
+
+class ItemCrossPoint : public QGraphicsItem
 {
     Q_OBJECT
 
 public:
 
-    ComposerView();
+    inline ItemCrossPoint();
 
-protected:
+    //! FROM QGraphicsItem
+    //!
+    QRectF boundingRect() const;
+
+    //! FROM QGraphicsItem
+    //!
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
 
 
 };
 
+/* ============================================================================
+ *
+ * */
+inline ItemCrossPoint::ItemCrossPoint()
+    : QGraphicsItem()
+{
+
+}
+
+
 } // gui
 } // proteo
-#endif // COMPOSERVIEW_HPP
+#endif // ITEMCROSSPOINT_HPP

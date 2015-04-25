@@ -1,7 +1,5 @@
-#ifndef COMPOSERVIEW_HPP
-#define COMPOSERVIEW_HPP
 //!
-//! \file ComposerView.hpp
+//! \file ComposerScene.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -19,30 +17,7 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <QWidget>
-#include <QGraphicsView>
 #include "ComposerScene.hpp"
-    
-namespace proteo { namespace gui {
-
-//! \class ComposerView
-//! \brief Menu of the composer widget
-//!
-//! \author [XR]MakingBot ( http://makingbot.fr )
-//!
-class ComposerView : public QGraphicsView
-{
-    Q_OBJECT
-
-public:
-
-    ComposerView();
-
-protected:
 
 
-};
 
-} // gui
-} // proteo
-#endif // COMPOSERVIEW_HPP

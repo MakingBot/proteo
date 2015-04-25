@@ -32,7 +32,7 @@ void export_gui_composer();
 
 std::string proteo_gui_objects()
 {
-    return std::string("spy-Rgui;shell-Rgui;composer-Rgui");
+    return std::string("Spy-Rgui;Shell-Rgui;Composer-Rgui");
 }
 
 

@@ -16,6 +16,7 @@ SET(PROJECT_HEADER_FILES
 # Sources
 SET(PROJECT_SOURCE_FILES
 
+    proteo/core/Type.cpp
     proteo/core/Object.cpp
     proteo/core/Container.cpp
     proteo/core/SharedCout.cpp

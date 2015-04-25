@@ -1,7 +1,7 @@
-#ifndef COMPOSERVIEW_HPP
-#define COMPOSERVIEW_HPP
+#ifndef MODULECHECKBOX_HPP
+#define MODULECHECKBOX_HPP
 //!
-//! \file ComposerView.hpp
+//! \file ModuleCheckBox.hpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -19,30 +19,31 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <QWidget>
-#include <QGraphicsView>
-#include "ComposerScene.hpp"
-    
+#include <QCheckBox>
+#include "ComposerParameter.hpp"
+
 namespace proteo { namespace gui {
 
-//! \class ComposerView
-//! \brief Menu of the composer widget
-//!
-//! \author [XR]MakingBot ( http://makingbot.fr )
-//!
-class ComposerView : public QGraphicsView
+
+
+class ModuleCheckBox : public QCheckBox
 {
     Q_OBJECT
 
 public:
 
-    ComposerView();
+    ModuleCheckBox(const QString & text = "", int ind = 0)
+        : QCheckBox(text), index(ind)
+    {
 
-protected:
+    }
 
+
+    int index;
 
 };
 
+
 } // gui
 } // proteo
-#endif // COMPOSERVIEW_HPP
+#endif // MODULECHECKBOX_HPP

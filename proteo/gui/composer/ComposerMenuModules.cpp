@@ -22,34 +22,64 @@ using namespace proteo::gui;
 ComposerMenuModules::ComposerMenuModules(QSharedPointer<ComposerParameter> parameter)
     : m_parameter(parameter)
 {
-
+    // Create the layout
     QVBoxLayout* lay = new QVBoxLayout(this);
 
-    for(int i=0 ; i < m_parameter->modules().size() ; i++)
-    {
-        std::cout << i << " -- " << m_parameter->modules().size() << std::endl;
-
-        ScriptModule& module = m_parameter->modules()[i];
-
-        QSharedPointer<ModuleCheckBox> box( new ModuleCheckBox( module.name(), i ) );
-
-        lay->addWidget(box.data());
-
-        m_checkBoxs << box;
-
-
-    }
-
-    // m_checkBoxs
-
+    // Refresh
+    refreshModuleList();
 }
 
+/* ============================================================================
+ *
+ * */
+void ComposerMenuModules::refreshModuleList()
+{
+    for(int i=0 ; i < m_parameter->modules().size() ; i++)
+    {
+        ScriptModule& module = m_parameter->modules()[i];
+
+        // Create the associated checkbox
+        QSharedPointer<ModuleCheckBox> box( new ModuleCheckBox(module.toDotChain(),i) );
+
+        // Connect the box signal
+        connect(box.data()  , &ModuleCheckBox::stateChanged       ,
+                this        , &ComposerMenuModules::onStateChange );
+
+        // Append it into the layout
+        ((QVBoxLayout*)layout())->addWidget(box.data());
+        m_checkBoxs << box;
+    }
+}
 
 /* ============================================================================
  *
  * */
 void ComposerMenuModules::onStateChange(int state)
 {
+    // Get the sender widget
+    ModuleCheckBox* box = qobject_cast<ModuleCheckBox*>(sender());
+    if(!box)
+    {
+        return;
+    }
 
+    // Get the module and set apply the new value
+    ScriptModule& module = m_parameter->modules()[box->index];
+    switch(state)
+    {
+        case Qt::Unchecked:
+            module.setImported(false);
+            m_parameter->signalParamModification();
+            break;
+
+        case Qt::Checked:
+            module.setImported(true);
+            m_parameter->signalParamModification();
+            break;
+
+        case Qt::PartiallyChecked:
+        default:
+            break;
+    }
 }
 
