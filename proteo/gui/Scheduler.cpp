@@ -48,14 +48,14 @@ Scheduler::Scheduler()
 {
     // Create the QApplication
     int argc = 1;
-    char * argv[1] = { "ybot" } ;
+    char * argv[1] = { "proteo" } ;
     m_app = QSharedPointer<QApplication>( new QApplication(argc, argv) );
 
     // Set tweaks style
     m_app->setStyle(new Style_tweaks);
 
     // Define application attributes
-    QApplication::setApplicationName("ybot");
+    QApplication::setApplicationName("proteo");
     QApplication::setApplicationVersion("1.0");
 
     QApplication::setOrganizationName("MakingBot");

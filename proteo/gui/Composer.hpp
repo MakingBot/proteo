@@ -32,8 +32,6 @@ class Composer : public GuiObject
 
 public:
 
-
-
     //! \brief Default constructor
     //!
     Composer(std::string name);
@@ -84,34 +82,25 @@ public:
     //!
     virtual const std::vector<core::Property>& properties() const;
 
+    // ========================================================================
+    // => Composer
 
-
-    //! \brief Visible getter
+    //! \brief Container getter
     //!
-    // bool isVisible();
-
-    // //! \brief Visible setter
-    // //!
-    // void setVisible(bool vis);
-
-
-
-    // void show();
+    boost::shared_ptr<core::Object> container();
 
 protected:
 
-
-    //! \brief Container that is composed
+    //! \brief Container object
+    //! Composer works on a unique object which serve as main container.
     //!
     boost::shared_ptr<core::Object> m_container;
 
-    //! \brief Widget
+    //! \brief Composer widget
     //!
     QSharedPointer<ComposerWidget> m_composer;
 
-
 };
-
 
 } // gui
 } // proteo

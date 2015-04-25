@@ -20,6 +20,7 @@
 #include "ComposerMenu.hpp"
 
 #include <QGridLayout>
+#include <proteo/gui/Composer.hpp>
 
 using namespace proteo;
 using namespace proteo::gui;
@@ -30,8 +31,9 @@ using namespace proteo::gui;
 /* ============================================================================
  *
  * */
-ComposerMenu::ComposerMenu(QSharedPointer<ComposerParameter> parameter)
+ComposerMenu::ComposerMenu(Composer* c, QSharedPointer<ComposerParameter> parameter)
     : QWidget()
+    , m_composer (c)
     , m_parameter(parameter)
     , m_tabModules(m_parameter)
     , m_tabObjects(m_parameter)

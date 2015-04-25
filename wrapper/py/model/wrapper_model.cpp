@@ -21,19 +21,17 @@
 
 using namespace boost::python;
 
-
 void export_model_joint();
 void export_model_robot();
 void export_model_sensordistance();
 
-
-
+/* ============================================================================
+ *
+ * */
 std::string proteo_model_objects()
 {
     return std::string("Joint-Rmodel;Robot-Rmodel;SensorDistance-Rmodel");
 }
-
-
 
 /* ============================================================================
  *
@@ -48,8 +46,3 @@ BOOST_PYTHON_MODULE(model)
 
     def("proteo_model_objects", proteo_model_objects);
 }
-
-
-
-
-

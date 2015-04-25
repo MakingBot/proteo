@@ -20,6 +20,7 @@
 #include "ComposerEditor.hpp"
 
 #include <QGridLayout>
+#include <proteo/gui/Composer.hpp>
 
 using namespace proteo;
 using namespace proteo::gui;
@@ -27,8 +28,10 @@ using namespace proteo::gui;
 /* ============================================================================
  *
  * */
-ComposerEditor::ComposerEditor()
+ComposerEditor::ComposerEditor(Composer* c, QSharedPointer<ComposerParameter> parameter)
     : QWidget()
+    , m_composer (c)
+    , m_parameter(parameter)
 {
     // Widget properties
     this->setMinimumWidth(400);

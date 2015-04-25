@@ -99,12 +99,16 @@ public:
     {
         //! \brief Emitted when the object name is modified
         //!
-        boost::signals2::signal<void ()> nameModified;
+        boost::signals2::signal<void ()>        nameModified;
 
         //! \brief Emitted when a property value has been modified
         //! It takes a uint8 value which is the property id.
         //!
         boost::signals2::signal<void (uint8_t)> propertyModified;
+
+        //! \brief Emitted when a new object has been connected
+        //!
+        boost::signals2::signal<void ()>        newConnection;
     };
 
     //! \struct ObjMutex

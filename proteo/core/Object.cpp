@@ -315,6 +315,9 @@ bool Object::connect(boost::shared_ptr<Object> obj, bool initiative)
     // Save connection pointer
     m_oConnections.push_back(obj);
 
+    // Emit signal
+    objSignals()->newConnection();
+
     return true;
 }
 

@@ -21,10 +21,13 @@
 
 #include <QWidget>
 #include <QTabWidget>
+#include "ComposerParameter.hpp"
 #include "ComposerMenuObjects.hpp"
 #include "ComposerMenuModules.hpp"
 
 namespace proteo { namespace gui {
+
+class Composer;
 
 //! \class ComposerMenu
 //! \brief Menu of the composer widget
@@ -37,7 +40,7 @@ class ComposerMenu : public QWidget
 
 public:
 
-    ComposerMenu(QSharedPointer<ComposerParameter> parameter);
+    ComposerMenu(Composer* c, QSharedPointer<ComposerParameter> parameter);
 
 protected:
 
@@ -45,12 +48,14 @@ protected:
     //!
     QTabWidget m_tabContainer;
 
-    // tabwidget 
-    // Modules
-    // Objects
 
 
+    //! \brief Composer object
+    //!
+    Composer* m_composer;
 
+    //! \brief Composer parameters
+    //!
     QSharedPointer<ComposerParameter> m_parameter;
 
 

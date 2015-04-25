@@ -24,11 +24,13 @@
 #include <proteo/gui/Composer.hpp>
 
 #include "ComposerMenu.hpp"
-#include "ComposerView.hpp"
+#include "ComposerGraphic.hpp"
 #include "ComposerEditor.hpp"
 #include "ComposerParameter.hpp"
 
 namespace proteo { namespace gui {
+
+class Composer;
 
 //! \class ComposerWidget
 //! \brief Widget of the composer object
@@ -43,7 +45,7 @@ public:
 
     //! \brief Default constructor
     //!
-    explicit ComposerWidget();
+    explicit ComposerWidget(Composer* c);
 
 signals:
 
@@ -54,8 +56,8 @@ protected:
     //! \brief Parameter used for the composer
     //!
     QSharedPointer<ComposerParameter> m_parameter;
-
-    //! \brief 
+    
+    //! \brief The graphic scene
     //!
     QSharedPointer<ComposerScene> m_scene;
 
@@ -69,15 +71,15 @@ protected:
 
     //! \brief Software architecture view
     //!
-    ComposerView m_view;
+    ComposerGraphic m_graphic;
 
     //! \brief Script editor
     //!
     ComposerEditor m_editor;
 
-
-
-
+    //! \brief Composer object
+    //!
+    Composer* m_composer;
 
 };
 

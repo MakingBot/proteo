@@ -1,7 +1,7 @@
-#ifndef COMPOSEREDITOR_HPP
-#define COMPOSEREDITOR_HPP
+#ifndef COMPOSERGRAPHIC_HPP
+#define COMPOSERGRAPHIC_HPP
 //!
-//! \file ComposerEditor.hpp
+//! \file ComposerGraphic.hpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -20,32 +20,52 @@
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QWidget>
-#include <QTextEdit>
+#include <QSpinBox>
+#include <QLineEdit>
 
+#include "ComposerView.hpp"
+#include "ComposerScene.hpp"
 #include "ComposerParameter.hpp"
 
 namespace proteo { namespace gui {
 
 class Composer;
 
-//! \class ComposerEditor
+//! \class ComposerGraphic
 //! \brief Menu of the composer widget
 //!
 //! \author [XR]MakingBot ( http://makingbot.fr )
 //!
-class ComposerEditor : public QWidget
+class ComposerGraphic : public QWidget
 {
     Q_OBJECT
 
 public:
 
-    ComposerEditor(Composer* c, QSharedPointer<ComposerParameter> parameter);
+    //! \brief Default constructor
+    //!
+    ComposerGraphic(Composer* c, QSharedPointer<ComposerParameter> parameter);
+
+
+    void refreshBarInfo();
 
 protected:
 
-    //! \brief Editor
+    //! \brief
     //!
-    QTextEdit m_editor;
+    QLineEdit m_boxName;
+
+    //! \brief
+    //!
+    QSpinBox m_boxWidth;
+
+    //! \brief
+    //!
+    QSpinBox m_boxHeight;
+
+    //! \brief 
+    //!
+    ComposerView m_view;
 
 
     //! \brief Composer object
@@ -60,4 +80,4 @@ protected:
 
 } // gui
 } // proteo
-#endif // COMPOSEREDITOR_HPP
+#endif // COMPOSERGRAPHIC_HPP

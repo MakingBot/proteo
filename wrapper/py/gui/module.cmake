@@ -32,14 +32,15 @@ SET(PROJECT_HEADER_FILES
     # === COMPOSER
     #
     proteo/gui/Composer.hpp
-    proteo/gui/composer/ComposerWidget.hpp
+    proteo/gui/composer/ComposerEditor.hpp
+    proteo/gui/composer/ComposerGraphic.hpp
     proteo/gui/composer/ComposerMenu.hpp
     proteo/gui/composer/ComposerMenuItem.hpp
-    proteo/gui/composer/ComposerMenuObjects.hpp
     proteo/gui/composer/ComposerMenuModules.hpp
+    proteo/gui/composer/ComposerMenuObjects.hpp
+    proteo/gui/composer/ComposerWidget.hpp
     proteo/gui/composer/ComposerView.hpp
     proteo/gui/composer/ComposerScene.hpp
-    proteo/gui/composer/ComposerEditor.hpp
     proteo/gui/composer/ScriptModule.hpp
     proteo/gui/composer/ComposerParameter.hpp
     proteo/gui/composer/ModuleCheckBox.hpp
@@ -76,14 +77,15 @@ SET(PROJECT_SOURCE_FILES
     # === COMPOSER
     #
     proteo/gui/Composer.cpp
-    proteo/gui/composer/ComposerWidget.cpp
+    proteo/gui/composer/ComposerEditor.cpp
+    proteo/gui/composer/ComposerGraphic.cpp
     proteo/gui/composer/ComposerMenu.cpp
     proteo/gui/composer/ComposerMenuItem.cpp
     proteo/gui/composer/ComposerMenuObjects.cpp
     proteo/gui/composer/ComposerMenuModules.cpp
+    proteo/gui/composer/ComposerWidget.cpp
     proteo/gui/composer/ComposerView.cpp
     proteo/gui/composer/ComposerScene.cpp
-    proteo/gui/composer/ComposerEditor.cpp
     proteo/gui/composer/ScriptModule.cpp
     proteo/gui/composer/ComposerParameter.cpp
     proteo/gui/composer/ItemObject.cpp

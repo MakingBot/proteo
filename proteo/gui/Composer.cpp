@@ -28,10 +28,11 @@ using namespace proteo::core;
  *
  * */
 Composer::Composer(std::string name)
-    : GuiObject(name), m_composer(new ComposerWidget())
+    : GuiObject(name)
+    , m_composer(new ComposerWidget(this))
 {
     // Set widget for GuiObject
-    m_widget = qSharedPointerObjectCast<QWidget>( m_composer );
+    m_widget = qSharedPointerObjectCast<QWidget>(m_composer);
 
     // Enable properties
     setPropertyActivity(IdPropertyVisible, true);
@@ -137,49 +138,10 @@ const std::vector<Property>& Composer::properties() const
     return Properties;
 }
 
-
-
-
-
-
 /* ============================================================================
  *
  * */
-// bool Composer::isVisible()
-// {
-//     return m_widget->isVisible();
-// }
-
-/* ============================================================================
- *
- * */
-// void Composer::setVisible(bool vis)
-// {
-//     // Check widget allocation    
-//     // if(!m_widget)
-//     // {
-//     //     return;
-//     // }
-
-//     // Set the variable
-//     // m_visible = v;
-
-//     // Command the widget
-//     if(vis)
-//     {
-//         std::cout << "vis = true" << std::endl;
-//         show();
-//         // ComposerWidget* rr = new ComposerWidget();
-//         // rr->show();
-//     }
-//     else
-//     {
-//         m_widget->hide();
-//     }
-// }
-
-
-// void Composer::show()
-// {
-//     m_widget->show();
-// }
+boost::shared_ptr<core::Object> Composer::container()
+{
+    return m_container;
+}
