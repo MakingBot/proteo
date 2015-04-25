@@ -1,5 +1,5 @@
 //!
-//! \file wrapper_gui_shell.cpp
+//! \file ComposerMenu.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -17,27 +17,41 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
-#include <proteo/gui/Shell.hpp>
+#include "ComposerMenu.hpp"
 
-using namespace boost::python;
-using namespace proteo::core;
+#include <QGridLayout>
+
+using namespace proteo;
 using namespace proteo::gui;
+
+
+
 
 /* ============================================================================
  *
  * */
-void export_gui_shell()
+ComposerMenu::ComposerMenu(QSharedPointer<ComposerParameter> parameter)
+    : QWidget(), m_parameter(parameter)
+    , m_tabObjects(m_parameter)
+    , m_tabModules(m_parameter)
 {
-    class_<Shell, boost::shared_ptr<Shell>, bases<Object>, boost::noncopyable>
-    (
-        "Shell"
-    ,   init<std::string>()
-    )
-
-    .def("show", &Shell::show)
 
 
-    ;
+
+    m_tabContainer.addTab(&m_tabModules, "Modules");
+    m_tabContainer.addTab(&m_tabObjects, "Objects");
+
+
+
+    // Create the layout
+    QGridLayout* lay = new QGridLayout(this);
+    lay->addWidget(&m_tabContainer, 0, 0);
+
+
+
+
 }
+
+
+
 

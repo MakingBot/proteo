@@ -26,16 +26,6 @@ using namespace proteo::gui;
 /* ============================================================================
  *
  * */
-static const int ViewerBool::TrueIndex  = 0;
-
-/* ============================================================================
- *
- * */
-static const int ViewerBool::FalseIndex = 1;
-
-/* ============================================================================
- *
- * */
 ViewerBool::ViewerBool(quint8 propid, bool readonly)
     : ViewerProperty(propid, readonly)
 {
@@ -80,7 +70,7 @@ void ViewerBool::apply()
 /* ============================================================================
  *
  * */
-void ViewerBool::onValueChange(double value)
+void ViewerBool::onValueChange(int value)
 {
     Q_UNUSED(value);
     m_setButton.change();

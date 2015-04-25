@@ -1,5 +1,7 @@
+#ifndef COMPOSERVIEW_HPP
+#define COMPOSERVIEW_HPP
 //!
-//! \file wrapper_gui_shell.cpp
+//! \file ComposerView.hpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -17,27 +19,31 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
-#include <proteo/gui/Shell.hpp>
+#include <QWidget>
+#include <QGraphicsView>
+    
+namespace proteo { namespace gui {
 
-using namespace boost::python;
-using namespace proteo::core;
-using namespace proteo::gui;
-
-/* ============================================================================
- *
- * */
-void export_gui_shell()
+//! \class ComposerView
+//! \brief Menu of the composer widget
+//!
+//! \author [XR]MakingBot ( http://makingbot.fr )
+//!
+class ComposerView : public QGraphicsView
 {
-    class_<Shell, boost::shared_ptr<Shell>, bases<Object>, boost::noncopyable>
-    (
-        "Shell"
-    ,   init<std::string>()
-    )
+    Q_OBJECT
 
-    .def("show", &Shell::show)
+public:
+
+    ComposerView();
+
+protected:
 
 
-    ;
-}
 
+
+};
+
+} // gui
+} // proteo
+#endif // COMPOSERVIEW_HPP

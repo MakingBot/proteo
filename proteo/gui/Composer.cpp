@@ -30,8 +30,11 @@ using namespace proteo::core;
 Composer::Composer(std::string name)
     : GuiObject(name), m_composer(new ComposerWidget())
 {
+    // Set widget for GuiObject
     m_widget = qSharedPointerObjectCast<QWidget>( m_composer );
-   // m_composer->show();
+
+    // Enable properties
+    setPropertyActivity(IdPropertyVisible, true);
 }
 
 /* ============================================================================
@@ -48,7 +51,7 @@ const Object::TagArray Composer::OTag = { 'C', 'O', 'M', 'P' };
  *
  * */
 const std::vector<Property> Composer::Properties = {
-   // Property()
+    Property(IdPropertyVisible, "visible", Tbool)
 };
 
 /* ============================================================================
@@ -67,6 +70,49 @@ const Object::TagArray& Composer::objTag() const
     return OTag;
 }
 
+
+/* ============================================================================
+ *
+ * */
+Variant Composer::propertyValue(uint8_t id)
+{
+    switch(id)
+    {
+        case IdPropertyVisible:
+        {
+            return Variant(isVisible());
+            break;
+        }
+
+        default:
+        {
+            return Object::propertyValue(id);
+            break;
+        }
+    }
+}
+
+/* ============================================================================
+ *
+ * */
+void Composer::setPropertyValue(uint8_t id, const Variant& v)
+{
+    switch(id)
+    {
+        case IdPropertyVisible:
+        {
+            setVisible(v.toBool());
+            break;
+        }
+
+        default:
+        {
+            Object::setPropertyValue(id, v);
+            break;
+        }
+    }
+}
+
 /* ============================================================================
  *
  * */
@@ -74,3 +120,50 @@ const std::vector<Property>& Composer::properties() const
 {
     return Properties;
 }
+
+
+
+
+
+
+/* ============================================================================
+ *
+ * */
+// bool Composer::isVisible()
+// {
+//     return m_widget->isVisible();
+// }
+
+/* ============================================================================
+ *
+ * */
+// void Composer::setVisible(bool vis)
+// {
+//     // Check widget allocation    
+//     // if(!m_widget)
+//     // {
+//     //     return;
+//     // }
+
+//     // Set the variable
+//     // m_visible = v;
+
+//     // Command the widget
+//     if(vis)
+//     {
+//         std::cout << "vis = true" << std::endl;
+//         show();
+//         // ComposerWidget* rr = new ComposerWidget();
+//         // rr->show();
+//     }
+//     else
+//     {
+//         m_widget->hide();
+//     }
+// }
+
+
+// void Composer::show()
+// {
+//     m_widget->show();
+// }

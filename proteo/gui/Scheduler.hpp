@@ -30,46 +30,51 @@ namespace proteo { namespace gui {
    
 //! \class Scheduler
 //! \brief Graphic scheduler
+//! QApplication is required for QWidget creation.
 //!
-class Scheduler : public core::Object
+//! \note SegFault when it became an core::object
+//!
+//! \author [XR]MakingBot ( http://makingbot.fr )
+//!
+class Scheduler // : public core::Object
 {
 
 public:
 
     //! \brief Constructor
     //!
-    Scheduler(std::string name);
+    Scheduler();
+//std::string name
 
+    // // ========================================================================
+    // // => Constantes
 
-    // ========================================================================
-    // => Constantes
+    // //! \brief Role
+    // //!
+    // static const core::ObjRole ORole;
 
-    //! \brief Role
-    //!
-    static const core::ObjRole ORole;
+    // //! \brief Tag
+    // //!
+    // static const core::Object::TagArray OTag;
 
-    //! \brief Tag
-    //!
-    static const core::Object::TagArray OTag;
+    // //! \brief Property vector
+    // //!
+    // static const std::vector<core::Property> Properties;
 
-    //! \brief Property vector
-    //!
-    static const std::vector<core::Property> Properties;
+    // // ========================================================================
+    // // => Object redefinition
 
-    // ========================================================================
-    // => Object redefinition
+    // //! \brief FROM Object
+    // //!
+    // virtual core::ObjRole objRole() const;
 
-    //! \brief FROM Object
-    //!
-    virtual core::ObjRole objRole() const;
+    // //! \brief FROM Object
+    // //!
+    // virtual const core::Object::TagArray& objTag() const;
 
-    //! \brief FROM Object
-    //!
-    virtual const core::Object::TagArray& objTag() const;
-
-    //! \brief FROM Object
-    //!
-    virtual const std::vector<core::Property>& properties() const;
+    // //! \brief FROM Object
+    // //!
+    // virtual const std::vector<core::Property>& properties() const;
 
 
 
@@ -77,6 +82,10 @@ public:
     //! \brief Start graphic event loop
     //!
     void start();
+
+    //! \brief Start graphic event loop for just 'sec' seconds
+    //!
+    // void start(int sec);
 
 protected:
 

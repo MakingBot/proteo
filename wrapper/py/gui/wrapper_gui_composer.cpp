@@ -34,5 +34,11 @@ void export_gui_composer()
         "Composer"
     ,   init<std::string>()
     )
+
+    // Direct property lead to a segfault when using it ... ? QWidget compatibility ?
+    // .add_property("visible", &Composer::isVisible, &Composer::setVisible)
+
+    .def("show", &Composer::show)
+
     ;
 }

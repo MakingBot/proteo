@@ -43,8 +43,8 @@ class Style_tweaks : public QProxyStyle
 /* ============================================================================
  *
  * */
-Scheduler::Scheduler(std::string name)
-    : core::Object(name)
+Scheduler::Scheduler()
+   // : core::Object(name)std::string name
 {
     // Create the QApplication
     int argc = 1;
@@ -69,43 +69,43 @@ Scheduler::Scheduler(std::string name)
 /* ============================================================================
  *
  * */
-const ObjRole Scheduler::ORole = Rgui;
+// const ObjRole Scheduler::ORole = Rgui;
 
 /* ============================================================================
  *
  * */
-const Object::TagArray Scheduler::OTag = { 'S', 'H', 'L', 'L' };
+// const Object::TagArray Scheduler::OTag = { 'S', 'H', 'L', 'L' };
 
 /* ============================================================================
  *
  * */
-const std::vector<Property> Scheduler::Properties = {
-   // Property()
-};
+// const std::vector<Property> Scheduler::Properties = {
+//    // Property()
+// };
 
 /* ============================================================================
  *
  * */
-ObjRole Scheduler::objRole() const
-{
-    return ORole;
-}
+// ObjRole Scheduler::objRole() const
+// {
+//     return ORole;
+// }
 
 /* ============================================================================
  *
  * */
-const Object::TagArray& Scheduler::objTag() const
-{
-    return OTag;
-}
+// const Object::TagArray& Scheduler::objTag() const
+// {
+//     return OTag;
+// }
 
 /* ============================================================================
  *
  * */
-const std::vector<Property>& Scheduler::properties() const
-{
-    return Properties;
-}
+// const std::vector<Property>& Scheduler::properties() const
+// {
+//     return Properties;
+// }
 
 
 
@@ -118,4 +118,14 @@ void Scheduler::start()
 {
     m_app->exec();
 }
+
+/* ============================================================================
+ *
+ * */
+// void Scheduler::start(int sec)
+// {
+//     m_app->exec();   
+// }
+
+
 

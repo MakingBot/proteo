@@ -19,14 +19,31 @@
 
 #include "ComposerWidget.hpp"
 
+#include <QFormLayout>
+#include <QGridLayout>
+
+using namespace proteo;
 using namespace proteo::gui;
 
 /* ============================================================================
  *
  * */
 ComposerWidget::ComposerWidget()
-    : QWidget()
+    : QWidget(), m_splitter(Qt::Horizontal)
+    , m_parameter(new ComposerParameter())
+    , m_menu(m_parameter)
 {
+
+
+    // Create the layout
+    QGridLayout* lay = new QGridLayout(this);
+    lay->addWidget(&m_splitter, 0, 0);
+    m_splitter.insertWidget(0, &m_menu  );
+    m_splitter.insertWidget(1, &m_view  );
+    m_splitter.insertWidget(2, &m_editor);
+
+
+
 
 }
 

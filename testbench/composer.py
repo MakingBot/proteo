@@ -6,16 +6,19 @@ from proteo.core  import *
 from proteo.gui   import *
 
 
-gui = Scheduler("gui")
+sched = Scheduler()
 
 
 
 comp = Composer("composer")
 
+spy1 = Spy("agent");
+#spy1.show()
+spy1 *= comp
 
 #comp.visible = True;
+comp.show()
 
-
-#gui.start()
+sched.start()
 
 

@@ -1,5 +1,5 @@
 //!
-//! \file wrapper_gui_shell.cpp
+//! \file ComposerView.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -17,27 +17,26 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
-#include <proteo/gui/Shell.hpp>
+#include "ComposerView.hpp"
 
-using namespace boost::python;
-using namespace proteo::core;
+using namespace proteo;
 using namespace proteo::gui;
+
+#include <stdlib.h>
+
+#include <iostream>
 
 /* ============================================================================
  *
  * */
-void export_gui_shell()
+ComposerView::ComposerView()
+    : QGraphicsView()
 {
-    class_<Shell, boost::shared_ptr<Shell>, bases<Object>, boost::noncopyable>
-    (
-        "Shell"
-    ,   init<std::string>()
-    )
 
-    .def("show", &Shell::show)
+    char* pPath = getenv("PYTHONPATH");
+    std::cout << pPath << std::endl;
 
 
-    ;
 }
+
 

@@ -31,7 +31,6 @@ Shell::Shell(std::string name)
     : Object(name)
     , m_widget(new ShellWidget())
 {
-    m_widget->show();
 }
 
 
@@ -77,3 +76,11 @@ const std::vector<Property>& Shell::properties() const
     return Properties;
 }
 
+
+
+
+void Shell::show()
+{
+
+    m_widget->show();
+}

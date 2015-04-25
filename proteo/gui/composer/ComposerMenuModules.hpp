@@ -1,7 +1,7 @@
-#ifndef COMPOSERWIDGET_HPP
-#define COMPOSERWIDGET_HPP
+#ifndef COMPOSERMENUMODULES_HPP
+#define COMPOSERMENUMODULES_HPP
 //!
-//! \file ComposerWidget.hpp
+//! \file ComposerMenuModules.hpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -20,57 +20,62 @@
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QWidget>
-#include <QSplitter>
-#include <proteo/gui/Composer.hpp>
-
-#include "ComposerMenu.hpp"
-#include "ComposerView.hpp"
-#include "ComposerEditor.hpp"
+#include <QCheckBox>
 #include "ComposerParameter.hpp"
 
 namespace proteo { namespace gui {
 
-//! \class ComposerWidget
-//! \brief Widget of the composer object
+
+
+
+class ModuleCheckBox : public QCheckBox
+{
+
+public:
+
+    ModuleCheckBox(const QString & text = "", int ind = 0)
+        : QCheckBox(text), index(ind)
+    {
+
+    }
+
+
+    int index;
+
+};
+
+
+
+
+
+//! \class ComposerMenuModules
+//! \brief Menu of the composer widget
 //!
 //! \author [XR]MakingBot ( http://makingbot.fr )
 //!
-class ComposerWidget : public QWidget
+class ComposerMenuModules : public QWidget
 {
     Q_OBJECT
 
 public:
 
-    //! \brief Default constructor
-    //!
-    explicit ComposerWidget();
+    ComposerMenuModules(QSharedPointer<ComposerParameter> parameter);
 
-signals:
+
 
 public slots:
 
+
+    void onStateChange(int state);
+
 protected:
 
-    //! \brief
-    //!
-    QSplitter m_splitter;
-
-    //! \brief Parameter used for the composer
+    //! \brief Parameters
     //!
     QSharedPointer<ComposerParameter> m_parameter;
 
-    //! \brief Object menu
-    //!
-    ComposerMenu m_menu;
 
-    //! \brief Software architecture view
-    //!
-    ComposerView m_view;
-
-    //! \brief Script editor
-    //!
-    ComposerEditor m_editor;
-
+    QList<QSharedPointer<ModuleCheckBox> > m_checkBoxs;
 
 
 
@@ -78,4 +83,4 @@ protected:
 
 } // gui
 } // proteo
-#endif // COMPOSERWIDGET_HPP
+#endif // COMPOSERMENUMODULES_HPP

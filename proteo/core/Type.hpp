@@ -51,6 +51,14 @@ enum ObjRole
 
 
 
+// ObjRole ObjRoleStringToEnum(std::string role)
+// {
+
+// }
+
+
+
+
 enum ObjState
 {
     Sok ,

@@ -35,7 +35,10 @@ void export_gui_guiobject()
     ,   no_init
     )
 
-    .add_property("visible", &GuiObject::isVisible, &GuiObject::setVisible)
+    // Direct property lead to a segfault when using it ... ? QWidget compatibility ?
+    // .add_property("visible", &Composer::isVisible, &Composer::setVisible)
 
+    .def("show", &GuiObject::show)
+    
     ;
 }

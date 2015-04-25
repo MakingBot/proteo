@@ -27,6 +27,16 @@ void export_gui_spy();
 void export_gui_shell();
 void export_gui_composer();
 
+
+
+
+std::string proteo_gui_objects()
+{
+    return std::string("spy-Rgui;shell-Rgui;composer-Rgui");
+}
+
+
+
 /* ============================================================================
  *
  * */
@@ -38,4 +48,9 @@ BOOST_PYTHON_MODULE(gui)
     export_gui_spy();
     export_gui_shell();
     export_gui_composer();
+
+
+    def("proteo_gui_objects", proteo_gui_objects);
 }
+
+

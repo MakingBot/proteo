@@ -1,5 +1,5 @@
 //!
-//! \file wrapper_gui_shell.cpp
+//! \file ComposerEditor.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -17,27 +17,16 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <boost/python.hpp>
-#include <proteo/gui/Shell.hpp>
+#include "ComposerEditor.hpp"
 
-using namespace boost::python;
-using namespace proteo::core;
+using namespace proteo;
 using namespace proteo::gui;
 
 /* ============================================================================
  *
  * */
-void export_gui_shell()
-{
-    class_<Shell, boost::shared_ptr<Shell>, bases<Object>, boost::noncopyable>
-    (
-        "Shell"
-    ,   init<std::string>()
-    )
+ComposerEditor::ComposerEditor()
+    : QWidget()
+{ }
 
-    .def("show", &Shell::show)
-
-
-    ;
-}
 

@@ -4,8 +4,6 @@ SET(MODULE_NAME "gui")
 # Headers
 SET(PROJECT_HEADER_FILES
 
-    proteo/gui/GuiObject.hpp
-
     proteo/gui/Scheduler.hpp
     
     proteo/gui/Spy.hpp
@@ -15,22 +13,31 @@ SET(PROJECT_HEADER_FILES
     
     proteo/gui/spy/SetButton.hpp
     proteo/gui/spy/DoubleLabel.hpp
-    proteo/gui/spy/ViewerProperty.hpp    
+    proteo/gui/spy/ViewerProperty.hpp 
+    proteo/gui/spy/ViewerBool.hpp  
     proteo/gui/spy/ViewerInteger.hpp    
 
     proteo/gui/Shell.hpp
     proteo/gui/shell/ShellWidget.hpp
 
-
     proteo/gui/Composer.hpp
     proteo/gui/composer/ComposerWidget.hpp
+    proteo/gui/composer/ComposerMenu.hpp
+    proteo/gui/composer/ComposerMenuObjects.hpp
+    proteo/gui/composer/ComposerMenuModules.hpp
+    proteo/gui/composer/ComposerView.hpp
+    proteo/gui/composer/ComposerEditor.hpp
+    proteo/gui/composer/ScriptModule.hpp
+    proteo/gui/composer/ComposerParameter.hpp
+
+    
+
+    proteo/gui/GuiObject.hpp
 
     )
 
 # Sources
 SET(PROJECT_SOURCE_FILES
-
-    proteo/gui/GuiObject.cpp
 
     proteo/gui/Scheduler.cpp
 
@@ -39,20 +46,30 @@ SET(PROJECT_SOURCE_FILES
     proteo/gui/spy/SpyWidgetHeader.cpp    
     proteo/gui/spy/SpyWidgetBody.cpp
 
+    proteo/gui/spy/ViewerBool.cpp
     proteo/gui/spy/ViewerInteger.cpp
 
     proteo/gui/Shell.cpp
     proteo/gui/shell/ShellWidget.cpp
 
-
     proteo/gui/Composer.cpp
     proteo/gui/composer/ComposerWidget.cpp
+    proteo/gui/composer/ComposerMenu.cpp
+    proteo/gui/composer/ComposerMenuObjects.cpp
+    proteo/gui/composer/ComposerMenuModules.cpp
+    proteo/gui/composer/ComposerView.cpp
+    proteo/gui/composer/ComposerEditor.cpp
+    proteo/gui/composer/ScriptModule.cpp
+    proteo/gui/composer/ComposerParameter.cpp
 
+    proteo/gui/GuiObject.cpp
 
     wrapper/py/gui/wrapper_gui.cpp
+    wrapper/py/gui/wrapper_gui_scheduler.cpp
     wrapper/py/gui/wrapper_gui_spy.cpp
     wrapper/py/gui/wrapper_gui_shell.cpp
     wrapper/py/gui/wrapper_gui_composer.cpp
+    wrapper/py/gui/wrapper_gui_guiobject.cpp
 
 
     )

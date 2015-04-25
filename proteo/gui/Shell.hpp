@@ -68,6 +68,10 @@ public:
     virtual const std::vector<core::Property>& properties() const;
 
 
+
+    void show();
+
+
 protected:
 
     //! \brief The widget

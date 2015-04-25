@@ -29,10 +29,10 @@ using namespace proteo::gui;
  * */
 void export_gui_scheduler()
 {
-    class_<Scheduler, boost::shared_ptr<Scheduler>, bases<Object>, boost::noncopyable>
+    class_<Scheduler>
     (
         "Scheduler"
-    ,   init<std::string>()
+    ,    init<>()// init<std::string>()
     )
     .def("start", &Scheduler::start)
 

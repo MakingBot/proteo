@@ -38,11 +38,11 @@ public:
 
     //! \brief Index of true in the combobox
     //!
-    static const int TrueIndex;
+    static const uint8_t TrueIndex  = 0;
 
     //! \brief Index of false in the combobox
     //!
-    static const int FalseIndex;
+    static const uint8_t FalseIndex = 1;
 
     //! \brief Default constructor
     //!
@@ -91,7 +91,7 @@ public slots:
 
     //! \brief Called when the user change the value
     //!
-    void onValueChange(double value);
+    void onValueChange(int value);
 
 protected:
 

@@ -31,11 +31,12 @@ class Composer : public GuiObject
 {
 
 public:
-    
+
+
+
     //! \brief Default constructor
     //!
     Composer(std::string name);
-
 
     // ========================================================================
     // => Constantes
@@ -65,16 +66,41 @@ public:
 
     //! \brief FROM Object
     //!
+    virtual core::Variant propertyValue(uint8_t id);
+
+    //! \brief FROM Object
+    //!
+    virtual void setPropertyValue(uint8_t id, const core::Variant& v);
+
+    //! \brief FROM Object
+    //!
     virtual const std::vector<core::Property>& properties() const;
 
+
+
+    //! \brief Visible getter
+    //!
+    // bool isVisible();
+
+    // //! \brief Visible setter
+    // //!
+    // void setVisible(bool vis);
+
+
+
+    // void show();
+
 protected:
+
 
     //! \brief Container that is composed
     //!
     boost::shared_ptr<core::Object> m_container;
 
-
+    //! \brief Widget
+    //!
     QSharedPointer<ComposerWidget> m_composer;
+
 
 };
 

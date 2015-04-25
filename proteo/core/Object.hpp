@@ -55,6 +55,12 @@ public:
 
     };
 
+    struct ObjMutex
+    {
+        std::mutex id;
+    };
+
+    
     //! \brief Default constructor
     //!
     Object(std::string name);
@@ -212,6 +218,8 @@ public:
 
 protected:
 
+    
+
     // ========================================================================
     // => Object dynamic identification
 
@@ -233,9 +241,11 @@ protected:
     //!
     std::string m_oIdChain;
 
-    //! \brief Mutex for every dynamic identification element
-    //!
-    // std::mutex m_mutex_identification;
+
+
+
+    boost::shared_ptr<ObjMutex> m_oMutex;
+
 
     // ========================================================================
     // => Block status management

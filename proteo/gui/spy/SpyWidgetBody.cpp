@@ -24,15 +24,8 @@
 #include <QFormLayout>
 #include <QGridLayout>
 #include <QMapIterator>
-#include <QStyleOption>
-#include <QVectorIterator>
 
-#include <QLabel>
-#include <QSpinBox>
-#include <QLineEdit>
-#include <QComboBox>
-#include <QDoubleSpinBox>
-
+#include "ViewerBool.hpp"
 #include "ViewerInteger.hpp"
 
 using namespace proteo::core;
@@ -109,11 +102,19 @@ void SpyWidgetBody::updateStructure()
                 ViewerInteger* widget = new ViewerInteger(pid, property.readOnly(), 1, 0, 0xFFFFFF);
                 QObject::connect(widget , &ViewerProperty::newValueRequestedFor  ,
                                  this   , &SpyWidgetBody ::onNewValueRequestedFor);
-          
-                new_widget = qobject_cast<QWidget*>(widget);     
-
+                new_widget = qobject_cast<QWidget*>(widget);
                 break;
             }
+
+            case Tbool:
+            {
+                ViewerBool* widget = new ViewerBool(pid, property.readOnly());
+                QObject::connect(widget , &ViewerProperty::newValueRequestedFor  ,
+                                 this   , &SpyWidgetBody ::onNewValueRequestedFor);
+                new_widget = qobject_cast<QWidget*>(widget);
+                break;
+            }
+            
             
     // Tint,
 

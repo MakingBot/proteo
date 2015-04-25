@@ -25,7 +25,7 @@ using namespace proteo::core;
  *
  * */
 Object::Object(std::string name)
-    : m_oName(name), m_oSignals(new ObjSignals())
+    : m_oName(name), m_oMutex(new ObjMutex()), m_oSignals(new ObjSignals())
 { }
 
 /* ============================================================================
@@ -33,7 +33,7 @@ Object::Object(std::string name)
  * */
 const std::string Object::objName() const
 {
-    //std::lock_guard<std::mutex> lock(m_mutex_identification);
+    std::lock_guard<std::mutex> lock(m_oMutex->id);
     return m_oName;
 }
 
@@ -42,16 +42,16 @@ const std::string Object::objName() const
  * */
 void Object::setObjName(const std::string name)
 {
-    //m_mutex_identification.lock();
+    m_oMutex->id.lock();
     if( m_oName.compare(name) != 0 )
     {
         m_oName = name;
-    //    m_mutex_identification.unlock();
+        m_oMutex->id.unlock();
         objSignals()->nameModified();
     }
     else
     {
-    //    m_mutex_identification.unlock();
+        m_oMutex->id.unlock();
     }
 }
 

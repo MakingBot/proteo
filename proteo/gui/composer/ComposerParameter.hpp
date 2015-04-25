@@ -1,7 +1,7 @@
-#ifndef GUIOBJECT_HPP
-#define GUIOBJECT_HPP
+#ifndef COMPOSERPARAMETER_HPP
+#define COMPOSERPARAMETER_HPP
 //!
-//! \file GuiObject.hpp
+//! \file ComposerParameter.hpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -19,66 +19,58 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <QWidget>
-#include <QSharedPointer>
-#include <proteo/core/Object.hpp>
+#include <QDir>
+#include <QList>
+#include <QStringList>
+#include "ScriptModule.hpp"
+
+
 
 namespace proteo { namespace gui {
 
-//! \class GuiObject
-//! \brief Gui model
+//! \class ComposerParameter
+//! \brief Menu of the composer widget
 //!
 //! \author [XR]MakingBot ( http://makingbot.fr )
 //!
-class GuiObject : public core::Object
+class ComposerParameter
 {
 
 public:
 
-    //! \brief Visible property id
+    //! \brief Size in pixel of the architecture scene
     //!
-    static const uint8_t IdPropertyVisible     = 0;
+    static const int CASE_PIXEL_SIZE = 300;
 
     //! \brief Default constructor
     //!
-    GuiObject(std::string name);
-
-    // ========================================================================
-    // => Constantes
-
-    //! \brief Role
-    //!
-    // static const core::ObjRole ORole;
+    ComposerParameter();
 
 
+    void refreshModuleList();
 
-    //! \brief Visible getter
-    //!
-    bool isVisible();
 
-    //! \brief Visible setter
-    //!
-    void setVisible(bool v);
+    void extractModules(const ScriptScope& scope);
 
-    //! \brief 
-    //!
-    // QSharedPointer<QWidget> uiWidget();
 
-    void show();
+
+    QList<ScriptModule>& modules()
+    {
+        return m_modules;
+    }
 
 protected:
 
-    //! \brief Visible property
+    //! \brief Path where proteo modules are stored
     //!
-    bool m_visible;
+    QString m_modulePath;
 
-    //! \brief widget
+    //! \brief List of availables modules on the system
     //!
-    QSharedPointer<QWidget> m_widget;
+    QList<ScriptModule> m_modules;
 
 };
 
-
 } // gui
 } // proteo
-#endif // GUIOBJECT_HPP
+#endif // COMPOSERPARAMETER_HPP

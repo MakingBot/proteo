@@ -47,21 +47,34 @@ bool GuiObject::isVisible()
  * */
 void GuiObject::setVisible(bool v)
 {
-    m_visible = v;
-    
-    if(!m_widget)
-    {
-        return;
-    }
+    // Check widget allocation    
+    // if(!m_widget)
+    // {
+    //     return;
+    // }
 
+    // Set the variable
+    m_visible = v;
+
+    // Command the widget
     if(m_visible)
     {
-       // m_widget->show();
+
+        std::cout << "vis = true" << std::endl;
+
+        //show();
+        m_widget->show();
     }
     else
     {
         m_widget->hide();
     }
+}
+
+
+void GuiObject::show()
+{
+    m_widget->show();  
 }
 
 /* ============================================================================

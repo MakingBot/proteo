@@ -1,7 +1,7 @@
-#ifndef COMPOSERWIDGET_HPP
-#define COMPOSERWIDGET_HPP
+#ifndef COMPOSERMENU_HPP
+#define COMPOSERMENU_HPP
 //!
-//! \file ComposerWidget.hpp
+//! \file ComposerMenu.hpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -20,62 +20,46 @@
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QWidget>
-#include <QSplitter>
-#include <proteo/gui/Composer.hpp>
-
-#include "ComposerMenu.hpp"
-#include "ComposerView.hpp"
-#include "ComposerEditor.hpp"
-#include "ComposerParameter.hpp"
+#include <QTabWidget>
+#include "ComposerMenuObjects.hpp"
+#include "ComposerMenuModules.hpp"
 
 namespace proteo { namespace gui {
 
-//! \class ComposerWidget
-//! \brief Widget of the composer object
+//! \class ComposerMenu
+//! \brief Menu of the composer widget
 //!
 //! \author [XR]MakingBot ( http://makingbot.fr )
 //!
-class ComposerWidget : public QWidget
+class ComposerMenu : public QWidget
 {
     Q_OBJECT
 
 public:
 
-    //! \brief Default constructor
-    //!
-    explicit ComposerWidget();
-
-signals:
-
-public slots:
+    ComposerMenu(QSharedPointer<ComposerParameter> parameter);
 
 protected:
 
-    //! \brief
+    //! \brief Tab container
     //!
-    QSplitter m_splitter;
+    QTabWidget m_tabContainer;
 
-    //! \brief Parameter used for the composer
-    //!
+    // tabwidget 
+    // Modules
+    // Objects
+
+
+
     QSharedPointer<ComposerParameter> m_parameter;
 
-    //! \brief Object menu
-    //!
-    ComposerMenu m_menu;
 
-    //! \brief Software architecture view
-    //!
-    ComposerView m_view;
+    ComposerMenuObjects m_tabObjects;
 
-    //! \brief Script editor
-    //!
-    ComposerEditor m_editor;
-
-
-
+    ComposerMenuModules m_tabModules;
 
 };
 
 } // gui
 } // proteo
-#endif // COMPOSERWIDGET_HPP
+#endif // COMPOSERMENU_HPP
