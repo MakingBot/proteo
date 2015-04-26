@@ -18,6 +18,136 @@
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "ComposerScene.hpp"
+#include <proteo/gui/Composer.hpp>
+
+#include <QMimeData>
+#include <QGraphicsSceneDragDropEvent>
+
+using namespace proteo;
+using namespace proteo::gui;
 
 
+/* ============================================================================
+ *
+ * */
+ComposerScene::ComposerScene(Composer* c, QSharedPointer<ComposerParameter> parameter)
+    : QGraphicsScene()
+    , m_composer (c)
+    , m_parameter(parameter)
+{
+    // Check new connections
+    m_composer->objSignals()->newConnection.connect( boost::bind(&ComposerScene::refreshGrid, this) );
+
+
+}
+
+
+/* ============================================================================
+ *
+ * */
+void ComposerScene::refreshGrid()
+{
+    // Delete old grid
+    m_crossPoints.clear();
+
+    // Get the size of the container
+    boost::shared_ptr<core::Object> container = m_composer->container();
+    if(!container)
+    {
+        return;
+    }
+
+    // Get size
+    const float w = container->objSize().width();
+    const float h = container->objSize().height();
+
+    const float w2= w/2.0f;
+    const float h2= h/2.0f;
+
+    // 
+    for(float xcase = -w2 ; xcase <= w2 ; xcase++)
+    {
+        for(float ycase = -h2 ; ycase <= h2 ; ycase++)
+        {
+            QSharedPointer<ItemCrossPoint> point(new ItemCrossPoint());
+            point->setPos( xcase * (float)ComposerParameter::CASE_PIXEL_SIZE
+                         , ycase * (float)ComposerParameter::CASE_PIXEL_SIZE ); 
+
+            m_crossPoints.append(point);
+            addItem( point.data() );
+        }
+    }
+}
+
+
+
+
+
+/* ============================================================================
+ *
+ * */
+void ComposerScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
+{
+    if (event->mimeData()->hasText())
+    {
+        event->setAccepted(true);
+        
+        // _dragOver = true;
+
+        // update();
+
+        std::cout << "in" << std::endl;
+    }
+    else
+    {
+        event->setAccepted(false);
+    }
+}
+
+/* ============================================================================
+ *
+ * */
+void ComposerScene::dragLeaveEvent(QGraphicsSceneDragDropEvent *event)
+{
+    Q_UNUSED(event);
+
+    // _dragOver = false;
+
+        std::cout << "out" << std::endl;
+    // update();
+}
+
+/* ============================================================================
+ *
+ * */
+void ComposerScene::dragMoveEvent(QGraphicsSceneDragDropEvent* event)
+{
+    if (event->mimeData()->hasText())
+    {
+        event->setAccepted(true);
+    }
+    else
+    {
+        event->setAccepted(false);
+    }
+}
+
+/* ============================================================================
+ *
+ * */
+void ComposerScene::dropEvent(QGraphicsSceneDragDropEvent *event)
+{
+    // If has text -> block creation
+    if ( event->mimeData()->hasText() )
+    {
+        // Get the requested block name
+        QString type = event->mimeData()->text();
+
+        // Request the block creation
+        emit requestTopObjectCreation(event->scenePos(), type);
+
+        // Accept the drop
+        event->setAccepted(true);
+    }
+}
 

@@ -21,6 +21,8 @@
 
 #include <QGraphicsItem>
 
+#include "ComposerParameter.hpp"
+
 namespace proteo { namespace gui {
 
 
@@ -41,6 +43,16 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 
+protected:
+
+    //! \brief Bounding rectangle
+    //!
+    QRectF m_bounding;
+
+
+    //! \brief Update the item geometry
+    //!
+    void updateGeometry();
 
 };
 
@@ -50,7 +62,11 @@ public:
 inline ItemCrossPoint::ItemCrossPoint()
     : QGraphicsItem()
 {
-
+    // Define flags
+    setFlag(ItemSendsGeometryChanges);
+    
+    // First update
+    updateGeometry();
 }
 
 

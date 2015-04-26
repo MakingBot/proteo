@@ -102,6 +102,9 @@ SET(PROJECT_SOURCE_FILES
     wrapper/py/gui/wrapper_gui_guiobject.cpp
     )
 
+# Append ressources
+QT5_ADD_RESOURCES( proteo/gui/rsc/ressources.qrc )
+
 # Define the wrapper library that wraps our library
 ADD_LIBRARY( ${MODULE_NAME} SHARED 
     ${PROJECT_SOURCE_FILES} 

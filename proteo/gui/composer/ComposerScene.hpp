@@ -21,8 +21,13 @@
 
 #include <QWidget>
 #include <QGraphicsScene>
+
+#include "ItemCrossPoint.hpp"
+#include "ComposerParameter.hpp"
     
 namespace proteo { namespace gui {
+
+class Composer;
 
 //! \class ComposerScene
 //! \brief Menu of the composer widget
@@ -37,24 +42,58 @@ public:
 
     //! \brief Default constructor
     //!
-    ComposerScene();
+    ComposerScene(Composer* c, QSharedPointer<ComposerParameter> parameter);
+
+
+public slots:
+
+    void refreshGrid();
+
+
+signals:
+
+    void requestTopObjectCreation(const QPointF& scenePos, const QString& type);
 
 protected:
 
 
+    //! \brief Cross points that compose the grid
+    //!
+    QList<QSharedPointer<ItemCrossPoint> > m_crossPoints;
+
+
+
+    //! \brief Composer object
+    //!
+    Composer* m_composer;
+
+    //! \brief Composer parameters
+    //!
+    QSharedPointer<ComposerParameter> m_parameter;
+
+    // ========================================================================
+    // => QGraphicsScene
+
+    //! FROM QGraphicsScene
+    //!
+    void dragEnterEvent(QGraphicsSceneDragDropEvent *event) Q_DECL_OVERRIDE;
+
+    //! FROM QGraphicsScene
+    //!
+    void dragLeaveEvent(QGraphicsSceneDragDropEvent *event) Q_DECL_OVERRIDE;
+
+    //! FROM QGraphicsScene
+    //!
+    void dragMoveEvent(QGraphicsSceneDragDropEvent* event);
+
+    //! FROM QGraphicsScene
+    //!
+    void dropEvent(QGraphicsSceneDragDropEvent *event) Q_DECL_OVERRIDE;
 
 
 };
 
 
-/* ============================================================================
- *
- * */
-inline ComposerScene::ComposerScene()
-    : QGraphicsScene()
-{
-
-}
 
 
 } // gui

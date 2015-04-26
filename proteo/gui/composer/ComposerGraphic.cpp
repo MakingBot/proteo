@@ -26,6 +26,7 @@
 
 using namespace proteo;
 using namespace proteo::gui;
+using namespace proteo::core;
 
 /* ============================================================================
  *
@@ -69,12 +70,22 @@ void ComposerGraphic::refreshBarInfo()
     boost::shared_ptr<core::Object> container = m_composer->container();
     if(container)
     {
+        // Container must have a non-null size
+        if( container->objSize() == ObjSize(0,0) )
+        {
+            container->setObjSize(ObjSize(11,11));
+            emit gridSizeModified();
+        }
+        container->setObjPosition(ObjPosition(0,0));
+
+        // Update fields
         m_boxName.setText(QString(container->objName().c_str()));
-        m_boxWidth.setValue(0);
-        m_boxHeight.setValue(0);
+        m_boxWidth.setValue(container->objSize().width());
+        m_boxHeight.setValue(container->objSize().height());
     }
     else
     {
+        // Update fields
         m_boxName.setText("No container connected");
         m_boxWidth.setValue(0);
         m_boxHeight.setValue(0);
@@ -82,4 +93,10 @@ void ComposerGraphic::refreshBarInfo()
 }
 
 
+
+
+void ComposerGraphic::setScene(QSharedPointer<ComposerScene> scene)
+{
+    m_view.setScene(scene.data());
+}
 

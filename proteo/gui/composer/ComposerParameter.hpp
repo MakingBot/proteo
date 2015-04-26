@@ -39,11 +39,21 @@ public:
 
     //! \brief Size in pixel of the architecture scene
     //!
-    static const int CASE_PIXEL_SIZE = 300;
+    static constexpr int CASE_PIXEL_SIZE = 200;
+
+    //! \brief
+    //!
+    static constexpr int CASE_PIXEL_PADDING = 50;
+
+    //! \brief Define the diameter of the cross point in function of the case pixel size
+    //! diameter = CASE_PIXEL_SIZE * CROSS_POINT_RATIO
+    //!
+    static constexpr float CROSS_POINT_RATIO = 0.05f;
 
     //! \brief Default constructor
     //!
     ComposerParameter();
+
 
 
     void refreshModuleList();

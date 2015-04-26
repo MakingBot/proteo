@@ -32,7 +32,7 @@ using namespace proteo::gui;
 ComposerWidget::ComposerWidget(Composer* c)
     : QWidget()
     , m_parameter   (new ComposerParameter())
-    , m_scene       (new ComposerScene())
+    , m_scene       (new ComposerScene(c, m_parameter))
     , m_splitter    (Qt::Horizontal)
     , m_menu        (c, m_parameter)
     , m_graphic     (c, m_parameter)
@@ -46,8 +46,56 @@ ComposerWidget::ComposerWidget(Composer* c)
     m_splitter.insertWidget(1, &m_graphic   );
     m_splitter.insertWidget(2, &m_editor    );
 
-    // Set a minimum height
-    setMinimumHeight(600);
+    // Window configuration
+    setWindowTitle("Composer");
+    setMinimumSize(1024 , 800);
+
+    // Attach the scene to the view
+    m_graphic.setScene(m_scene);
+
+
+    connect(&m_graphic, SIGNAL(gridSizeModified()), m_scene.data(), SLOT(refreshGrid()));
+
 }
 
+/* ============================================================================
+ *
+ * */
+void ComposerWidget::onRequestTopObjectCreation(const QPointF& scenePos, const QString& type)
+{
+
+
+}
+
+/* ============================================================================
+ *
+ * */
+void ComposerWidget::wheelEvent(QWheelEvent* event)
+{
+
+}
+
+/* ============================================================================
+ *
+ * */
+void ComposerWidget::closeEvent(QCloseEvent* event)
+{
+
+}
+
+/* ============================================================================
+ *
+ * */
+void ComposerWidget::keyPressEvent(QKeyEvent* event)
+{
+
+}
+
+/* ============================================================================
+ *
+ * */
+void ComposerWidget::keyReleaseEvent(QKeyEvent* event)
+{
+
+}
 

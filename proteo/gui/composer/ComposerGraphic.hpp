@@ -49,6 +49,13 @@ public:
 
     void refreshBarInfo();
 
+
+    void setScene(QSharedPointer<ComposerScene> scene);
+
+signals:
+
+    void gridSizeModified();
+
 protected:
 
     //! \brief

@@ -20,17 +20,46 @@
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QGraphicsItemGroup>
+#include <proteo/core/Object.hpp>
+
+#include "ComposerParameter.hpp"
 
 namespace proteo { namespace gui {
 
 
 
-class ItemObject : public QGraphicsItemGroup
+class ItemObject : public QObject, public QGraphicsItemGroup
 {
+    Q_OBJECT
 
 public:
 
+    enum ItemCorner { ICTopLeft, ICBotLeft, ICBotRight, ICTopRight };
 
+
+    ItemObject(boost::shared_ptr<core::Object> obj, QGraphicsItem* parent = 0);
+
+
+    //! FROM QGraphicsItem
+    QRectF boundingRect() const;
+
+    //! FROM QGraphicsItem
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+protected:
+
+    //! \brief Bounding rectangle
+    //!
+    QRectF m_bounding;
+
+    //! \brief Associated object
+    //!
+    boost::shared_ptr<core::Object> m_object;
+
+
+    //! \brief Update the item geometry
+    //!
+    void updateGeometry();
 
 };
 

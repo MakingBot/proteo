@@ -51,6 +51,10 @@ signals:
 
 public slots:
 
+
+    void onRequestTopObjectCreation(const QPointF& scenePos, const QString& type);
+    
+
 protected:
 
     //! \brief Parameter used for the composer
@@ -80,6 +84,26 @@ protected:
     //! \brief Composer object
     //!
     Composer* m_composer;
+
+    // ========================================================================
+    // => QWidget
+
+    //! FROM QWidget
+    //!
+    void wheelEvent(QWheelEvent* event);
+
+    //! FROM QWidget
+    //!
+    void closeEvent(QCloseEvent* event);
+
+    //! FROM QWidget
+    //!
+    void keyPressEvent(QKeyEvent* event);
+    
+    //! FROM QWidget
+    //!
+    void keyReleaseEvent(QKeyEvent* event);
+
 
 };
 

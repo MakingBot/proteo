@@ -26,12 +26,13 @@
 using namespace proteo;
 using namespace proteo::gui;
 
+
 /* ============================================================================
  *
  * */
 QRectF ItemCrossPoint::boundingRect() const
 {
-
+    return m_bounding;
 }
 
 /* ============================================================================
@@ -39,6 +40,33 @@ QRectF ItemCrossPoint::boundingRect() const
  * */
 void ItemCrossPoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    
+    Q_UNUSED(option);
+    Q_UNUSED(widget);
+
+    // Activate antialiasing
+    painter->setRenderHints(painter->renderHints() | QPainter::Antialiasing);
+
+
+    painter->setBrush( Qt::SolidPattern  );
+    painter->setBrush( QBrush("#000000") );
+    painter->drawEllipse( m_bounding );
+
 }
 
+/* ============================================================================
+ *
+ * */
+void ItemCrossPoint::updateGeometry()
+{
+    prepareGeometryChange();
+
+    const float diameter = (float)ComposerParameter::CASE_PIXEL_SIZE * (float)ComposerParameter::CROSS_POINT_RATIO;
+    const int coef = -(diameter/2.0f);
+    
+    // std::cout << (float)ComposerParameter::CASE_PIXEL_SIZE << std::endl;
+    // std::cout << (float)ComposerParameter::CROSS_POINT_RATIO << std::endl;
+    // std::cout << diameter << std::endl;
+    // std::cout << coef << std::endl;
+
+    m_bounding = QRectF( coef, coef, diameter,diameter);
+}

@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file alias="magnifier">icon/magnifier.svg</file>
+        <file alias="plug">icon/plug.svg</file>
+        <file alias="spy">icon/spy.svg</file>
+    </qresource>
+</RCC>

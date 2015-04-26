@@ -31,7 +31,7 @@ ObjSize::ObjSize(uint32_t w, uint32_t h)
 /* ============================================================================
  *
  * */
-uint32_t ObjSize::width()
+uint32_t ObjSize::width() const
 {
     return m_width;
 }
@@ -47,7 +47,7 @@ void ObjSize::setWidth(uint32_t w)
 /* ============================================================================
  *
  * */
-uint32_t ObjSize::height()
+uint32_t ObjSize::height() const
 {
     return m_height;
 }
@@ -63,6 +63,18 @@ void ObjSize::setHeight(uint32_t h)
 /* ============================================================================
  *
  * */
+bool ObjSize::operator==(const ObjSize& s)
+{
+    if( (m_width == s.width()) && (m_height == s.height()) )
+    {
+        return true;
+    }
+    return false;
+}
+
+/* ============================================================================
+ *
+ * */
 ObjPosition::ObjPosition(uint32_t x, uint32_t y)
     : m_x(x), m_y(y)
 { }
@@ -70,7 +82,7 @@ ObjPosition::ObjPosition(uint32_t x, uint32_t y)
 /* ============================================================================
  *
  * */
-uint32_t ObjPosition::x()
+uint32_t ObjPosition::x() const
 {
     return m_x;
 }
@@ -86,7 +98,7 @@ void ObjPosition::setX(uint32_t x)
 /* ============================================================================
  *
  * */
-uint32_t ObjPosition::y()
+uint32_t ObjPosition::y() const
 {
     return m_y;
 }

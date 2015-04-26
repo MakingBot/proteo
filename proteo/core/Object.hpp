@@ -35,10 +35,12 @@ public:
     //! \brief Default constructor
     //!
     ObjSize(uint32_t w = 0, uint32_t h = 0);
-    uint32_t width();
+    uint32_t width() const;
     void setWidth(uint32_t w);
-    uint32_t height();
+    uint32_t height() const;
     void setHeight(uint32_t h);
+
+    bool operator==(const ObjSize& p);
 
 protected:
 
@@ -62,10 +64,12 @@ public:
     //! \brief Default constructor
     //!
     ObjPosition(uint32_t x = 0, uint32_t y = 0);
-    uint32_t x();
+    uint32_t x() const;
     void setX(uint32_t x);
-    uint32_t y();
+    uint32_t y() const;
     void setY(uint32_t y);
+
+    // void operator==(ObjPosition& p);
 
 protected:
 
