@@ -21,6 +21,7 @@
 
 #include <proteo/core/Variant.hpp>
 #include <proteo/core/Property.hpp>
+#include <proteo/core/CodeStream.hpp>
 
 namespace proteo { namespace core {
 
@@ -299,6 +300,14 @@ public:
     //! \brief
     //!
     virtual const std::vector<Property>& properties() const = 0;
+
+    // ========================================================================
+    // => Object conversion
+
+    //! \brief To convert his object to code
+    //! This function should be re-implemented in wrappers
+    //!
+    virtual void codify(CodeStream& code_stream);
 
 protected:
 

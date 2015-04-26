@@ -449,3 +449,11 @@ bool Object::setPropertyActivity(uint8_t id, bool b)
     m_oActiveProperties[id] = (int)b;
 }
 
+/* ============================================================================
+ *
+ * */
+void Object::codify(CodeStream& code_stream)
+{
+
+}
+

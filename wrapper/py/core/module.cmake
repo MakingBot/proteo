@@ -27,6 +27,7 @@ SET(PROJECT_SOURCE_FILES
     wrapper/py/core/wrapper_core_objposition.cpp
     wrapper/py/core/wrapper_core_container.cpp
 
+    wrapper/py/core/wrapper_core_codestream.cpp
     )
 
 # Define the wrapper library that wraps our library
