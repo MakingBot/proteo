@@ -22,6 +22,7 @@
 #include <QWidget>
 #include <QGraphicsScene>
 
+#include "ItemObject.hpp"
 #include "ItemCrossPoint.hpp"
 #include "ComposerParameter.hpp"
     
@@ -61,6 +62,8 @@ protected:
     //!
     QList<QSharedPointer<ItemCrossPoint> > m_crossPoints;
 
+
+    QList<QSharedPointer<ItemObject> > m_objects;
 
 
     //! \brief Composer object

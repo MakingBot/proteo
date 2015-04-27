@@ -65,6 +65,8 @@ public:
 
 
 
+    Composer* composer() { return m_composer; }
+
     std::list<core::ScriptModule>& modules()
     {
         return m_modules;

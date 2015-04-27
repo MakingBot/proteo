@@ -27,6 +27,10 @@ using namespace proteo;
 using namespace proteo::gui;
 
 
+
+#include <boost/python.hpp>
+using namespace boost::python;
+
 /* ============================================================================
  *
  * */
@@ -143,8 +147,45 @@ void ComposerScene::dropEvent(QGraphicsSceneDragDropEvent *event)
         // Get the requested block name
         QString type = event->mimeData()->text();
 
+
+        std::cout << "drop " << type.toStdString() << std::endl;
+
         // Request the block creation
-        emit requestTopObjectCreation(event->scenePos(), type);
+        // emit requestTopObjectCreation(event->scenePos(), type);
+
+
+        // Retrieve the main module.
+        object main = import("__main__");
+
+        // Retrieve the main module's namespace
+        object global(main.attr("__dict__"));
+
+        //
+        QString object_creation = type.toLower() + QString(" = ") + type + "('" + type.toLower() + "')";
+        std::cout << "exec: " << object_creation.toStdString() << std::endl;
+        exec(object_creation.toStdString().c_str());
+
+
+        // Define greet function in Python.
+        object result = eval(type.toLower().toStdString().c_str(), global, global);
+
+
+        boost::shared_ptr<core::Object> temp = extract< boost::shared_ptr<core::Object> >(result);
+
+        m_parameter->composer()->container()->append(temp);
+
+        QSharedPointer<ItemObject> item( new ItemObject( temp) );
+        item->setPos(event->scenePos());
+
+        std::cout << "Pos: " << item->pos().x() << "  "  << item->pos().y() << std::endl;
+
+        addItem( item.data() );
+
+
+        m_objects << item;
+
+        //std::cout << "Res: " << temp->objName() << std::endl;
+
 
         // Accept the drop
         event->setAccepted(true);

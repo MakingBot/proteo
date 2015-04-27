@@ -43,7 +43,7 @@ ItemObject::ItemObject(boost::shared_ptr<core::Object> obj, QGraphicsItem* paren
     setFlag(ItemIsSelectable);
     setFlag(ItemSendsGeometryChanges);
 
-
+    updateGeometry();
 }
 
 
@@ -68,7 +68,7 @@ void ItemObject::paint(QPainter* painter, const QStyleOptionGraphicsItem* option
 
 
     painter->setBrush( Qt::SolidPattern  );
-    painter->setBrush( QBrush("#000000") );
+    painter->setBrush( QBrush("#FF4444") );
     painter->drawRoundedRect( m_bounding, 10, 10 );
 }
 
@@ -86,8 +86,8 @@ void ItemObject::updateGeometry()
 
     // std::cout << (float)ComposerParameter::CASE_PIXEL_SIZE << std::endl;
     // std::cout << (float)ComposerParameter::CROSS_POINT_RATIO << std::endl;
-    // std::cout << diameter << std::endl;
-    // std::cout << coef << std::endl;
+    std::cout << diameter << std::endl;
+    std::cout << coef << std::endl;
 
 
     m_bounding = QRectF( coef, coef, diameter,diameter);
