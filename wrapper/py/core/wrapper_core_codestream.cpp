@@ -17,6 +17,7 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <proteo/core/Object.hpp>
 #include <proteo/core/CodeStream.hpp>
 
 using namespace proteo::core;
@@ -53,6 +54,30 @@ CodeStream& operator<< (CodeStream& cs, const char* s)
 CodeStream& operator<< (CodeStream& cs, const std::string& s)
 {
     cs.currentStream() << s;
+
+    return cs;
+}
+
+/* ============================================================================
+ *
+ * */
+CodeStream& operator<< (CodeStream& cs, boost::shared_ptr<Object> o)
+{
+    cs.setCurrentSection(CodeStream::SectionCreation);
+    cs << o->objName() << " = " << o->objType() << "('" << o->objName() << "')" << "\n";
+
+
+
+    // cs.setCurrentSection(CodeStream::SectionConnection);
+    // if( o->nbObjChilds() > 0  )
+    // {
+        // std::map<std::string, boost::shared_ptr<Object> >& childs = o->objChilds();
+
+        // std::map<std::string, boost::shared_ptr<Object> >::iterator child;
+
+        // for (child=childs.begin(); child!=childs.end(); ++child)
+        //     cs << child->second;
+    //}
 
     return cs;
 }

@@ -58,6 +58,10 @@ public:
     //!
     virtual const core::Object::TagArray& objTag() const;
 
+
+    virtual const char* objType() const { return "Container"; }
+
+
     //! \brief FROM Object
     //!
     virtual const std::vector<core::Property>& properties() const;

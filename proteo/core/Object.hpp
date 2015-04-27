@@ -141,6 +141,8 @@ public:
     //!
     virtual const TagArray& objTag() const = 0;
 
+    virtual const char* objType() const { return "NotDefined"; }
+
     // ========================================================================
     // => Object dynamic identification
 
@@ -202,6 +204,10 @@ public:
     //! \brief Break the link between the object and its parent
     //!
     void resetObjParent();
+
+
+    std::map<std::string, boost::shared_ptr<Object> >& objChilds() { return m_oChilds; }
+
 
     //! \brief Get the number of childs
     //!

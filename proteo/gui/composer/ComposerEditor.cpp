@@ -58,6 +58,7 @@ void ComposerEditor::onModuleListModified()
 {
     CodeStream cs;
     cs << m_parameter->modules();
+    cs << m_parameter->composer()->container();
 
     m_editor.setText(QString(cs.code().c_str()));
 }

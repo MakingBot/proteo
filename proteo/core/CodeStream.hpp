@@ -22,9 +22,15 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+
+#include <boost/shared_ptr.hpp>
+
 #include "ScriptModule.hpp"
 
+
 namespace proteo { namespace core {
+
+class Object;
 
 class CodeStream
 {
@@ -90,6 +96,8 @@ proteo::core::CodeStream& operator<< (proteo::core::CodeStream& cs, bool a);
 proteo::core::CodeStream& operator<< (proteo::core::CodeStream& cs, const char* s);
 
 proteo::core::CodeStream& operator<< (proteo::core::CodeStream& cs, const std::string& s);
+
+proteo::core::CodeStream& operator<< (proteo::core::CodeStream& cs, boost::shared_ptr<proteo::core::Object> o);
 
 proteo::core::CodeStream& operator<< (proteo::core::CodeStream& cs, const proteo::core::ScriptModule& m);
 
