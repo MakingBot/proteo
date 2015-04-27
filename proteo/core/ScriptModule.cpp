@@ -1,5 +1,5 @@
 //!
-//! \file CodeStream.cpp
+//! \file ScriptModule.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -17,34 +17,19 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "CodeStream.hpp"
+
+#include "ScriptModule.hpp"
 
 using namespace proteo::core;
 
-/* ============================================================================
- *
- * */
-CodeStream::CodeStream()
-    : m_currentSection(SectionImport)
-{ }
-
 
 /* ============================================================================
  *
  * */
-std::string CodeStream::code()
+std::string ScriptModule::toDotChain() const
 {
-    std::stringstream code;
-
-    code << m_sectionImport.str();
-    code << "\n"; 
-    code << m_sectionCreation.str();
-    code << "\n"; 
-    code << m_sectionConnection.str();
-    code << "\n"; 
-    code << m_sectionActivation.str();
-    code << "\n";
-
-    return code.str();
+    return m_scope.toDotChain() + '.' + m_name;
 }
+
+
 

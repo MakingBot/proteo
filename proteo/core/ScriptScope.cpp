@@ -1,5 +1,5 @@
 //!
-//! \file ScriptModule.cpp
+//! \file ScriptScope.cpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -17,46 +17,50 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "ScriptModule.hpp"
 
-using namespace proteo;
-using namespace proteo::gui;
+#include "ScriptScope.hpp"
+
+using namespace proteo::core;
 
 
 /* ============================================================================
  *
  * */
-QString ScriptScope::toPathChain() const
+std::string ScriptScope::toPathChain() const
 {
-    QString path_chain;
-    foreach(const QString& scope, m_scopeChain)
+    std::string path_chain;
+    for(const std::string& scope : m_scopeChain)
     {
         path_chain += scope;
-        path_chain += QDir::separator();    
+        #ifdef _WIN32
+        path_chain += '/';
+        #else
+        path_chain += '/';
+        #endif
+        // #include <boost/filesystem.hpp>
+        // std::cout << boost::filesystem::path::preferred_separator 
     }
-    path_chain.remove( path_chain.size()-1 , 1 );
+
+    std::cout << "== " << path_chain << std::endl;
+    
+    if(!path_chain.empty())
+    {
+        path_chain.pop_back();
+    }
     return path_chain;
 }
 
 /* ============================================================================
  *
  * */
-QString ScriptScope::toDotChain() const
+std::string ScriptScope::toDotChain() const
 {
-    QString path_chain;
-    foreach(const QString& scope, m_scopeChain)
+    std::string dot_chain;
+    for(const std::string& scope : m_scopeChain)
     {
-        path_chain += scope;
-        path_chain += '.';    
+        dot_chain += scope;
+        dot_chain += '.';
     }
-    path_chain.remove( path_chain.size()-1 , 1 );
-    return path_chain;
-}
-
-/* ============================================================================
- *
- * */
-QString ScriptModule::toDotChain() const
-{
-    return m_scope.toDotChain() + '.' + m_name;
+    dot_chain.pop_back();
+    return dot_chain;
 }

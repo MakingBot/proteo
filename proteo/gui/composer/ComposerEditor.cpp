@@ -24,6 +24,7 @@
 
 using namespace proteo;
 using namespace proteo::gui;
+using namespace proteo::core;
 
 /* ============================================================================
  *
@@ -41,7 +42,23 @@ ComposerEditor::ComposerEditor(Composer* c, QSharedPointer<ComposerParameter> pa
 
     lay->addWidget(&m_editor, 0, 0);
 
-    
+
+    // Connect the box signal
+    connect(m_parameter.data()  , &ComposerParameter::moduleListModified    ,
+            this                , &ComposerEditor::onModuleListModified );
+
+
+    new ComposerEditorHighlighter(m_editor.document());
 }
 
+/* ============================================================================
+ *
+ * */
+void ComposerEditor::onModuleListModified()
+{
+    CodeStream cs;
+    cs << m_parameter->modules();
+
+    m_editor.setText(QString(cs.code().c_str()));
+}
 

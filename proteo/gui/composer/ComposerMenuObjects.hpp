@@ -72,7 +72,7 @@ protected:
 
     //!
     //!
-    void extractObjectFromModule(ScriptModule& module);
+    void extractObjectFromModule(core::ScriptModule& module);
 
 };
 

@@ -22,6 +22,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include "ScriptModule.hpp"
 
 namespace proteo { namespace core {
 
@@ -64,6 +65,9 @@ public:
         }
     }
 
+
+    std::string code();
+
 protected:
 
     Section m_currentSection;
@@ -81,5 +85,14 @@ protected:
 //! \brief Append the code for a bool
 //!
 proteo::core::CodeStream& operator<< (proteo::core::CodeStream& cs, bool a);
+
+
+proteo::core::CodeStream& operator<< (proteo::core::CodeStream& cs, const char* s);
+
+proteo::core::CodeStream& operator<< (proteo::core::CodeStream& cs, const std::string& s);
+
+proteo::core::CodeStream& operator<< (proteo::core::CodeStream& cs, const proteo::core::ScriptModule& m);
+
+proteo::core::CodeStream& operator<< (proteo::core::CodeStream& cs, const std::list<proteo::core::ScriptModule>& ms);
 
 #endif // CODESTREAM_HPP

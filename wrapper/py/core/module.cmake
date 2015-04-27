@@ -11,6 +11,8 @@ SET(PROJECT_HEADER_FILES
     proteo/core/Container.hpp
     proteo/core/SharedCout.hpp
 
+    proteo/core/ScriptScope.hpp
+    proteo/core/ScriptModule.hpp
     )
 
 # Sources
@@ -20,6 +22,12 @@ SET(PROJECT_SOURCE_FILES
     proteo/core/Object.cpp
     proteo/core/Container.cpp
     proteo/core/SharedCout.cpp
+
+    proteo/core/CodeStream.cpp
+    proteo/core/ScriptScope.cpp
+    proteo/core/ScriptModule.cpp
+
+
 
     wrapper/py/core/wrapper_core.cpp
     wrapper/py/core/wrapper_core_object.cpp

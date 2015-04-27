@@ -19,53 +19,12 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <QDir>
-#include <QString>
-#include <QStringList>
+#include "ScriptScope.hpp"
 
-#include <iostream>
 #include <boost/python.hpp>
 using namespace boost::python;
 
-namespace proteo { namespace gui {
-
-//! \class ScriptScope
-//! \brief 
-//!
-//! \author [XR]MakingBot ( http://makingbot.fr )
-//!
-class ScriptScope
-{
-
-public:
-
-    //! \brief Default constructor
-    //!
-    inline ScriptScope(const QString& base = "");
-
-    //! \brief Scope name list to path chain 'path/to/scope'
-    //!
-    QString toPathChain() const;
-
-    //! \brief Scope name list to dot chain 'path.to.scope'
-    //!
-    QString toDotChain() const;
-
-protected:
-
-    //! \brief List of scope namespace
-    //!
-    QStringList m_scopeChain;
-
-};
-
-/* ============================================================================
- *
- * */
-inline ScriptScope::ScriptScope(const QString& base)
-{
-    m_scopeChain = base.split('.');
-}
+namespace proteo { namespace core {
 
 //! \class ScriptModule
 //! \brief 
@@ -79,23 +38,23 @@ public:
 
     //! \brief Default constructor
     //!
-    inline ScriptModule(const QString& name, const ScriptScope& scope);
+    inline ScriptModule(const std::string& name, const ScriptScope& scope);
 
     //! \brief Import flag getter
     //!
-    inline bool isImported();
+    inline bool isImported()const;
     
     //! \brief Import flag setter
     //!
-    inline void setImported(bool imp);
+    inline void setImported(bool imp) ;
 
     //! \brief Name getter
     //!
-    inline const QString& name();
+    inline const std::string& name() const;
 
     //! \brief Name setter
     //!
-    inline void setName(const QString& n);
+    inline void setName(const std::string& n);
 
     //! \brief Scope getter
     //!
@@ -107,7 +66,7 @@ public:
 
     //! \brief Scope name list to dot chain 'path.to.scope'
     //!
-    QString toDotChain() const;
+    std::string toDotChain() const;
 
 protected:
 
@@ -117,7 +76,7 @@ protected:
 
     //! \brief Module name
     //!
-    QString m_name;
+    std::string m_name;
 
     //! \brief Module scope
     //!
@@ -125,7 +84,10 @@ protected:
 
 };
 
-inline ScriptModule::ScriptModule(const QString& name, const ScriptScope& scope)
+/* ============================================================================
+ *
+ * */
+inline ScriptModule::ScriptModule(const std::string& name, const ScriptScope& scope)
     : m_imported(false)
     , m_name(name)
     , m_scope(scope)
@@ -134,7 +96,7 @@ inline ScriptModule::ScriptModule(const QString& name, const ScriptScope& scope)
 /* ============================================================================
  *
  * */
-inline bool ScriptModule::isImported()
+inline bool ScriptModule::isImported() const
 {
     return m_imported;
 }
@@ -147,18 +109,17 @@ inline void ScriptModule::setImported(bool imp)
     m_imported = imp;
     if(m_imported)
     {
-        object result = import(toDotChain().toStdString().c_str());
+        //object result = import(toDotChain().toStdString().c_str());
 
-        QString import_cmd = QString("from ") + toDotChain() + QString(" import *");
-        exec(import_cmd.toStdString().c_str());
-
+        std::string import_cmd = "from " + toDotChain() + " import *";
+        exec(import_cmd.c_str());
     }
 }
 
 /* ============================================================================
  *
  * */
-inline const QString& ScriptModule::name()
+inline const std::string& ScriptModule::name() const
 {
     return m_name;
 }
@@ -166,7 +127,7 @@ inline const QString& ScriptModule::name()
 /* ============================================================================
  *
  * */
-inline void ScriptModule::setName(const QString& n)
+inline void ScriptModule::setName(const std::string& n)
 {
     m_name = n;
 }
@@ -187,8 +148,8 @@ inline void ScriptModule::setScope(const ScriptScope& s)
     m_scope = s;
 }
 
-} // gui
+
+
+} // core
 } // proteo
 #endif // SCRIPTMODULE_HPP
-
-

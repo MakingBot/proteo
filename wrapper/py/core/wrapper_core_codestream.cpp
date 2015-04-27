@@ -37,3 +37,47 @@ CodeStream& operator<< (CodeStream& cs, bool a)
     return cs;
 }
 
+/* ============================================================================
+ *
+ * */
+CodeStream& operator<< (CodeStream& cs, const char* s)
+{
+    cs.currentStream() << s;
+
+    return cs;
+}
+
+/* ============================================================================
+ *
+ * */
+CodeStream& operator<< (CodeStream& cs, const std::string& s)
+{
+    cs.currentStream() << s;
+
+    return cs;
+}
+
+/* ============================================================================
+ *
+ * */
+CodeStream& operator<< (CodeStream& cs, const ScriptModule& m)
+{
+    if(m.isImported())
+    {
+        cs.setCurrentSection(CodeStream::SectionImport);
+        cs << "from " << m.toDotChain() << " import * \n";
+    }
+    return cs;
+}
+
+/* ============================================================================
+ *
+ * */
+CodeStream& operator<< (CodeStream& cs, const std::list<ScriptModule>& ms)
+{
+    for(const ScriptModule &m : ms)
+    {
+        cs << m;
+    }
+    return cs;
+}

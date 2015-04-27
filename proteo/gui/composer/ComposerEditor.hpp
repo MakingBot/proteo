@@ -23,6 +23,7 @@
 #include <QTextEdit>
 
 #include "ComposerParameter.hpp"
+#include "ComposerEditorHighlighter.hpp"
 
 namespace proteo { namespace gui {
 
@@ -40,6 +41,15 @@ class ComposerEditor : public QWidget
 public:
 
     ComposerEditor(Composer* c, QSharedPointer<ComposerParameter> parameter);
+
+
+public slots:
+
+
+    //! \brief 
+    //!
+    void onModuleListModified();
+
 
 protected:
 

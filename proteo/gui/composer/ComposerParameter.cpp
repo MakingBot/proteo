@@ -21,6 +21,7 @@
 
 using namespace proteo;
 using namespace proteo::gui;
+using namespace proteo::core;
 
 
 #include <stdlib.h>
@@ -30,8 +31,9 @@ using namespace proteo::gui;
 /* ============================================================================
  *
  * */
-ComposerParameter::ComposerParameter()
+ComposerParameter::ComposerParameter(Composer* composer)
     : QObject()
+    , m_composer(composer)
 {
 
     refreshModuleList();
@@ -71,24 +73,37 @@ void ComposerParameter::refreshModuleList()
 /* ============================================================================
  *
  * */
-void ComposerParameter::extractModules(const ScriptScope& scope)
+void ComposerParameter::extractModules(const core::ScriptScope& scope)
 {
-    const QString scope_dir_path = m_modulePath + QDir::separator() + scope.toPathChain();
+    const QString scope_dir_path = m_modulePath + QDir::separator() + QString(scope.toPathChain().c_str());
+    
     QDir scope_dir( scope_dir_path );
+    if( !scope_dir.exists() )
+    {
+        std::cout << "ComposerParameter::extractModules => " << scope_dir_path.toStdString() << " nexiste pas !!!" << std::endl;
+    }
+
 
 
     QStringList scope_module_list = scope_dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
+
+   // std::cout << "pop: "  << scope_dir_path.toStdString() << scope_module_list.size() << std::endl;
+
 
     foreach(const QString& module, scope_module_list)
     {
         QString name = module.split(".",QString::SkipEmptyParts).at(0);
         QString extension = module.split(".",QString::SkipEmptyParts).at(1);
+ 
+     //   std::cout << "pop: " << name.toStdString() << std::endl;
 
         if( extension.compare("so") == 0 )
         {
 
-            m_modules << ScriptModule(name, scope);
-        
+            m_modules .push_back( ScriptModule(name.toStdString(), scope) );
+
+       //     std::cout << "mod: " << name.toStdString() << std::endl;
+
         }
 
         

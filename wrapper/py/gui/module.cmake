@@ -41,7 +41,7 @@ SET(PROJECT_HEADER_FILES
     proteo/gui/composer/ComposerWidget.hpp
     proteo/gui/composer/ComposerView.hpp
     proteo/gui/composer/ComposerScene.hpp
-    proteo/gui/composer/ScriptModule.hpp
+    proteo/gui/composer/ComposerEditorHighlighter.hpp
     proteo/gui/composer/ComposerParameter.hpp
     proteo/gui/composer/ModuleCheckBox.hpp
     proteo/gui/composer/ItemObject.hpp
@@ -86,7 +86,7 @@ SET(PROJECT_SOURCE_FILES
     proteo/gui/composer/ComposerWidget.cpp
     proteo/gui/composer/ComposerView.cpp
     proteo/gui/composer/ComposerScene.cpp
-    proteo/gui/composer/ScriptModule.cpp
+    proteo/gui/composer/ComposerEditorHighlighter.cpp
     proteo/gui/composer/ComposerParameter.cpp
     proteo/gui/composer/ItemObject.cpp
     proteo/gui/composer/ItemCrossPoint.cpp

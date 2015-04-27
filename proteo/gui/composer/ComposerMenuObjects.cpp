@@ -11,6 +11,7 @@
 
 using namespace proteo;
 using namespace proteo::gui;
+using namespace proteo::core;
 
 
 #include <boost/python.hpp>
@@ -46,12 +47,14 @@ void ComposerMenuObjects::refreshUi()
     destroyUi();
 
     // Extract items for modules
-    for(int i=0 ; i < m_parameter->modules().size() ; i++)
-    {
-        ScriptModule& module = m_parameter->modules()[i];
 
-        extractObjectFromModule(module);
+    for (std::list<core::ScriptModule>::iterator module = m_parameter->modules().begin() ; module != m_parameter->modules().end() ; ++module)
+    {
+        //ScriptModule& module = m_parameter->modules()[i];
+
+        extractObjectFromModule(*module);
     }
+
 }
 
 /* ============================================================================
@@ -81,7 +84,7 @@ void ComposerMenuObjects::destroyUi()
 /* ============================================================================
  *
  * */
-void ComposerMenuObjects::extractObjectFromModule(ScriptModule& module)
+void ComposerMenuObjects::extractObjectFromModule(core::ScriptModule& module)
 {
     // Check if the module is imported
     if( !module.isImported() )
@@ -96,7 +99,7 @@ void ComposerMenuObjects::extractObjectFromModule(ScriptModule& module)
     object global(main.attr("__dict__"));
 
     // 
-    QString object_function = QString("proteo_") + module.name() + QString("_objects()");
+    QString object_function = QString("proteo_") + QString(module.name().c_str()) + QString("_objects()");
 
     // Define greet function in Python.
     object result = eval(object_function.toStdString().c_str(), global, global);
@@ -105,7 +108,7 @@ void ComposerMenuObjects::extractObjectFromModule(ScriptModule& module)
     char * list_c_str = extract<char *>(result);
     QString list_qstr(list_c_str);
 
-    std::cout << list_c_str << std::endl;
+   // std::cout << list_c_str << std::endl;
 
     //
     QStringList objects = list_qstr.split(';');

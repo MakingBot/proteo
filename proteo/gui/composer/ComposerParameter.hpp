@@ -22,9 +22,11 @@
 #include <QDir>
 #include <QList>
 #include <QStringList>
-#include "ScriptModule.hpp"
+#include <proteo/core/ScriptModule.hpp>
 
 namespace proteo { namespace gui {
+
+class Composer;
 
 //! \class ComposerParameter
 //! \brief Menu of the composer widget
@@ -52,18 +54,18 @@ public:
 
     //! \brief Default constructor
     //!
-    ComposerParameter();
+    ComposerParameter(Composer* composer);
 
 
 
     void refreshModuleList();
 
 
-    void extractModules(const ScriptScope& scope);
+    void extractModules(const core::ScriptScope& scope);
 
 
 
-    QList<ScriptModule>& modules()
+    std::list<core::ScriptModule>& modules()
     {
         return m_modules;
     }
@@ -81,13 +83,17 @@ signals:
 
 protected:
 
+    //! \brief Global pointer on the composer
+    //!
+    Composer* m_composer;
+
     //! \brief Path where proteo modules are stored
     //!
     QString m_modulePath;
 
     //! \brief List of availables modules on the system
     //!
-    QList<ScriptModule> m_modules;
+    std::list<core::ScriptModule> m_modules;
 
 };
 

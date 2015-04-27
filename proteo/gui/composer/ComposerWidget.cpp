@@ -31,7 +31,7 @@ using namespace proteo::gui;
  * */
 ComposerWidget::ComposerWidget(Composer* c)
     : QWidget()
-    , m_parameter   (new ComposerParameter())
+    , m_parameter   (new ComposerParameter(c))
     , m_scene       (new ComposerScene(c, m_parameter))
     , m_splitter    (Qt::Horizontal)
     , m_menu        (c, m_parameter)

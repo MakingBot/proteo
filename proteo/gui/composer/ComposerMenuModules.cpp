@@ -13,6 +13,7 @@
 
 using namespace proteo;
 using namespace proteo::gui;
+using namespace proteo::core;
 
 #include <iostream>
 
@@ -34,12 +35,12 @@ ComposerMenuModules::ComposerMenuModules(QSharedPointer<ComposerParameter> param
  * */
 void ComposerMenuModules::refreshModuleList()
 {
-    for(int i=0 ; i < m_parameter->modules().size() ; i++)
+    int i=0;
+    for (std::list<core::ScriptModule>::iterator module = m_parameter->modules().begin() ; module != m_parameter->modules().end() ; ++module)
     {
-        ScriptModule& module = m_parameter->modules()[i];
 
         // Create the associated checkbox
-        QSharedPointer<ModuleCheckBox> box( new ModuleCheckBox(module.toDotChain(),i) );
+        QSharedPointer<ModuleCheckBox> box( new ModuleCheckBox((*module).toDotChain().c_str(),i) );
 
         // Connect the box signal
         connect(box.data()  , &ModuleCheckBox::stateChanged       ,
@@ -48,6 +49,8 @@ void ComposerMenuModules::refreshModuleList()
         // Append it into the layout
         ((QVBoxLayout*)layout())->addWidget(box.data());
         m_checkBoxs << box;
+
+        i++;
     }
 }
 
@@ -64,16 +67,20 @@ void ComposerMenuModules::onStateChange(int state)
     }
 
     // Get the module and set apply the new value
-    ScriptModule& module = m_parameter->modules()[box->index];
+    std::list<core::ScriptModule>::iterator module = m_parameter->modules().begin();
+    for(int i=0; i<box->index ; i++)
+        module++;
+
+
     switch(state)
     {
         case Qt::Unchecked:
-            module.setImported(false);
+            (*module).setImported(false);
             m_parameter->signalParamModification();
             break;
 
         case Qt::Checked:
-            module.setImported(true);
+            (*module).setImported(true);
             m_parameter->signalParamModification();
             break;
 

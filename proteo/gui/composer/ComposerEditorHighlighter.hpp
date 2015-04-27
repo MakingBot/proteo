@@ -1,5 +1,7 @@
+#ifndef COMPOSEREDITORHIGHLIGHTER_HPP
+#define COMPOSEREDITORHIGHLIGHTER_HPP
 //!
-//! \file CodeStream.cpp
+//! \file ComposerEditorHighlighter.hpp
 //!
 // Copyright 2015 MakingBot
 // This file is part of proteo.
@@ -17,34 +19,37 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "CodeStream.hpp"
-
-using namespace proteo::core;
-
-/* ============================================================================
- *
- * */
-CodeStream::CodeStream()
-    : m_currentSection(SectionImport)
-{ }
 
 
-/* ============================================================================
- *
- * */
-std::string CodeStream::code()
+
+
+#include <QSyntaxHighlighter>
+
+
+namespace proteo { namespace gui {
+
+
+class ComposerEditorHighlighter : public QSyntaxHighlighter
 {
-    std::stringstream code;
 
-    code << m_sectionImport.str();
-    code << "\n"; 
-    code << m_sectionCreation.str();
-    code << "\n"; 
-    code << m_sectionConnection.str();
-    code << "\n"; 
-    code << m_sectionActivation.str();
-    code << "\n";
 
-    return code.str();
-}
+public:    
 
+    ComposerEditorHighlighter(QTextDocument* document)
+        : QSyntaxHighlighter(document)
+    {  
+
+    }
+
+
+    void highlightBlock(const QString &text);
+
+};
+
+
+
+
+
+} // gui
+} // proteo
+#endif // COMPOSEREDITORHIGHLIGHTER_HPP

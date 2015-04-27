@@ -5,6 +5,6 @@ cd build
 
 cmake -DCMAKE_INSTALL_PREFIX=/home/rodriguez/opt/proteo ..
 
-make -j1
+make -j4
 make install
 
