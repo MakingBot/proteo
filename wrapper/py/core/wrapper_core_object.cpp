@@ -61,6 +61,9 @@ void export_core_object()
     .def("disconnect", &Object::initiativeDisconnect)
     .def(self /= other<boost::shared_ptr<Object> >())
 
+    .def("nbObjConnections", &Object::nbObjConnections)
+
+
     ;
 }
 

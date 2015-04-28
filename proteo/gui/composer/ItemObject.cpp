@@ -84,10 +84,10 @@ void ItemObject::updateGeometry()
     const float diameter = (float)ComposerParameter::CASE_PIXEL_SIZE - (float)ComposerParameter::CASE_PIXEL_PADDING;
     const int coef = -(diameter/2.0f);
 
-    // std::cout << (float)ComposerParameter::CASE_PIXEL_SIZE << std::endl;
-    // std::cout << (float)ComposerParameter::CROSS_POINT_RATIO << std::endl;
-    std::cout << diameter << std::endl;
-    std::cout << coef << std::endl;
+    // // std::cout << (float)ComposerParameter::CASE_PIXEL_SIZE << std::endl;
+    // // std::cout << (float)ComposerParameter::CROSS_POINT_RATIO << std::endl;
+    // std::cout << diameter << std::endl;
+    // std::cout << coef << std::endl;
 
 
     m_bounding = QRectF( coef, coef, diameter,diameter);

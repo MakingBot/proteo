@@ -65,6 +65,10 @@ public:
 
     //! \brief FROM Object
     //!
+    virtual const char* objType() const { return "Device"; }
+
+    //! \brief FROM Object
+    //!
     virtual core::Variant propertyValue(uint8_t id);
 
     //! \brief FROM Object

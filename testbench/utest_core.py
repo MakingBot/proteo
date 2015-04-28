@@ -40,9 +40,27 @@ class UtestCore(unittest.TestCase):
 		if child.hasObjParent():
 			self.fail("Child2 should have no parent anymore")
 
+	def test_object_connection(self):
+		""" Test object connection
+		"""
+		obj1 = Container('obj1')
+		obj2 = Container('obj2')
 
+		obj1 *= obj2
 
-	# def test_object_connection(self):
+		if obj1.nbObjConnections() != 1:
+			self.fail("Obj1 should be connected")
+
+		if obj2.nbObjConnections() != 1:
+			self.fail("Obj2 should be connected")
+
+		obj2 /= obj1
+	
+		if obj1.nbObjConnections() == 1:
+			self.fail("Obj1 should not be connected")
+
+		if obj2.nbObjConnections() == 1:
+			self.fail("Obj2 should not be connected")
 
 
 	# def test_object_idNumber(self):

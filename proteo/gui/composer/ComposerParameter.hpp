@@ -41,29 +41,20 @@ public:
 
     //! \brief Size in pixel of the architecture scene
     //!
-    static constexpr int CASE_PIXEL_SIZE = 200;
+    static constexpr int CASE_PIXEL_SIZE        = 200;
 
-    //! \brief
+    //! \brief Space beteween the case border and the object item border
     //!
-    static constexpr int CASE_PIXEL_PADDING = 50;
+    static constexpr int CASE_PIXEL_PADDING     = 50;
 
     //! \brief Define the diameter of the cross point in function of the case pixel size
     //! diameter = CASE_PIXEL_SIZE * CROSS_POINT_RATIO
     //!
-    static constexpr float CROSS_POINT_RATIO = 0.05f;
+    static constexpr float CROSS_POINT_RATIO    = 0.05f;
 
     //! \brief Default constructor
     //!
     ComposerParameter(Composer* composer);
-
-
-
-    void refreshModuleList();
-
-
-    void extractModules(const core::ScriptScope& scope);
-
-
 
     //! \brief Composer pointer getter
     //!
@@ -81,6 +72,12 @@ public:
     //!
     inline void emitContainerModified();
 
+
+
+    void refreshModuleList();
+
+
+    void extractModules(const core::ScriptScope& scope);
 
 
 

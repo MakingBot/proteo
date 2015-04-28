@@ -309,17 +309,17 @@ bool Object::connect(boost::shared_ptr<Object> obj, bool initiative)
     //     return false;
     // }
 
-    // // Call the connection process of the other object
-    // if( initiative )
-    // {
-    //     if( ! obj->connect(shared_from_this(), false) )
-    //     {
-    //         return false;
-    //     }
-    // }
+    // Call the connection process of the other object
+    if( initiative )
+    {
+        if( !obj->connect(shared_from_this(), false) )
+        {
+            return false;
+        }
+    }
 
     // Call hook
-    if( ! connectionHook(obj, initiative) )
+    if( !connectionHook(obj, initiative) )
     {
 
     }
@@ -359,9 +359,18 @@ bool Object::disconnect(boost::shared_ptr<Object> obj, bool initiative)
     it = std::find(m_oConnections.begin(), m_oConnections.end(), obj);
 
     // Check if the connection exists
-    if(it != m_oConnections.end())
+    if(it == m_oConnections.end())
     {
         return false;
+    }
+
+    // Call the disconnection process of the other object
+    if( initiative )
+    {
+        if( !obj->disconnect(shared_from_this(), false) )
+        {
+            return false;
+        }
     }
 
     // Call hook

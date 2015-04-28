@@ -29,7 +29,7 @@ using namespace proteo::gui;
  * */
 void export_gui_spy()
 {
-    class_<Spy, boost::shared_ptr<Spy>, bases<Object>, boost::noncopyable>
+    class_<Spy, boost::shared_ptr<Spy>, bases<GuiObject>, boost::noncopyable>
     (
         "Spy"
     ,   init<std::string>()

@@ -28,14 +28,12 @@ using namespace proteo::core;
  *
  * */
 Spy::Spy(std::string name)
-    : Object(name)
-    , m_widget(new SpyWidget(this))
+    : GuiObject(name)
+    , m_spy(new SpyWidget(this))
 {
+    // Set widget for GuiObject
+    m_widget = qSharedPointerObjectCast<QWidget>(m_spy);
 
-
-
-    
-    m_widget->show();
 }
 
 /* ============================================================================
@@ -77,7 +75,8 @@ const Object::TagArray& Spy::objTag() const
 bool Spy::connectionHook(boost::shared_ptr<Object> obj, bool initiative)
 {
     m_spied = obj;
-    m_widget->onSpiedObjChange();
+    m_spy->onSpiedObjChange();
+    return true;
 }
 
 /* ============================================================================

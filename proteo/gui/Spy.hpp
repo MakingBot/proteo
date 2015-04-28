@@ -19,7 +19,7 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <proteo/core/Object.hpp>
+#include "GuiObject.hpp"
 
 namespace proteo { namespace gui {
 
@@ -27,7 +27,7 @@ class SpyWidget;
 
 //! \class Spy
 //!
-class Spy : public core::Object
+class Spy : public GuiObject
 {
 
 public:
@@ -64,6 +64,10 @@ public:
 
     //! \brief FROM Object
     //!
+    virtual const char* objType() const { return "Spy"; }
+
+    //! \brief FROM Object
+    //!
     bool connectionHook(boost::shared_ptr<Object> obj, bool initiative);
 
     //! \brief FROM Object
@@ -83,9 +87,9 @@ protected:
     //!
     boost::shared_ptr<Object> m_spied;
 
-    //! \brief The widget
+    //! \brief Composer widget
     //!
-    boost::shared_ptr<SpyWidget> m_widget;
+    QSharedPointer<SpyWidget> m_spy;
 
 };
 

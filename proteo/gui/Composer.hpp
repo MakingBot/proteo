@@ -64,6 +64,10 @@ public:
 
     //! \brief FROM Object
     //!
+    virtual const char* objType() const { return "Composer"; }
+
+    //! \brief FROM Object
+    //!
     virtual bool connectionHook(boost::shared_ptr<Object> obj, bool initiative);
 
     //! \brief FROM Object

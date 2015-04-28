@@ -65,6 +65,10 @@ public:
 
     //! \brief FROM Object
     //!
+    virtual const char* objType() const { return "Shell"; }
+
+    //! \brief FROM Object
+    //!
     virtual const std::vector<core::Property>& properties() const;
 
 
