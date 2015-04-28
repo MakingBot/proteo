@@ -48,6 +48,12 @@ ComposerEditor::ComposerEditor(Composer* c, QSharedPointer<ComposerParameter> pa
             this                , &ComposerEditor::onModuleListModified );
 
 
+    connect(m_parameter.data()  , &ComposerParameter::containerModified    ,
+            this                , &ComposerEditor::onModuleListModified );
+
+
+
+
     new ComposerEditorHighlighter(m_editor.document());
 }
 

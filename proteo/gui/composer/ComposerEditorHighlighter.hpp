@@ -1,3 +1,5 @@
+
+
 #ifndef COMPOSEREDITORHIGHLIGHTER_HPP
 #define COMPOSEREDITORHIGHLIGHTER_HPP
 //!
@@ -19,37 +21,49 @@
 // You should have received a copy of the GNU General Public License
 // along with proteo.  If not, see <http://www.gnu.org/licenses/>.
 
-
-
-
-
 #include <QSyntaxHighlighter>
-
 
 namespace proteo { namespace gui {
 
-
+//! \class ComposerEditorHighlighter
+//! \brief
+//!
+//! \author [XR]MakingBot ( http://makingbot.fr )
+//!
 class ComposerEditorHighlighter : public QSyntaxHighlighter
 {
 
+public:
 
-public:    
+    //! \brief 
+    //!
+    struct HighlightingRule
+    {
+        QRegExp pattern;
+        QTextCharFormat format;
+    };
 
-    ComposerEditorHighlighter(QTextDocument* document)
-        : QSyntaxHighlighter(document)
-    {  
+    //! \brief Default constructor
+    //!
+    ComposerEditorHighlighter(QTextDocument* document);
 
-    }
-
-
+    //! \brief FROM ComposerEditorHighlighter
+    //!
     void highlightBlock(const QString &text);
 
+
+protected:
+
+    //! \brief 
+    //!
+    QVector<HighlightingRule> m_highlightingRules;
+
+
+    void registerRules();
 };
-
-
-
 
 
 } // gui
 } // proteo
 #endif // COMPOSEREDITORHIGHLIGHTER_HPP
+

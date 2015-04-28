@@ -65,12 +65,23 @@ public:
 
 
 
-    Composer* composer() { return m_composer; }
+    //! \brief Composer pointer getter
+    //!
+    inline Composer* composer();
 
-    std::list<core::ScriptModule>& modules()
-    {
-        return m_modules;
-    }
+    //! \brief Modules list getter
+    //!
+    inline std::list<core::ScriptModule>& modules();
+
+    //! \brief Emit signal modulesModified
+    //!
+    inline void emitModulesModified();
+
+    //! \brief Emit signal modulesModified
+    //!
+    inline void emitContainerModified();
+
+
 
 
     //! \brief
@@ -82,6 +93,15 @@ signals:
     //! \brief Emitted when the module list is modified
     //!
     void moduleListModified();
+
+
+    //! \brief Emitted when the module list is modified
+    //!
+    void modulesModified();
+
+    //! \brief Emitted when the structure of the container is modified
+    //!
+    void containerModified();
 
 protected:
 
@@ -98,6 +118,40 @@ protected:
     std::list<core::ScriptModule> m_modules;
 
 };
+
+
+/* ============================================================================
+ *
+ * */
+inline Composer* ComposerParameter::composer()
+{
+    return m_composer;
+}
+
+/* ============================================================================
+ *
+ * */
+inline std::list<core::ScriptModule>& ComposerParameter::modules()
+{
+    return m_modules;
+}
+
+/* ============================================================================
+ *
+ * */
+inline void ComposerParameter::emitModulesModified()
+{
+    emit modulesModified();
+}
+
+/* ============================================================================
+ *
+ * */
+inline void ComposerParameter::emitContainerModified()
+{
+    emit containerModified();
+}
+
 
 } // gui
 } // proteo

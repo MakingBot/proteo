@@ -58,6 +58,7 @@ CodeStream& operator<< (CodeStream& cs, const std::string& s)
     return cs;
 }
 
+
 /* ============================================================================
  *
  * */
@@ -67,20 +68,21 @@ CodeStream& operator<< (CodeStream& cs, boost::shared_ptr<Object> o)
     cs << o->objName() << " = " << o->objType() << "('" << o->objName() << "')" << "\n";
 
 
+    cs.setCurrentSection(CodeStream::SectionConnection);
+    if( o->nbObjChilds() > 0  )
+    {
+        std::map<std::string, boost::shared_ptr<Object> >::iterator child;
+        for (child=o->objChilds().begin(); child!=o->objChilds().end(); ++child)
+        {
+            cs << child->second;
+        }
+    }
 
-    // cs.setCurrentSection(CodeStream::SectionConnection);
-    // if( o->nbObjChilds() > 0  )
-    // {
-        // std::map<std::string, boost::shared_ptr<Object> >& childs = o->objChilds();
-
-        // std::map<std::string, boost::shared_ptr<Object> >::iterator child;
-
-        // for (child=childs.begin(); child!=childs.end(); ++child)
-        //     cs << child->second;
-    //}
 
     return cs;
 }
+
+
 
 /* ============================================================================
  *

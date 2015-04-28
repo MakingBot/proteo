@@ -186,7 +186,7 @@ void ComposerScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 
         //std::cout << "Res: " << temp->objName() << std::endl;
 
-        // m_parameter->signalParamModification();
+        m_parameter->containerModified();
 
         // Accept the drop
         event->setAccepted(true);
