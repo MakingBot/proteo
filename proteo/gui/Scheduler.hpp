@@ -85,7 +85,8 @@ public:
 
     //! \brief Start graphic event loop for just 'sec' seconds
     //!
-    // void start(int sec);
+    // void start(int ms);
+    // QTimer::singleShot(nbMs, this, SLOT(killApp()));
 
 protected:
 
